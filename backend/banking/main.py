@@ -15,6 +15,7 @@ from .agent import Agent, BusyError
 from .bank import BankError
 from .config import ROOT, Settings
 from .db import TZ, Database, add_message, dumps, event, message_dict, now
+from .planning import PlanningService
 
 
 class Body(BaseModel):
@@ -44,6 +45,56 @@ class InspectBody(Body):
     conversation_id: str | None = Field(default=None, max_length=100)
 
 
+class PlanPreviewBody(Body):
+    conversation_id: str | None = Field(default=None, max_length=100)
+    kind: Literal["purchase", "savings"]
+    title: str = Field(default="资金安排", min_length=1, max_length=80)
+    action_label: str = Field(default="", max_length=80)
+    amount_minor: int = Field(gt=0, le=100_000_000)
+    living_reserve_minor: int = Field(default=0, ge=0, le=100_000_000)
+    action_date: str | None = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$")
+    deadline: str | None = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$")
+    account_id: str = Field(default="daily", max_length=100)
+    salary_amount_minor: int | None = Field(default=None, gt=0, le=100_000_000)
+    salary_day: int | None = Field(default=None, ge=1, le=28)
+    rent_amount_minor: int | None = Field(default=None, gt=0, le=100_000_000)
+    rent_day: int | None = Field(default=None, ge=1, le=28)
+    plan_id: str | None = Field(default=None, max_length=100)
+
+
+class PlanActionBody(Body):
+    conversation_id: str | None = Field(default=None, max_length=100)
+    version: int = Field(ge=1)
+    action: Literal[
+        "challenge_salary",
+        "challenge_expense",
+        "apply_repair",
+        "activate",
+        "execute",
+        "create_rule",
+        "adopt_trigger",
+    ]
+    variant_key: Literal["now", "after_salary"] = "now"
+    expense_date: str | None = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$")
+    cadence: Literal["once", "monthly"] = "once"
+    reserve_minor: int = Field(default=0, ge=0, le=100_000_000)
+    notification_id: str | None = Field(default=None, max_length=100)
+
+
+class SandboxEventBody(Body):
+    kind: Literal["salary"]
+    amount_minor: int = Field(gt=0, le=100_000_000)
+    account_id: str = Field(default="daily", max_length=100)
+    source_key: str = Field(default="salary", min_length=1, max_length=80)
+    period: str = Field(pattern=r"^\d{4}-\d{2}$")
+    event_key: str | None = Field(default=None, max_length=200)
+    occurred_at: str | None = Field(default=None, max_length=50)
+
+
+class DemoScenarioBody(Body):
+    confirmation: Literal["LOAD_DEMO"]
+
+
 class FeishuBody(Body):
     event_id: str = Field(min_length=1, max_length=200)
     kind: Literal["message", "card"]
@@ -64,11 +115,13 @@ def create_app(settings: Settings | None = None, model=None):
     settings = settings or Settings()
     database = Database(settings.database_path)
     agent = Agent(database, settings, model)
+    planning = PlanningService(database)
 
     @asynccontextmanager
     async def lifespan(app):
         database.initialize()
         await agent.start()
+        reminder_task = asyncio.create_task(planning.run_reminder_loop(agent.changed))
         sender = None
         if settings.feishu_ready:
             from .feishu import OutboxSender
@@ -77,6 +130,11 @@ def create_app(settings: Settings | None = None, model=None):
         try:
             yield
         finally:
+            reminder_task.cancel()
+            try:
+                await reminder_task
+            except asyncio.CancelledError:
+                pass
             if sender:
                 sender.cancel()
                 try:
@@ -89,6 +147,7 @@ def create_app(settings: Settings | None = None, model=None):
     app.state.agent = agent
     app.state.database = database
     app.state.settings = settings
+    app.state.planning = planning
 
     @app.middleware("http")
     async def origin_guard(request: Request, call_next):
@@ -99,6 +158,7 @@ def create_app(settings: Settings | None = None, model=None):
                 "http://localhost:5173",
                 "http://127.0.0.1:8000",
                 "http://localhost:8000",
+                "https://093c-2406-da18-1f2f-d00-e27a-9a35-fc21-c012.ngrok-free.app",
             }
             if origin and origin not in allowed:
                 return JSONResponse({"detail": "不接受来自其他站点的请求。"}, status_code=403)
@@ -170,6 +230,10 @@ def create_app(settings: Settings | None = None, model=None):
                     "SELECT * FROM messages WHERE conversation_id=? ORDER BY rowid", (conversation_id,)
                 )
             ]
+            db.execute(
+                "UPDATE notifications SET read_at=COALESCE(read_at,?) WHERE conversation_id=?",
+                (now(), conversation_id),
+            )
             active = agent.active(db, conversation_id)
             event_id = db.execute(
                 "SELECT COALESCE(MAX(id),0) FROM events WHERE conversation_id IN (?, '*')", (conversation_id,)
@@ -203,6 +267,226 @@ def create_app(settings: Settings | None = None, model=None):
     def list_conversations():
         with database.connection() as db:
             return database.conversations(db)
+
+    @app.get("/api/plans", dependencies=[Depends(session)])
+    def list_plans():
+        with database.connection() as db:
+            return planning.list_plans(db)
+
+    @app.get("/api/plans/{plan_id}", dependencies=[Depends(session)])
+    def get_plan(plan_id: str):
+        with database.connection() as db:
+            return planning.get_plan(db, plan_id)
+
+    @app.post("/api/plans/preview", status_code=201)
+    async def preview_plan(body: PlanPreviewBody, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            conversation_id = resolve_conversation(db, session_key, body.conversation_id)
+            result = planning.preview(db, conversation_id, body.model_dump(exclude={"conversation_id"}, exclude_none=True))
+            message = add_message(
+                db,
+                conversation_id,
+                None,
+                "assistant",
+                "plan",
+                "我按当前账务生成了两种执行时点的预演。",
+                {"card_type": "preview", "plan": result},
+            )
+        await agent.notify()
+        return message
+
+    @app.post("/api/plans/{plan_id}/actions")
+    async def plan_action(plan_id: str, body: PlanActionBody, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            conversation_id = resolve_conversation(db, session_key, body.conversation_id)
+            plan = planning.get_plan(db, plan_id)
+            owner = db.execute("SELECT conversation_id FROM plans WHERE id=?", (plan_id,)).fetchone()
+            if not owner:
+                raise BankError("找不到这份资金计划。")
+            if body.action.startswith("challenge"):
+                dimension = "salary_delay" if body.action == "challenge_salary" else "unexpected_expense"
+                result = planning.challenge(db, plan_id, body.version, dimension, body.expense_date)
+                message = add_message(
+                    db,
+                    conversation_id,
+                    None,
+                    "assistant",
+                    "plan",
+                    "我找到了这份方案最先失效的边界，并重新验证了修复建议。",
+                    {"card_type": "challenge", **result},
+                )
+            elif body.action == "apply_repair":
+                repair = planning.challenge(db, plan_id, body.version, "salary_delay")["challenge"].get(
+                    "repair"
+                )
+                if not repair:
+                    raise BankError("当前挑战结果没有可直接采用的日期修复。")
+                version_row = db.execute(
+                    "SELECT input_json FROM plan_versions WHERE plan_id=? AND version=?",
+                    (plan_id, body.version),
+                ).fetchone()
+                payload = json.loads(version_row["input_json"])
+                payload["plan_id"] = plan_id
+                payload["action_date"] = repair["date"]
+                result = planning.preview(db, conversation_id, payload)
+                message = add_message(
+                    db,
+                    conversation_id,
+                    None,
+                    "assistant",
+                    "plan",
+                    "我已把修复建议保存为新的计划版本，并重新验证了现金流。",
+                    {"card_type": "preview", "plan": result},
+                )
+            elif body.action == "activate":
+                message = agent.create_direct_approval(
+                    db,
+                    conversation_id,
+                    "activate_plan",
+                    {"plan_id": plan_id, "plan_version": body.version, "variant_key": body.variant_key},
+                    "采用计划只会保存安排与预留，具体扣款仍需另行确认。",
+                )
+            elif body.action == "execute":
+                version_row = db.execute(
+                    "SELECT input_json,result_json FROM plan_versions WHERE plan_id=? AND version=?",
+                    (plan_id, body.version),
+                ).fetchone()
+                if not version_row or plan["status"] != "active" or plan["version"] != body.version:
+                    raise BankError("请先确认采用这份计划的当前版本。")
+                payload = json.loads(version_row["input_json"])
+                result = json.loads(version_row["result_json"])
+                variant = next((item for item in result["variants"] if item["key"] == body.variant_key), None)
+                if not variant:
+                    raise BankError("找不到要执行的方案。")
+                if body.variant_key == "after_salary":
+                    period = variant["action_date"][:7]
+                    arrived = db.execute(
+                        "SELECT 1 FROM bank_events WHERE kind='salary' AND period=?", (period,)
+                    ).fetchone()
+                    if not arrived:
+                        raise BankError("工资尚未实际到账；计划会保留，到账事件触发后再生成执行确认。")
+                if payload["kind"] == "purchase":
+                    message = agent.create_direct_approval(
+                        db,
+                        conversation_id,
+                        "simulate_expense",
+                        {
+                            "merchant": payload.get("action_label") or "电子产品商店",
+                            "amount_yuan": f"{payload['amount_minor'] / 100:.2f}",
+                            "category": "购物",
+                            "account_id": payload["account_id"],
+                            "plan_id": plan_id,
+                            "plan_version": body.version,
+                        },
+                    )
+                else:
+                    installment = None
+                    for step in result.get("installments", []):
+                        if step["date"] <= PlanningService.business_date(db).isoformat():
+                            installment = step["amount_minor"]
+                            break
+                    if result.get("installments") and installment is None:
+                        raise BankError("下一期储蓄尚未到执行日，计划会保留到期。")
+                    message = agent.create_direct_approval(
+                        db,
+                        conversation_id,
+                        "save_to_goal",
+                        {
+                            "total_yuan": f"{payload['amount_minor'] / 100:.2f}",
+                            "installment_yuan": f"{installment / 100:.2f}" if installment else None,
+                            "plan_id": plan_id,
+                            "account_id": payload["account_id"],
+                        },
+                    )
+            else:
+                if body.action == "adopt_trigger":
+                    notice = db.execute("SELECT * FROM notifications WHERE id=?", (body.notification_id,)).fetchone()
+                    if not notice:
+                        raise BankError("工资到账建议不存在或已处理。")
+                    data = json.loads(notice["data_json"])
+                    if notice["conversation_id"] != conversation_id:
+                        raise BankError("该建议属于其他会话，请切换到来源会话后采纳。")
+                    amount = data.get("amount_minor", 0)
+                    if amount <= 0:
+                        raise BankError("当前没有可转存金额，已安排资金需要优先保留。")
+                    message = agent.create_direct_approval(
+                        db,
+                        conversation_id,
+                        "save_to_goal",
+                        {"total_yuan": f"{amount / 100:.2f}", "account_id": "daily"},
+                        "工资到账后的储蓄建议待确认。",
+                    )
+                    db.execute("UPDATE notifications SET read_at=? WHERE id=?", (now(), body.notification_id))
+                else:
+                    message = agent.create_direct_approval(
+                        db,
+                        conversation_id,
+                        "create_trigger_rule",
+                        {
+                            "reserve_yuan": f"{body.reserve_minor / 100:.2f}",
+                            "cadence": body.cadence,
+                            "source_key": "salary",
+                            "account_id": "daily",
+                            "plan_id": plan_id,
+                        },
+                        "确认后只登记提醒规则，工资到账时会重新计算，不会自动转账。",
+                    )
+        await agent.notify()
+        return message
+
+    @app.post("/api/sandbox/events")
+    async def sandbox_event(body: SandboxEventBody, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            result = planning.trigger_salary(db, body.model_dump())
+        await agent.notify()
+        return result
+
+    @app.post("/api/sandbox/scenario")
+    async def demo_scenario(body: DemoScenarioBody, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            result = planning.seed_demo_scenario(db)
+            event(db, "*", "bank.updated", {})
+        await agent.notify()
+        return result
+
+    @app.post("/api/notifications/{notification_id}/read")
+    async def read_notification(notification_id: str, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            row = db.execute("SELECT * FROM notifications WHERE id=?", (notification_id,)).fetchone()
+            if not row:
+                raise HTTPException(404, "通知不存在。")
+            resolve_conversation(db, session_key, row["conversation_id"])
+            db.execute("UPDATE notifications SET read_at=? WHERE id=?", (now(), notification_id))
+            event(db, "*", "conversations.updated", {"conversation_id": row["conversation_id"]})
+        await agent.notify()
+        return {"status": "read"}
+
+    @app.post("/api/notifications/{notification_id}/adopt")
+    async def adopt_notification(notification_id: str, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            notice = db.execute("SELECT * FROM notifications WHERE id=?", (notification_id,)).fetchone()
+            if not notice:
+                raise HTTPException(404, "通知不存在。")
+            conversation_id = resolve_conversation(db, session_key, notice["conversation_id"])
+            payload = json.loads(notice["data_json"])
+            amount = int(payload.get("amount_minor", 0))
+            if amount <= 0:
+                raise BankError("当前没有可转存金额，已安排资金需要优先保留。")
+            message = agent.create_direct_approval(
+                db,
+                conversation_id,
+                "save_to_goal",
+                {
+                    "total_yuan": f"{amount / 100:.2f}",
+                    "account_id": "daily",
+                    "plan_id": payload.get("plan_id"),
+                },
+                "工资到账后的储蓄建议待确认。",
+            )
+            db.execute("UPDATE notifications SET read_at=? WHERE id=?", (now(), notification_id))
+            event(db, "*", "conversations.updated", {"conversation_id": conversation_id})
+        await agent.notify()
+        return message
 
     @app.post("/api/conversations", status_code=201)
     async def new_conversation(body: ConversationBody, session_key: str = Depends(session)):
@@ -242,6 +526,10 @@ def create_app(settings: Settings | None = None, model=None):
                 raise BusyError("这条会话仍在处理请求，请结束后再删除。")
             if active:
                 agent._cancel_pending(db, active["id"], "会话已删除，尚未确认的操作已取消。")
+            db.execute(
+                "UPDATE trigger_rules SET status='paused',updated_at=? WHERE conversation_id=? AND status='active'",
+                (now(), conversation_id),
+            )
             db.execute("UPDATE conversations SET deleted_at=? WHERE id=?", (now(), conversation_id))
             remaining = database.conversations(db)
             fallback = remaining[0]["id"] if remaining else database.create_conversation(db)
@@ -313,8 +601,17 @@ def create_app(settings: Settings | None = None, model=None):
                 "conversations",
                 "feishu_outbox",
                 "binding_codes",
+                "plans",
+                "plan_versions",
+                "commitments",
+                "plan_executions",
+                "trigger_rules",
+                "bank_events",
+                "trigger_runs",
+                "notifications",
             ):
                 db.execute(f"DELETE FROM {table}")
+            db.execute("DELETE FROM meta WHERE key='business_date'")
             new_conversation = database.seed(db)
             db.execute("UPDATE sessions SET active_conversation_id=?", (new_conversation,))
             event(db, "*", "reset", {"conversation_id": new_conversation})

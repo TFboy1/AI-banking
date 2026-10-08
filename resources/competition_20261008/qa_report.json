@@ -1,0 +1,118 @@
+{
+  "01": {
+    "document": "01_bankmate_技术文档.docx",
+    "pages": 11,
+    "chars_per_page": [
+      706,
+      575,
+      381,
+      1007,
+      779,
+      903,
+      771,
+      987,
+      861,
+      971,
+      976
+    ],
+    "sparse_pages": [],
+    "page_starts": [
+      "bankmate  技术文档  第 1 页  bankmate 技术文档  银行 AI 智能体参 赛材料   队伍名称：哈基米摸南北绿豆    学校：暨南大学  赛题方向：银行 A",
+      "bankmate  技术文档  第 2 页  1 产品目标与业务范围  用户通常提出的是一个目标，例如“买一台电脑后还能否留够生活费”，而不是单个银行接口请求。 bankmate ",
+      "bankmate  技术文档  第 3 页  2 系统架构    图 1 bankmate 系统架构与资金执行边界  浏览器通过同源 HTTP 接口提交需求，通过 SSE 接收消息",
+      "bankmate  技术文档  第 4 页  3 Agent 编排与工具协议  3 1 工具执行流程  需求先进入 queued，由单个异步队列转为 running。查询工具返回数",
+      "bankmate  技术文档  第 5 页  4 账单风险与资金精度算法  4 1 账单汇总与异常线索  按 YYYY-MM 读取流水，将对外支出按类别累计。本人账户互转及理财本金",
+      "bankmate  技术文档  第 6 页  5 现金流投影与单因素压力测试  现金流预演读取当前余额、有效资金承诺及预计事件，输出每个事件后的余额、受保护资金和可自由 安排余额。",
+      "bankmate  技术文档  第 7 页  6 计划版本资金承诺与条件触发  6 1 计划与承诺的生命周期  preview_cashflow 创建 draft 计划和版本，记录",
+      "bankmate  技术文档  第 8 页  7 数据一致性与恢复  数据组 主要数据表 用途  账务 accounts、transactions、holdings 余额、资金流、",
+      "bankmate  技术文档  第 9 页  8 安全设计与权限分级  项目采用能力分级和流程控制，不是多用户角色授权系统。默认只监听 127.0.0.1；连接 Cookie 用于",
+      "bankmate  技术文档  第 10 页  9 接口配置与部署  接口 用途  GET /api/bootstrap 连接初始化、选中会话、历史与银行快照  POST /api",
+      "bankmate  技术文档  第 11 页  10 验证结果与已知限制  验证日期为 2026 年 10 月 8 日。本次执行 scripts/check.ps1 和 scrip"
+    ],
+    "contact_sheets": [
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\01\\contact-1.png",
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\01\\contact-2.png"
+    ]
+  },
+  "02": {
+    "document": "02_bankmate_答辩提纲与讲稿.docx",
+    "pages": 7,
+    "chars_per_page": [
+      629,
+      532,
+      568,
+      617,
+      726,
+      558,
+      672
+    ],
+    "sparse_pages": [],
+    "page_starts": [
+      "bankmate  答辩提纲与讲稿  第 1 页  bankmate 答辩提纲与讲稿  银行 AI 智能体参 赛材料   队伍名称：哈基米摸南北绿豆    学校：暨南大学  赛题方",
+      "bankmate  答辩提纲与讲稿  第 2 页  第 1 至 2 页 产品与需求  第 1 页 作品定位  建议用时：30 秒    画面建议：项目名称、队伍、一个自然语言目标 ",
+      "bankmate  答辩提纲与讲稿  第 3 页  第 3 至 4 页 架构与执行  第 3 页 系统架构  建议用时：60 秒    画面建议：复用技术文档图 1  1. Vue",
+      "bankmate  答辩提纲与讲稿  第 4 页  第 5 至 6 页 资金预演与计划  第 5 页 现金流路径检查  建议用时：60 秒    画面建议：两种执行时点比较与首次缺",
+      "bankmate  答辩提纲与讲稿  第 5 页  第 7 至 8 页 现场演示  第 7 页 转账与诊断演示  建议用时：80 秒    画面建议：实际界面由团队提前手动核验  ",
+      "bankmate  答辩提纲与讲稿  第 6 页  第 9 至 10 页 验证与价值  第 9 页 验证与安全边界  建议用时：50 秒    画面建议：验证结果表与明确的产品边界",
+      "bankmate  答辩提纲与讲稿  第 7 页  评委问答准备  模型能否绕过用户直接转账  模型只能调用白名单中的准备入口。13 类变更都暂停等待确认；真正的写入由确认事务执行"
+    ],
+    "contact_sheets": [
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\02\\contact-1.png",
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\02\\contact-2.png"
+    ]
+  },
+  "03": {
+    "document": "03_bankmate_源代码部署与测试说明.docx",
+    "pages": 7,
+    "chars_per_page": [
+      762,
+      888,
+      732,
+      718,
+      823,
+      920,
+      1115
+    ],
+    "sparse_pages": [],
+    "page_starts": [
+      "bankmate  源代码部署与测试说明  第 1 页  bankmate 源代码部署与测试说明  银行 AI 智能体参 赛材料   队伍名称：哈基米摸南北绿豆    学校：暨南大",
+      "bankmate  源代码部署与测试说明  第 2 页  2 安装启动与配置  2 1 一条命令启动  解压源码包后，在项目根目录打开 PowerShell。启动脚本首次复制 .e",
+      "bankmate  源代码部署与测试说明  第 3 页  3 源码目录与配置项  路径 说明  backend/banking/main.py FastAPI 入口及 SSE、确认",
+      "bankmate  源代码部署与测试说明  第 4 页  4 演示流程与预期结果  4 1 初始沙箱  日常账户 12860.50 元，储蓄账户 8200.00 元，安心现金持仓 ",
+      "bankmate  源代码部署与测试说明  第 5 页  5 资金方案的确定性回放  源码包包含独立回放脚本，使用临时数据库和显式假设，不依赖模型、浏览器或日常 data 目录。运",
+      "bankmate  源代码部署与测试说明  第 6 页  6 测试方法与结果  .\\scripts\\check.ps1  uv run --frozen python script",
+      "bankmate  源代码部署与测试说明  第 7 页  7 打包数据管理与提交  7 1 源码包内容  bankmate_源代码与部署材料.zip 包含当前 backend、fr"
+    ],
+    "contact_sheets": [
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\03\\contact-1.png",
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\03\\contact-2.png"
+    ]
+  },
+  "04": {
+    "document": "04_bankmate_安全自评报告.docx",
+    "pages": 7,
+    "chars_per_page": [
+      692,
+      612,
+      936,
+      860,
+      859,
+      637,
+      815
+    ],
+    "sparse_pages": [],
+    "page_starts": [
+      "bankmate  安全自评报告  第 1 页  bankmate 安全自评报告  银行 AI 智能体参 赛材料   队伍名称：哈基米摸南北绿豆    学校：暨南大学  赛题方向：",
+      "bankmate  安全自评报告  第 2 页  2 信任边界与威胁模型  用户输入、模型输出、历史引用、联系人名称和交易备注都应视为不可信数据。模型负责提议工具和 参数，后端负责",
+      "bankmate  安全自评报告  第 3 页  3 权限分级实现  下列分级描述当前能力与执行流程，不将演示风险等级 R1 至 R4 当成用户访问角色。Web 的所有有 效连接共",
+      "bankmate  安全自评报告  第 4 页  4 交易安全与执行保护  4 1 固定参数与二次复核  准备阶段验证对象和参数，收款人重名不能生成有效转账确认。通过检查后保存实际",
+      "bankmate  安全自评报告  第 5 页  5 数据隐私渠道与审计  5 1 数据最小化  模型上下文中的已知联系人手机号替换为稳定联系人 ID，其他符合手机号模式的数字隐藏",
+      "bankmate  安全自评报告  第 6 页  6 已知风险清单  等级按当前单机演示用途判断。下列改进均属于尚未完成项；不将建议性控制写成已实现能力。  编号 等级 已知风险 ",
+      "bankmate  安全自评报告  第 7 页  7 业务与验证剩余风险  编号 等级 已知风险 处理建议  R09 中 固定业务日期与按当前月份生成的种子流水可 能不一致，自动工"
+    ],
+    "contact_sheets": [
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\04\\contact-1.png",
+      "D:\\pycharmProject\\AI-banking\\resources\\competition_20261008\\qa\\04\\contact-2.png"
+    ]
+  }
+}

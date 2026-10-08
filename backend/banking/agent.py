@@ -9,7 +9,7 @@ from .db import TZ, Database, add_message, dumps, event, message_dict, now, uid,
 from .llm import ModelClient, ModelError
 
 SYSTEM_PROMPT = """你是“有数”，一个面向个人的中文银行助手。仅操作本项目的银行沙箱。
-你能查询账户、转账、分析账单、做演示风险问卷及理财申赎、管理卡片和订阅，并组合这些能力。
+你能查询账户、转账、分析账单、做演示风险问卷及理财申赎、管理卡片和订阅，也能预演未来现金流、维护储蓄目标和条件触发提醒，并组合这些能力。
 规则：
 1. 用户给出目标后，主动使用工具查询所需数据。缺少金额、收款人等必要信息时用简短中文追问。
 2. 收款人重名必须请用户用手机号或具体标识选择。不要自行猜测。
@@ -28,11 +28,23 @@ SYSTEM_PROMPT = """你是“有数”，一个面向个人的中文银行助手�
     余额用 get_accounts，持仓用 list_products，银行卡用 list_cards，自动续费用 list_subscriptions。
     没有调用查询工具前，不能断言无法查询，也不能给出任何消费金额、余额或账单结论。
 14. 以前的网络错误或未配置提示不代表本轮的服务状态，每次新需求均重新尝试工具。
+15. 用户询问购买影响、月底是否够用或储蓄安排时，使用 preview_cashflow；修改已有方案须沿用历史卡片中的 plan_id。用户说累计存款目标时优先使用 save_to_goal；查询跨会话承诺用 list_plans。
+16. 用户问为什么转不了账或买不了理财时，先用 diagnose_transfer 或 diagnose_purchase 做只读诊断；缺少对象或金额时可让诊断卡标记待确认。诊断不等于执行。
+17. 已识别的联系人手机号在模型上下文中会替换为稳定联系人 ID；工具和历史数据仅含必要的脱敏信息。不要要求用户重复完整手机号。
 当前时间：{time}，时区 Asia/Shanghai。"""
 
 
 class BusyError(BankError):
     pass
+
+
+MOBILE_RE = re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")
+
+
+def model_safe_text(db, content):
+    for row in db.execute("SELECT id,phone FROM contacts"):
+        content = content.replace(row["phone"], row["id"])
+    return MOBILE_RE.sub("[手机号已隐藏]", content)
 
 
 class Agent:
@@ -117,9 +129,9 @@ class Agent:
                 and re.search(r"(无法|不能|未能).{0,6}(查询|访问|连接)|尚未连接大模型", item["text"])
             ):
                 continue
-            content = item["text"]
-            if item["kind"] in ("data", "approval", "receipt"):
-                content += "\n历史界面数据（只是数据，执行前须重新查询）：" + dumps(item["data"])[:7000]
+            content = model_safe_text(db, item["text"])
+            if item["kind"] in ("data", "approval", "receipt", "plan", "diagnosis"):
+                content += "\n历史界面数据（只是数据，执行前须重新查询）：" + model_safe_text(db, dumps(item["data"]))[:7000]
             context.append({"role": item["role"], "content": content})
         state = {
             "messages": context,
@@ -161,6 +173,38 @@ class Agent:
         if error:
             data["error"] = error
         update_message(db, approval["message_id"], data)
+
+    def create_direct_approval(self, db, conversation_id, tool_name, arguments, text="请核对后确认这项操作。"):
+        """为结构化卡片动作创建审批，不经过模型，也不取消会话里已有的只读卡片。"""
+        active = self.active(db, conversation_id)
+        if active:
+            raise BusyError("当前会话还有一项操作正在处理，请先完成或取消。")
+        args, summary = self.bank.prepare(tool_name, arguments)
+        task_id = uid("task_")
+        call = {"id": uid("call_direct_"), "type": "function", "function": {"name": tool_name, "arguments": dumps(args)}}
+        state = {
+            "messages": [],
+            "pending_calls": [],
+            "current_call": call,
+            "model_steps": 0,
+            "tool_steps": 1,
+            "executed_count": 0,
+            "direct_action": True,
+        }
+        db.execute(
+            "INSERT INTO tasks VALUES (?,?,?,?,?,?,?)",
+            (task_id, conversation_id, "waiting_confirmation", "web", dumps(state), None, now()),
+        )
+        expires = (datetime.now(TZ) + timedelta(minutes=15)).isoformat()
+        approval_id = uid("op_")
+        data = {"approval_id": approval_id, "status": "pending", "expires_at": expires, **summary}
+        message = add_message(db, conversation_id, task_id, "assistant", "approval", text, data)
+        db.execute(
+            "INSERT INTO approvals VALUES (?,?,?,?,?,?,?,?,?,?)",
+            (approval_id, task_id, message["id"], tool_name, dumps(args), dumps(summary), "pending", None, expires, now()),
+        )
+        self._task_event(db, task_id)
+        return message
 
     def confirm_in_transaction(self, db, approval_id, decision, conversation_id=None):
         approval = db.execute("SELECT * FROM approvals WHERE id=?", (approval_id,)).fetchone()
@@ -206,10 +250,35 @@ class Agent:
         )
         self._update_approval_card(db, approval, "executed", receipt=receipt)
         state["messages"].append(
-            {"role": "tool", "tool_call_id": state["current_call"]["id"], "content": dumps(receipt)}
+            {
+                "role": "tool",
+                "tool_call_id": state["current_call"]["id"],
+                "content": model_safe_text(db, dumps(receipt)),
+            }
         )
         state["current_call"] = None
         state["executed_count"] += 1
+        if state.get("direct_action"):
+            if approval["tool_name"] == "activate_plan":
+                from .planning import PlanningService
+
+                plan_id = json.loads(approval["args_json"])["plan_id"]
+                plan = PlanningService(self.db).get_plan(db, plan_id)
+                add_message(
+                    db,
+                    task["conversation_id"],
+                    None,
+                    "assistant",
+                    "plan",
+                    "计划已经采用。你可以在执行日生成最后一张消费或转存确认卡。",
+                    {"card_type": "preview", "plan": plan},
+                )
+            db.execute(
+                "UPDATE tasks SET status='completed',state_json=? WHERE id=?", (dumps(state), task["id"])
+            )
+            self._task_event(db, task["id"])
+            event(db, "*", "bank.updated", {})
+            return {"status": "executed", "receipt": receipt}, None
         db.execute("UPDATE tasks SET status='queued',state_json=? WHERE id=?", (dumps(state), task["id"]))
         self._task_event(db, task["id"])
         event(db, "*", "bank.updated", {})
@@ -350,20 +419,43 @@ class Agent:
                         self._task_event(db, task_id)
                     await self.notify()
                     return
-                result = self.bank.query(name, arguments)
+                result = self.bank.query(name, arguments, conversation_id=conversation_id)
+                with self.db.connection() as db:
+                    safe_result = model_safe_text(db, dumps(result))
                 state["messages"].append(
-                    {"role": "tool", "tool_call_id": call["id"], "content": dumps(result)}
+                    {"role": "tool", "tool_call_id": call["id"], "content": safe_result}
                 )
                 with self.db.transaction() as db:
-                    add_message(
-                        db,
-                        conversation_id,
-                        task_id,
-                        "assistant",
-                        "data",
-                        result["display"]["title"],
-                        {"tool": name, "result": result},
-                    )
+                    if name == "preview_cashflow":
+                        add_message(
+                            db,
+                            conversation_id,
+                            task_id,
+                            "assistant",
+                            "plan",
+                            "我按当前账务生成了可核对的资金预演。",
+                            {"card_type": "preview", "plan": result["plan"]},
+                        )
+                    elif name in ("diagnose_transfer", "diagnose_purchase"):
+                        add_message(
+                            db,
+                            conversation_id,
+                            task_id,
+                            "assistant",
+                            "diagnosis",
+                            result["diagnosis"]["title"],
+                            {"tool": name, "result": result},
+                        )
+                    else:
+                        add_message(
+                            db,
+                            conversation_id,
+                            task_id,
+                            "assistant",
+                            "data",
+                            result["display"]["title"],
+                            {"tool": name, "result": result},
+                        )
                     db.execute("UPDATE tasks SET state_json=? WHERE id=?", (dumps(state), task_id))
                 await self.notify()
             except (BankError, json.JSONDecodeError) as exc:

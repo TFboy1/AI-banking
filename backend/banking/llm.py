@@ -1,4 +1,5 @@
 import json
+import re
 
 import httpx
 
@@ -16,11 +17,14 @@ PLANNER_PROMPT = """你现在是银行助手的工具调度器，只输出一个
 必须从下面工具列表选择工具读取真实数据，不得编造数据或声称没有查询权限。
 用户问本月消费、钱花在哪了，选择 analyze_bills，arguments={} 即可，本月无需追问。
 余额使用 get_accounts，产品和持仓使用 list_products，订阅使用 list_subscriptions，卡片使用 list_cards。
+购买影响、月底是否够用或储蓄安排使用 preview_cashflow；修改历史方案须沿用已有 plan_id。跨会话资金承诺使用 list_plans，累计储蓄或改口补差额使用 save_to_goal。
+用户询问为什么转不了账或无法购买理财时，先用 diagnose_transfer 或 diagnose_purchase 只读诊断；诊断信息不足时按卡片结果追问。
 变更工具由服务器生成待确认卡片，不会直接操作资金；缺少必要参数时才追问。
 组合需求需要依次完成，已有 executed 回执的操作不得重复调用。
 
 要查询/执行下一步时，输出：
 {"type":"tool_calls","calls":[{"name":"工具名称","arguments":{}}]}
+不要只输出 arguments 对象，不要输出数组，不要把工具名省略。
 闲聊时输出：{"type":"reply","reason":"chat","text":"简短中文回复"}
 缺少必填参数时输出：{"type":"reply","reason":"clarification","text":"简短中文追问"}
 本轮工具已返回且用户的全部步骤已完成时输出：
@@ -202,7 +206,7 @@ class ModelClient:
             content = response.get("content")
             if not isinstance(content, str) or len(content) > 64000:
                 raise ValueError("Missing structured response")
-            plan = json.loads(content)
+            plan = self._decode_plan_content(content)
             if plan["type"] == "tool_calls":
                 if (
                     set(plan) != {"type", "calls"}
@@ -239,3 +243,60 @@ class ModelClient:
             raise ModelError(
                 "模型未返回有效的银行工具计划，本轮已停止。请重试或换用支持工具调用的模型。"
             ) from None
+
+    def _decode_plan_content(self, content):
+        """解析兼容模型常见的结构化输出变体。
+
+        部分兼容 Chat Completions 的模型在声明 json_object 后，仍会返回
+        ``tool_name\\n{...}`` 或 Markdown JSON 代码块。两者语义明确且不会
+        绕过后续工具白名单和参数校验，因此在这里统一转换为标准计划对象。
+        """
+        text = content.strip()
+        if text.startswith("```") and text.endswith("```"):
+            text = re.sub(r"^```(?:json)?\s*", "", text, count=1, flags=re.IGNORECASE)
+            text = re.sub(r"\s*```$", "", text, count=1).strip()
+        try:
+            parsed = json.loads(text)
+            if isinstance(parsed, dict) and ("type" in parsed or "calls" in parsed):
+                return parsed
+            inferred = self._infer_tool_call(parsed)
+            if inferred:
+                return inferred
+            raise ValueError("Missing tool name")
+        except json.JSONDecodeError:
+            pass
+
+        match = re.fullmatch(r"([A-Za-z_][A-Za-z0-9_]*)\s*(\{.*\})?", text, flags=re.DOTALL)
+        if not match:
+            raise ValueError("Invalid structured plan")
+        name, raw_arguments = match.groups()
+        allowed_names = {item["function"]["name"] for item in tool_schemas()}
+        if name not in allowed_names:
+            raise ValueError("Unknown tool in structured plan")
+        arguments = json.loads(raw_arguments or "{}")
+        if not isinstance(arguments, dict):
+            raise TypeError("Invalid tool arguments")
+        return {"type": "tool_calls", "calls": [{"name": name, "arguments": arguments}]}
+
+    def _infer_tool_call(self, value):
+        """仅在参数键唯一匹配某个工具时兼容模型省略工具名的输出。"""
+        candidates = []
+        values = [value]
+        if isinstance(value, list):
+            values = [item for item in value if isinstance(item, dict) and "type" not in item]
+            if len(values) != 1:
+                return None
+        arguments = values[0] if values and isinstance(values[0], dict) else None
+        if not arguments:
+            return None
+        for schema in tool_schemas():
+            function = schema["function"]
+            parameters = function["parameters"]
+            properties = set(parameters.get("properties", {}))
+            required = set(parameters.get("required", []))
+            keys = set(arguments)
+            if keys.issubset(properties) and (not required or required.issubset(keys)):
+                candidates.append(function["name"])
+        if len(candidates) != 1:
+            return None
+        return {"type": "tool_calls", "calls": [{"name": candidates[0], "arguments": arguments}]}

@@ -185,3 +185,20 @@ async def test_structured_format_retry_keeps_tool_result_and_never_repeats_tool(
     assert len(requests) == 2
     assert "服务端格式校验" in requests[1]["messages"][-1]["content"]
     assert sum("银行工具结果" in m["content"] for m in requests[1]["messages"]) == 1
+
+
+@pytest.mark.parametrize(
+    "content",
+    [
+        "get_accounts\n{}",
+        "```json\n{\"type\":\"tool_calls\",\"calls\":[{\"name\":\"get_accounts\",\"arguments\":{}}]}\n```",
+        "{\"query\":\"张三\"}",
+        "[{\"type\":\"reply\",\"reason\":\"chat\",\"text\":\"先查询\"},{\"query\":\"张三\"}]",
+    ],
+)
+async def test_structured_adapter_accepts_common_compatible_output_variants(settings, content):
+    configure(settings)
+    settings.llm_tool_mode = "structured"
+    client = ModelClient(settings)
+    result = client._parse_plan({"content": content}, [{"role": "user", "content": "查询余额"}])
+    assert result["tool_calls"][0]["function"]["name"] in {"get_accounts", "find_recipients"}

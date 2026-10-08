@@ -58,6 +58,32 @@ CREATE TABLE IF NOT EXISTS feishu_binding (id INTEGER PRIMARY KEY CHECK(id=1),te
 CREATE TABLE IF NOT EXISTS feishu_inbox (event_id TEXT PRIMARY KEY,result_json TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS feishu_outbox (message_id TEXT PRIMARY KEY,payload_json TEXT NOT NULL,
  external_id TEXT,status TEXT NOT NULL,attempts INTEGER NOT NULL DEFAULT 0,error TEXT);
+CREATE TABLE IF NOT EXISTS plans (
+ id TEXT PRIMARY KEY,conversation_id TEXT NOT NULL,kind TEXT NOT NULL,title TEXT NOT NULL,status TEXT NOT NULL,
+ current_version INTEGER NOT NULL,goal_minor INTEGER,deadline TEXT,created_at TEXT NOT NULL,updated_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS plan_versions (
+ plan_id TEXT NOT NULL,version INTEGER NOT NULL,input_json TEXT NOT NULL,result_json TEXT NOT NULL,
+ created_at TEXT NOT NULL,PRIMARY KEY(plan_id,version));
+CREATE TABLE IF NOT EXISTS commitments (
+ id TEXT PRIMARY KEY,plan_id TEXT NOT NULL,conversation_id TEXT NOT NULL,account_id TEXT NOT NULL,
+ kind TEXT NOT NULL,label TEXT NOT NULL,amount_minor INTEGER NOT NULL,remaining_minor INTEGER NOT NULL,
+ due_date TEXT,status TEXT NOT NULL,created_at TEXT NOT NULL,updated_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS plan_executions (
+ id TEXT PRIMARY KEY,plan_id TEXT NOT NULL,step_key TEXT NOT NULL,approval_id TEXT NOT NULL UNIQUE,
+ amount_minor INTEGER NOT NULL,status TEXT NOT NULL,receipt_json TEXT,created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS trigger_rules (
+ id TEXT PRIMARY KEY,plan_id TEXT,conversation_id TEXT NOT NULL,account_id TEXT NOT NULL,
+ source_key TEXT NOT NULL,expected_day INTEGER NOT NULL,reserve_minor INTEGER NOT NULL,
+ cadence TEXT NOT NULL,status TEXT NOT NULL,last_period TEXT,created_at TEXT NOT NULL,updated_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS bank_events (
+ id TEXT PRIMARY KEY,event_key TEXT NOT NULL UNIQUE,kind TEXT NOT NULL,period TEXT NOT NULL,
+ payload_json TEXT NOT NULL,occurred_at TEXT NOT NULL,created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS trigger_runs (
+ id TEXT PRIMARY KEY,rule_id TEXT NOT NULL,event_id TEXT,period TEXT NOT NULL,kind TEXT NOT NULL,
+ result_json TEXT NOT NULL,created_at TEXT NOT NULL,UNIQUE(rule_id,period,kind));
+CREATE TABLE IF NOT EXISTS notifications (
+ id TEXT PRIMARY KEY,conversation_id TEXT NOT NULL,kind TEXT NOT NULL,title TEXT NOT NULL,
+ data_json TEXT NOT NULL,read_at TEXT,created_at TEXT NOT NULL);
 """
 
 
@@ -247,7 +273,8 @@ class Database:
             SELECT c.id,c.title,c.created_at,c.updated_at,
                 (SELECT text FROM messages WHERE conversation_id=c.id ORDER BY rowid DESC LIMIT 1) AS preview,
                 (SELECT status FROM tasks WHERE conversation_id=c.id
-                 AND status IN ('queued','running','waiting_confirmation') ORDER BY rowid DESC LIMIT 1) AS task_status
+                 AND status IN ('queued','running','waiting_confirmation') ORDER BY rowid DESC LIMIT 1) AS task_status,
+                (SELECT COUNT(*) FROM notifications n WHERE n.conversation_id=c.id AND n.read_at IS NULL) AS unread_count
             FROM conversations c WHERE c.deleted_at IS NULL ORDER BY c.updated_at DESC,c.rowid DESC
         """)
         ]

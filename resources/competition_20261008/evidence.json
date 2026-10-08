@@ -1,0 +1,884 @@
+{
+  "date": "2026-10-08",
+  "team_name": "哈基米摸南北绿豆",
+  "project_name": "bankmate",
+  "initial": {
+    "accounts": [
+      {
+        "id": "daily",
+        "name": "日常账户",
+        "kind": "checking",
+        "balance_minor": 1286050
+      },
+      {
+        "id": "savings",
+        "name": "储蓄账户",
+        "kind": "savings",
+        "balance_minor": 820000
+      }
+    ],
+    "cards": [
+      {
+        "id": "card_daily",
+        "account_id": "daily",
+        "name": "日常借记卡",
+        "last4": "8821",
+        "status": "active",
+        "daily_limit_minor": 1000000
+      }
+    ],
+    "holdings": [
+      {
+        "product_id": "cash",
+        "units": "2000.0000",
+        "name": "安心现金",
+        "nav": "1.0000",
+        "risk_level": 1,
+        "value_minor": 200000
+      }
+    ],
+    "risk_level": null,
+    "total_assets_minor": 2306050,
+    "transactions": [
+      {
+        "id": "tx_9255f2ebfe634381866b5e8669fe53bb",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "星河视频会员",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-10-08T09:00:00+08:00",
+        "merchant_key": "video",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_6c64bdfeb7684a80a30a0b99985b59fb",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "电子产品商店",
+        "direction": "out",
+        "amount_minor": 389900,
+        "category": "购物",
+        "occurred_at": "2026-10-08T09:00:00+08:00",
+        "merchant_key": "electronics",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_2b1d50232566463fb70b1a6af2f2f485",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "周末餐厅",
+        "direction": "out",
+        "amount_minor": 16800,
+        "category": "餐饮",
+        "occurred_at": "2026-10-08T09:00:00+08:00",
+        "merchant_key": "restaurant",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_902c4ef75982468bb40b8b9ccd010962",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "地铁出行",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "交通",
+        "occurred_at": "2026-10-08T09:00:00+08:00",
+        "merchant_key": "metro",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_d8b71c451bc34c8a95b5870ed59500ac",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "云端存储",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "订阅",
+        "occurred_at": "2026-10-08T09:00:00+08:00",
+        "merchant_key": "cloud",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_4148ddf0af5e4c2197f361e4cd4dc446",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "日常超市",
+        "direction": "out",
+        "amount_minor": 23650,
+        "category": "购物",
+        "occurred_at": "2026-10-07T09:00:00+08:00",
+        "merchant_key": "market",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_3d34f49d501845648887b85bda8b635e",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "街角咖啡",
+        "direction": "out",
+        "amount_minor": 2800,
+        "category": "餐饮",
+        "occurred_at": "2026-10-06T09:00:00+08:00",
+        "merchant_key": "coffee",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_a34a714bddd04a6a9cfa306351730a20",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "声动音乐会员",
+        "direction": "out",
+        "amount_minor": 1500,
+        "category": "订阅",
+        "occurred_at": "2026-10-05T09:00:00+08:00",
+        "merchant_key": "music",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_eb53515578aa42df89a4d8bb427785b4",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "星河视频会员",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-10-03T09:00:00+08:00",
+        "merchant_key": "video",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_fe8b7e3295d9460fa3069a814fae50b0",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "房租",
+        "direction": "out",
+        "amount_minor": 320000,
+        "category": "居住",
+        "occurred_at": "2026-10-02T09:00:00+08:00",
+        "merchant_key": "rent",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_45467c92e1fc44e7b1a1c1b98406a951",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "工资收入",
+        "direction": "in",
+        "amount_minor": 1800000,
+        "category": "工资",
+        "occurred_at": "2026-10-01T09:00:00+08:00",
+        "merchant_key": "salary",
+        "description": "演示历史交易"
+      },
+      {
+        "id": "tx_fec84b11c4fb40658395e2ace8cea01a",
+        "action_id": null,
+        "account_id": "daily",
+        "counterparty": "星河视频会员",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-09-12T09:00:00+08:00",
+        "merchant_key": "video",
+        "description": "演示历史交易"
+      }
+    ],
+    "subscriptions": [
+      {
+        "id": "video",
+        "name": "星河视频会员",
+        "merchant_key": "video",
+        "amount_minor": 2900,
+        "next_charge_date": "2026-11-03",
+        "status": "active"
+      },
+      {
+        "id": "music",
+        "name": "声动音乐会员",
+        "merchant_key": "music",
+        "amount_minor": 1500,
+        "next_charge_date": "2026-11-05",
+        "status": "active"
+      },
+      {
+        "id": "cloud",
+        "name": "云端存储",
+        "merchant_key": "cloud",
+        "amount_minor": 1200,
+        "next_charge_date": "2026-11-08",
+        "status": "active"
+      }
+    ],
+    "current_month": "2026-10",
+    "protected_minor": 0,
+    "free_minor": 1286050,
+    "business_date": "2026-10-08",
+    "next_salary_period": "2026-11"
+  },
+  "demo": {
+    "business_date": "2026-09-30",
+    "daily_balance_minor": 625600,
+    "protected_minor": 625600
+  },
+  "preview": {
+    "plan_id": "plan_fea7ced5ee434e8dbf1e8943a40d4bc6",
+    "version": 1,
+    "title": "购买电脑方案",
+    "kind": "purchase",
+    "status": "draft",
+    "amount_minor": 600000,
+    "living_reserve_minor": 300000,
+    "deadline": "2026-10-31",
+    "assumptions": {
+      "as_of": "2026-09-30",
+      "salary": null,
+      "rent": null,
+      "subscriptions": [
+        {
+          "id": "video",
+          "name": "星河视频会员",
+          "merchant_key": "video",
+          "amount_minor": 2900,
+          "next_charge_date": "2026-11-03",
+          "status": "active"
+        },
+        {
+          "id": "music",
+          "name": "声动音乐会员",
+          "merchant_key": "music",
+          "amount_minor": 1500,
+          "next_charge_date": "2026-11-05",
+          "status": "active"
+        },
+        {
+          "id": "cloud",
+          "name": "云端存储",
+          "merchant_key": "cloud",
+          "amount_minor": 1200,
+          "next_charge_date": "2026-11-08",
+          "status": "active"
+        }
+      ],
+      "realized_salary_periods": []
+    },
+    "variants": [
+      {
+        "key": "now",
+        "label": "按计划执行",
+        "action_date": "2026-09-30",
+        "result": {
+          "feasible": false,
+          "opening_available_minor": 0,
+          "ending_balance_minor": 25600,
+          "ending_protected_minor": 625600,
+          "ending_available_minor": -600000,
+          "lowest_available_minor": -600000,
+          "lowest_date": "2026-09-30",
+          "first_failure": {
+            "date": "2026-09-30",
+            "event": "购买电脑",
+            "shortfall_minor": 600000
+          },
+          "timeline": [
+            {
+              "key": "primary_action",
+              "kind": "action",
+              "date": "2026-09-30",
+              "amount_minor": 600000,
+              "label": "购买电脑",
+              "balance_minor": 25600,
+              "protected_minor": 625600,
+              "available_minor": -600000
+            }
+          ]
+        }
+      }
+    ],
+    "installments": [],
+    "explanation": {
+      "as_of": "2026-10-08T16:02:54.432+08:00",
+      "sources": [
+        {
+          "label": "日常账户余额 ¥6,256.00；业务日期 2026-09-30",
+          "references": [
+            "daily"
+          ]
+        },
+        {
+          "label": "3 项有效代扣协议",
+          "references": [
+            "video",
+            "music",
+            "cloud"
+          ]
+        },
+        {
+          "label": "预演纳入已安排及新增保护资金 ¥6,256.00",
+          "references": [
+            "commit_f7812e9bb8204013bbdffa07a3029f69",
+            "commit_813fd70af5bc450399d32f94c6e7801b",
+            "commit_4d848fd0a3d940ed837fb7223bd99c25"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "label": "按计划执行",
+          "status": "block",
+          "detail": "2026-09-30 · 购买电脑，缺口 ¥6,000.00"
+        }
+      ],
+      "conclusion": "这是按当前账务和上述假设得到的预演；采用计划与实际执行仍需分别确认。"
+    }
+  },
+  "salary_challenge": {
+    "plan_id": "plan_fea7ced5ee434e8dbf1e8943a40d4bc6",
+    "version": 1,
+    "title": "购买电脑方案",
+    "challenge": {
+      "dimension": "salary_delay",
+      "found": false,
+      "reason": "方案中没有预计工资事件。"
+    }
+  },
+  "expense_challenge": {
+    "plan_id": "plan_fea7ced5ee434e8dbf1e8943a40d4bc6",
+    "version": 1,
+    "title": "购买电脑方案",
+    "challenge": {
+      "dimension": "unexpected_expense",
+      "found": true,
+      "date": "2026-09-30",
+      "maximum_minor": 0,
+      "first_failure_minor": 1,
+      "shortfall_minor": 1,
+      "scope": "指定日期的一笔预算外支出，精确到 0.01 元"
+    }
+  },
+  "tables": [
+    "accounts",
+    "approvals",
+    "bank_events",
+    "binding_codes",
+    "cards",
+    "commitments",
+    "contacts",
+    "conversations",
+    "events",
+    "feishu_binding",
+    "feishu_inbox",
+    "feishu_outbox",
+    "holdings",
+    "messages",
+    "meta",
+    "notifications",
+    "plan_executions",
+    "plan_versions",
+    "plans",
+    "products",
+    "risk_profile",
+    "sessions",
+    "subscriptions",
+    "tasks",
+    "transactions",
+    "trigger_rules",
+    "trigger_runs"
+  ],
+  "read_tools": [
+    "get_accounts",
+    "find_recipients",
+    "analyze_bills",
+    "get_risk_questionnaire",
+    "list_products",
+    "list_cards",
+    "list_subscriptions",
+    "list_plans",
+    "preview_cashflow",
+    "diagnose_transfer",
+    "diagnose_purchase"
+  ],
+  "write_tools": [
+    "transfer",
+    "save_risk_profile",
+    "purchase_product",
+    "redeem_product",
+    "set_card_status",
+    "set_card_limit",
+    "cancel_subscription",
+    "simulate_expense",
+    "reserve_funds",
+    "create_trigger_rule",
+    "save_to_goal",
+    "activate_plan",
+    "adjust_commitment"
+  ],
+  "test_groups": {
+    "test_api.py": [
+      "test_session_origin_and_tampered_decision_are_rejected",
+      "test_missing_model_is_reported_without_fake_success",
+      "test_reset_clears_pending_operation_and_reseeds_bank",
+      "test_feishu_binding_deduplication_and_cross_channel_confirmation",
+      "test_only_readonly_inspection_is_exposed_without_model"
+    ],
+    "test_banking.py": [
+      "test_transfer_requires_confirmation_and_writes_receipt",
+      "test_simultaneous_confirmation_is_idempotent",
+      "test_own_transfer_conserves_assets_and_is_not_consumption",
+      "test_ambiguous_contact_does_not_create_approval",
+      "test_money_validation_rejects_invalid_amounts",
+      "test_balance_is_revalidated_at_confirmation",
+      "test_frozen_card_blocks_debit_then_unfreeze_restores_it",
+      "test_limit_covers_cumulative_daily_payments",
+      "test_risk_profile_prevents_unsuitable_purchase",
+      "test_purchase_and_redemption_settle_cash_and_units",
+      "test_sub_cent_redemption_cannot_create_money_through_rounding",
+      "test_read_data_injection_cannot_grant_execution_permission",
+      "test_cancellation_has_evidence_and_does_not_refund",
+      "test_multistep_failure_preserves_completed_step_and_stops_tail",
+      "test_bill_totals_and_anomaly_references_are_grounded",
+      "test_unknown_tool_and_fake_confirmation_cannot_execute",
+      "test_new_message_revokes_previous_confirmation",
+      "test_expired_approval_cannot_execute",
+      "test_model_failure_after_execution_does_not_repeat_payment",
+      "test_model_only_success_claim_is_not_a_receipt",
+      "test_pending_approval_survives_service_restart",
+      "test_connection_errors_do_not_poison_next_bill_query_context"
+    ],
+    "test_conversations.py": [
+      "test_conversations_keep_independent_context_and_persist_selection",
+      "test_explicit_conversation_prevents_stale_tab_message_and_inspection_mixup",
+      "test_confirmation_stays_with_original_conversation_and_shares_bank",
+      "test_deleting_last_conversation_cancels_pending_but_keeps_money",
+      "test_reset_and_delete_cannot_interrupt_running_task_in_other_conversation",
+      "test_legacy_database_migration_preserves_history_receipts_and_balances"
+    ],
+    "test_diagnostics.py": [
+      "test_purchase_diagnosis_lists_independent_blockers_without_changes",
+      "test_transfer_diagnosis_distinguishes_missing_and_ambiguous_data",
+      "test_ready_diagnosis_does_not_bypass_confirmation_recheck",
+      "test_bill_evidence_is_persisted_and_model_context_masks_phone",
+      "test_agent_persists_read_only_diagnosis_card"
+    ],
+    "test_llm.py": [
+      "test_compatible_tool_call_protocol",
+      "test_upstream_errors_do_not_expose_credentials",
+      "test_plaintext_without_tool_evidence_uses_structured_adapter",
+      "test_structured_adapter_rejects_invalid_plans_and_ungrounded_summary",
+      "test_structured_format_retry_keeps_tool_result_and_never_repeats_tool",
+      "test_structured_adapter_accepts_common_compatible_output_variants"
+    ],
+    "test_planning.py": [
+      "test_commitment_release_does_not_double_count_rent",
+      "test_projection_exposes_chart_origin_and_first_gap",
+      "test_salary_delay_finds_one_day_boundary_and_repair_condition",
+      "test_unexpected_expense_boundary_is_exact_to_one_cent",
+      "test_salary_event_is_idempotent",
+      "test_demo_scenario_has_fixed_business_date_and_full_protection",
+      "test_multimonth_savings_is_split_by_salary_cycles",
+      "test_income_inference_needs_two_matching_cycles"
+    ]
+  },
+  "hashes": {
+    "README.md": "140cdb41284eee9b9aa60beb6e5e349d8241f68c40e9237080a95aed040943c4",
+    "pyproject.toml": "76d710ff2d76b1268fe98eec51f418e49757d18dd27eb70c4a153f96227a986b",
+    "uv.lock": "89faf478866ddc62b53b8e32604b3160cb461829191fc9fe7cb6beb5b0d681e3",
+    "frontend/package.json": "46e10880c1a3558253c14b5bfd93a17e983e19fb5d35b526343d9d4d2053cb07",
+    "frontend/package-lock.json": "966f6ce0868c580993aec3f62b61f8ff3525da4e8525fccf566a32b1825031e7",
+    ".env.example": "6a8d25615a71f412e9ddaeb11d620617709025f21be08d7cdc791390d1974037",
+    "backend/banking/__init__.py": "a76db70c6fe858c9ebe57aa1cbb592ca190fb27f4a55e38e77e83aa3228d2384",
+    "backend/banking/agent.py": "e9fce75d05fd8b82dd89ad5d27c3d768327b177d9688676866b6a4f5e081e023",
+    "backend/banking/bank.py": "8b3b6156b6509cd70c8cc79e25acf8db370178d0cf5c9da991fb9e533ccb30d1",
+    "backend/banking/cashflow.py": "c72efb4f25f6534f958baade78667db5734b49fb8212eefbe01eb170af5762fc",
+    "backend/banking/config.py": "05004837c41684840a8b37b866992a78cbbcb832b0d87ea91c66a56023cd1b36",
+    "backend/banking/db.py": "c54a6dc1b11463d3a2fc51fcee57d8b58e91d49584ef261758765205102d2780",
+    "backend/banking/feishu.py": "b5755ed7ffffaf0b79aac34b2fdf3da9df8ad6ddf8ba88bf1c322ace225efa08",
+    "backend/banking/feishu_bridge.py": "9d6ea55d41468e9a5c324850c72f92a7b05571a6648088246c1ce41d9dd44c79",
+    "backend/banking/llm.py": "bf59be708fc3affd9b9790506b85b5b22982ec96432bad9a25251ffa8f134c31",
+    "backend/banking/main.py": "cd929fad8630821caece6cc37f0513601638170535d0d13b069ce3b7e376b32d",
+    "backend/banking/planning.py": "7583cad16f8c7b50428278ee351662da2231a9d60e773f92bb139a5c8eae0d3b",
+    "backend/tests/conftest.py": "aff59ba95cece5d757bf6305d7ab64497a3b101a608b87ee982f9460a4501ee0",
+    "backend/tests/test_api.py": "ebe9d167db56d3967e5c0c76e04c4eaba75fa96a5ca128879b6bd08e10ab97a4",
+    "backend/tests/test_banking.py": "8c4a738d2298d0e9fed7cb2a9799bcb628e8fc0ec4773fc57530e90421a93d91",
+    "backend/tests/test_conversations.py": "bfd1ae2cf89c2c8c408c8e909805a153de4eb597284befa1caed1ba2d469a8e6",
+    "backend/tests/test_diagnostics.py": "20ad62b3b02a0d0aa1e93bcfe73de52b6f144d0e7520754d5f5723167bfbacf7",
+    "backend/tests/test_llm.py": "144b4171e1d5735dace2093e668c1b6246d27ff23be3e356696a9ef6cfaf2faa",
+    "backend/tests/test_planning.py": "54782d0baabe0e09fab040219996dc6b59b65cba2d7057e3ee6662ffd41dbd80",
+    "frontend/src/App.vue": "63362fc2ba4fad952ce2c551d7e71596d52219659fa0daa9e95df54f757e51fe",
+    "frontend/src/components/BankPanel.vue": "329d35d5f3b2c78e1e44381814b439b66ede1597716af4abcfc175623f8008ac",
+    "frontend/src/components/CashflowChart.vue": "c14c66e3672d1723c1233fd8374e852d6997f998215453b222e12148f53398c4",
+    "frontend/src/components/ConversationPanel.vue": "6c91828d967989d53fbb1d481eb431ea49742ce8c7500deb1da226e9201b47a7",
+    "frontend/src/components/DecisionEvidence.vue": "96b001bb323351ac36e19ee4b9add3369bfbfa2c6d959abd3ef2ab19d0cd5335",
+    "frontend/src/components/MessageCard.vue": "720748b49922f4f7cc4f20f3e3e516554e55d91c9f9b145b98fa09541adede0b",
+    "frontend/src/main.ts": "145e8e4a4e3accb5316d235c9e3e062d36d5ab34f5986f1bf96fdee53ce704f0",
+    "frontend/src/style.css": "794a06b284283d3945646bfb9292b5c110742b9201c9d58943085ef2ce8d7609",
+    "frontend/src/types.ts": "2a222a815bd2033a3ea8204dd6a689edd243a8493375305a70a71200830d9089",
+    "scripts/check.ps1": "7b50a3a4ccae787ec2fdc58d6d418812a0b1c8f75d8324577297b44a1de7cd8b",
+    "scripts/smoke_backend.py": "d5777f2e6fb00db36fb8df71bcc4b474a0d89a114880138405459efabd421d95",
+    "scripts/smoke_model.py": "467e2b6dc148610a079cc5a860b6ec7324304c8d4c15bb7d3e7ab4f0a391f888",
+    "scripts/start.ps1": "97a73515a6acfdfd5bbf0f2019724b9a623deae1347ba8c1e86e66202076ab21"
+  },
+  "verification": {
+    "ruff": "passed",
+    "pytest_passed": 65,
+    "pytest_seconds": 3.26,
+    "frontend_build": "passed",
+    "frontend_ui": "not_run",
+    "smoke_backend": "passed",
+    "smoke_events": 11,
+    "real_model": "not_run",
+    "live_feishu": "not_run"
+  },
+  "normal_assumptions": {
+    "as_of": "2026-10-08",
+    "salary": {
+      "amount_minor": 1800000,
+      "day": 1,
+      "evidence_ids": [
+        "tx_133363cd2c0e4951b303b518c6531218",
+        "tx_a5bd1d048cc1497e9fe46b0b09d114e0"
+      ],
+      "months": [
+        "2026-08",
+        "2026-09"
+      ]
+    },
+    "rent": {
+      "amount_minor": 320000,
+      "day": 2,
+      "evidence_ids": [
+        "tx_2d4b362ea19a46c991f5155b589f4daa",
+        "tx_aec94b73debd4165800c1bc9eafe8f71"
+      ],
+      "months": [
+        "2026-08",
+        "2026-09"
+      ]
+    },
+    "subscriptions": [
+      {
+        "id": "video",
+        "name": "星河视频会员",
+        "merchant_key": "video",
+        "amount_minor": 2900,
+        "next_charge_date": "2026-11-03",
+        "status": "active"
+      },
+      {
+        "id": "music",
+        "name": "声动音乐会员",
+        "merchant_key": "music",
+        "amount_minor": 1500,
+        "next_charge_date": "2026-11-05",
+        "status": "active"
+      },
+      {
+        "id": "cloud",
+        "name": "云端存储",
+        "merchant_key": "cloud",
+        "amount_minor": 1200,
+        "next_charge_date": "2026-11-08",
+        "status": "active"
+      }
+    ]
+  },
+  "explicit_preview": {
+    "plan_id": "plan_382f287ef2cd42ab8fdb83f30643e2f5",
+    "version": 1,
+    "title": "购买电脑方案",
+    "kind": "purchase",
+    "status": "draft",
+    "amount_minor": 600000,
+    "living_reserve_minor": 300000,
+    "deadline": "2026-10-31",
+    "assumptions": {
+      "as_of": "2026-09-30",
+      "salary": {
+        "amount_minor": 1800000,
+        "day": 1,
+        "evidence_ids": [],
+        "months": [],
+        "source": "user"
+      },
+      "rent": {
+        "amount_minor": 320000,
+        "day": 2,
+        "evidence_ids": [],
+        "months": [],
+        "source": "user"
+      },
+      "subscriptions": [
+        {
+          "id": "video",
+          "name": "星河视频会员",
+          "merchant_key": "video",
+          "amount_minor": 2900,
+          "next_charge_date": "2026-11-03",
+          "status": "active"
+        },
+        {
+          "id": "music",
+          "name": "声动音乐会员",
+          "merchant_key": "music",
+          "amount_minor": 1500,
+          "next_charge_date": "2026-11-05",
+          "status": "active"
+        },
+        {
+          "id": "cloud",
+          "name": "云端存储",
+          "merchant_key": "cloud",
+          "amount_minor": 1200,
+          "next_charge_date": "2026-11-08",
+          "status": "active"
+        }
+      ],
+      "realized_salary_periods": []
+    },
+    "variants": [
+      {
+        "key": "now",
+        "label": "按计划执行",
+        "action_date": "2026-09-30",
+        "result": {
+          "feasible": false,
+          "opening_available_minor": 0,
+          "ending_balance_minor": 1505600,
+          "ending_protected_minor": 305600,
+          "ending_available_minor": 1200000,
+          "lowest_available_minor": -600000,
+          "lowest_date": "2026-09-30",
+          "first_failure": {
+            "date": "2026-09-30",
+            "event": "购买电脑",
+            "shortfall_minor": 600000
+          },
+          "timeline": [
+            {
+              "key": "primary_action",
+              "kind": "action",
+              "date": "2026-09-30",
+              "amount_minor": 600000,
+              "label": "购买电脑",
+              "balance_minor": 25600,
+              "protected_minor": 625600,
+              "available_minor": -600000
+            },
+            {
+              "key": "salary:2026-10",
+              "kind": "income",
+              "source": "salary",
+              "date": "2026-10-01",
+              "amount_minor": 1800000,
+              "label": "预计工资到账",
+              "balance_minor": 1825600,
+              "protected_minor": 625600,
+              "available_minor": 1200000
+            },
+            {
+              "key": "rent:2026-10",
+              "kind": "expense",
+              "source": "rent",
+              "date": "2026-10-02",
+              "amount_minor": 320000,
+              "release_commitment_minor": 320000,
+              "release_commitment_kind": "rent",
+              "label": "预计房租",
+              "balance_minor": 1505600,
+              "protected_minor": 305600,
+              "available_minor": 1200000
+            }
+          ]
+        }
+      },
+      {
+        "key": "after_salary",
+        "label": "工资到账后执行",
+        "action_date": "2026-10-01",
+        "result": {
+          "feasible": true,
+          "opening_available_minor": 0,
+          "ending_balance_minor": 1505600,
+          "ending_protected_minor": 305600,
+          "ending_available_minor": 1200000,
+          "lowest_available_minor": 0,
+          "lowest_date": "2026-09-30",
+          "first_failure": null,
+          "timeline": [
+            {
+              "key": "salary:2026-10",
+              "kind": "income",
+              "source": "salary",
+              "date": "2026-10-01",
+              "amount_minor": 1800000,
+              "label": "预计工资到账",
+              "balance_minor": 2425600,
+              "protected_minor": 625600,
+              "available_minor": 1800000
+            },
+            {
+              "key": "primary_action",
+              "kind": "action",
+              "date": "2026-10-01",
+              "amount_minor": 600000,
+              "label": "购买电脑",
+              "timing": "after_income",
+              "balance_minor": 1825600,
+              "protected_minor": 625600,
+              "available_minor": 1200000
+            },
+            {
+              "key": "rent:2026-10",
+              "kind": "expense",
+              "source": "rent",
+              "date": "2026-10-02",
+              "amount_minor": 320000,
+              "release_commitment_minor": 320000,
+              "release_commitment_kind": "rent",
+              "label": "预计房租",
+              "balance_minor": 1505600,
+              "protected_minor": 305600,
+              "available_minor": 1200000
+            }
+          ]
+        }
+      }
+    ],
+    "installments": [],
+    "explanation": {
+      "as_of": "2026-10-08T16:03:43.285+08:00",
+      "sources": [
+        {
+          "label": "日常账户余额 ¥6,256.00；业务日期 2026-09-30",
+          "references": [
+            "daily"
+          ]
+        },
+        {
+          "label": "预计工资 ¥18,000.00，每月 1 日（用户提供）",
+          "references": []
+        },
+        {
+          "label": "预计房租 ¥3,200.00，每月 2 日（用户提供）",
+          "references": []
+        },
+        {
+          "label": "3 项有效代扣协议",
+          "references": [
+            "video",
+            "music",
+            "cloud"
+          ]
+        },
+        {
+          "label": "预演纳入已安排及新增保护资金 ¥6,256.00",
+          "references": [
+            "commit_bb95b2efe0d14ff29139315c16d1d5cf",
+            "commit_4bda8b998f6b49c0942a70bb8fbb6dd9",
+            "commit_500382d638464db8b8e9b67de438f6be"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "label": "按计划执行",
+          "status": "block",
+          "detail": "2026-09-30 · 购买电脑，缺口 ¥6,000.00"
+        },
+        {
+          "label": "工资到账后执行",
+          "status": "pass",
+          "detail": "最低可自由安排 ¥0.00"
+        }
+      ],
+      "conclusion": "这是按当前账务和上述假设得到的预演；采用计划与实际执行仍需分别确认。"
+    }
+  },
+  "explicit_salary_challenge": {
+    "plan_id": "plan_382f287ef2cd42ab8fdb83f30643e2f5",
+    "version": 1,
+    "title": "购买电脑方案",
+    "challenge": {
+      "dimension": "salary_delay",
+      "found": true,
+      "minimum_days": 1,
+      "previous_days_passed": 0,
+      "failure": {
+        "date": "2026-10-01",
+        "event": "购买电脑",
+        "shortfall_minor": 600000
+      },
+      "scope": "工资延期 0～30 天",
+      "previous_result": {
+        "lowest_available_minor": 0,
+        "lowest_date": "2026-09-30"
+      },
+      "repair": {
+        "date": "2026-10-02",
+        "delay_days": 1,
+        "result": {
+          "feasible": true,
+          "opening_available_minor": 0,
+          "ending_balance_minor": 1505600,
+          "ending_protected_minor": 305600,
+          "ending_available_minor": 1200000,
+          "lowest_available_minor": 0,
+          "lowest_date": "2026-09-30",
+          "first_failure": null,
+          "timeline": [
+            {
+              "key": "rent:2026-10",
+              "kind": "expense",
+              "source": "rent",
+              "date": "2026-10-02",
+              "amount_minor": 320000,
+              "release_commitment_minor": 320000,
+              "release_commitment_kind": "rent",
+              "label": "预计房租",
+              "balance_minor": 305600,
+              "protected_minor": 305600,
+              "available_minor": 0
+            },
+            {
+              "key": "salary:2026-10",
+              "kind": "income",
+              "source": "salary",
+              "date": "2026-10-02",
+              "amount_minor": 1800000,
+              "label": "预计工资到账",
+              "balance_minor": 2105600,
+              "protected_minor": 305600,
+              "available_minor": 1800000
+            },
+            {
+              "key": "primary_action",
+              "kind": "action",
+              "date": "2026-10-02",
+              "amount_minor": 600000,
+              "label": "购买电脑",
+              "timing": "after_income",
+              "balance_minor": 1505600,
+              "protected_minor": 305600,
+              "available_minor": 1200000
+            }
+          ]
+        }
+      }
+    }
+  },
+  "explicit_expense_challenge": {
+    "plan_id": "plan_382f287ef2cd42ab8fdb83f30643e2f5",
+    "version": 1,
+    "title": "购买电脑方案",
+    "challenge": {
+      "dimension": "unexpected_expense",
+      "found": true,
+      "date": "2026-10-01",
+      "maximum_minor": 1200000,
+      "first_failure_minor": 1200001,
+      "shortfall_minor": 1,
+      "scope": "指定日期的一笔预算外支出，精确到 0.01 元"
+    }
+  }
+}

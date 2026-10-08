@@ -53,6 +53,8 @@ const connected = ref(false);
 const submitting = ref(false);
 const resetting = ref(false);
 const deciding = ref<string | null>(null);
+const planningAction = ref<string | null>(null);
+const eventBusy = ref(false);
 const panelOpen = ref(false);
 const settingsOpen = ref(false);
 const bindingCode = ref("");
@@ -129,6 +131,10 @@ function upsertMessage(message: Message) {
   else messages.value.push(message);
   void scrollToBottom(message.role === "user");
 }
+function upsertGlobalMessage(message: Message) {
+  if (message.conversation_id === conversationId.value) upsertMessage(message);
+  else void refreshConversations();
+}
 async function refreshBank() {
   try {
     bank.value = await api<BankSnapshot>("/bank");
@@ -160,7 +166,7 @@ function openEvents(after: number, id: string) {
   };
   source.addEventListener(
     "message",
-    (e) => isCurrent() && upsertMessage(JSON.parse((e as MessageEvent).data)),
+    (e) => isCurrent() && upsertGlobalMessage(JSON.parse((e as MessageEvent).data)),
   );
   source.addEventListener("task", (e) => {
     if (!isCurrent()) return;
@@ -194,6 +200,10 @@ function openEvents(after: number, id: string) {
     listRefreshTimer = window.setTimeout(() => {
       void refreshConversations();
     }, 100);
+  });
+  source.addEventListener("notification", () => {
+    if (!isCurrent()) return;
+    void refreshConversations();
   });
   source.addEventListener("reset", () => {
     if (!isCurrent()) return;
@@ -321,6 +331,12 @@ async function send(text = draft.value) {
     textarea.value?.focus();
   }
 }
+function suggest(prompt: string) {
+  draft.value = prompt;
+  drafts.set(conversationId.value, prompt);
+  resizeInput();
+  void nextTick(() => textarea.value?.focus());
+}
 async function decide(id: string, decision: "confirm" | "cancel") {
   if (navigationBusy.value) return;
   deciding.value = id;
@@ -347,6 +363,43 @@ async function decide(id: string, decision: "confirm" | "cancel") {
     error.value = (e as Error).message;
   } finally {
     deciding.value = null;
+  }
+}
+async function planAction(
+  planId: string,
+  action: string,
+  version: number,
+  variantKey = "now",
+) {
+  if (planningAction.value || navigationBusy.value) return;
+  planningAction.value = `${planId}:${action}`;
+  error.value = "";
+  try {
+    const message = await api<Message>(`/plans/${encodeURIComponent(planId)}/actions`, {
+      action,
+      version,
+      variant_key: variantKey,
+      conversation_id: conversationId.value,
+    });
+    upsertMessage(message);
+    void scrollToBottom(true);
+  } catch (e) {
+    error.value = (e as Error).message;
+  } finally {
+    planningAction.value = null;
+  }
+}
+async function adoptTrigger(notificationId: string) {
+  if (planningAction.value || navigationBusy.value) return;
+  planningAction.value = `notice:${notificationId}`;
+  try {
+    const message = await api<Message>(`/notifications/${encodeURIComponent(notificationId)}/adopt`, {}, "POST");
+    upsertMessage(message);
+    void scrollToBottom(true);
+  } catch (e) {
+    error.value = (e as Error).message;
+  } finally {
+    planningAction.value = null;
   }
 }
 async function inspect(tool: InspectTool) {
@@ -380,6 +433,34 @@ async function reset() {
     await bootstrap();
   } finally {
     resetting.value = false;
+  }
+}
+async function salaryEvent() {
+  eventBusy.value = true;
+  try {
+    await api("/sandbox/events", {
+      kind: "salary",
+      amount_minor: 1800000,
+      account_id: "daily",
+      source_key: "salary",
+      period: bank.value?.next_salary_period || new Date().toISOString().slice(0, 7),
+    });
+    await refreshBank();
+  } catch (e) {
+    error.value = (e as Error).message;
+  } finally {
+    eventBusy.value = false;
+  }
+}
+async function demoScenario() {
+  eventBusy.value = true;
+  try {
+    await api("/sandbox/scenario", { confirmation: "LOAD_DEMO" });
+    await bootstrap();
+  } catch (e) {
+    error.value = (e as Error).message;
+  } finally {
+    eventBusy.value = false;
   }
 }
 async function generateBinding() {
@@ -608,11 +689,15 @@ onBeforeUnmount(() => {
                   </div>
                   <MessageCard
                     v-if="
-                      message.kind === 'data' || message.kind === 'approval'
+                      message.kind === 'data' || message.kind === 'approval' || message.kind === 'plan' || message.kind === 'diagnosis'
                     "
                     :message="message"
                     :deciding="deciding"
+                    :acting="planningAction"
                     @decision="decide"
+                    @plan-action="planAction"
+                    @adopt-trigger="adoptTrigger"
+                    @suggest="suggest"
                   />
                   <div v-else class="message-text">
                     <CircleAlert v-if="message.kind === 'error'" :size="16" />{{
@@ -714,9 +799,12 @@ onBeforeUnmount(() => {
         :bank="bank"
         :busy="busy"
         :resetting="resetting"
+        :event-busy="eventBusy"
         @close="panelOpen = false"
         @inspect="inspect"
         @reset="reset"
+        @salary-event="salaryEvent"
+        @demo-scenario="demoScenario"
       />
     </main>
 

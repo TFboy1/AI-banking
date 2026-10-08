@@ -8,17 +8,21 @@ import {
   RotateCcw,
   Wallet,
   X,
+  Radio,
 } from "@lucide/vue";
 import type { BankSnapshot, InspectTool } from "../types";
 import { money } from "../types";
 
-defineProps<{ bank: BankSnapshot; busy: boolean; resetting: boolean }>();
+const props = defineProps<{ bank: BankSnapshot; busy: boolean; resetting: boolean; eventBusy?: boolean }>();
 const emit = defineEmits<{
   close: [];
   inspect: [tool: InspectTool];
   reset: [];
+  salaryEvent: [];
+  demoScenario: [];
 }>();
 const resetConfirmation = ref(false);
+const eventConfirmation = ref(false);
 </script>
 
 <template>
@@ -44,8 +48,19 @@ const resetConfirmation = ref(false);
         <div class="asset-amount">
           <span>¥</span>{{ money(bank.total_assets_minor) }}
         </div>
+        <div class="asset-allocation"><span>已安排 ¥{{ money(bank.protected_minor || 0) }}</span><span>可自由安排 ¥{{ money(bank.free_minor || 0) }}</span></div>
         <p>随每次操作更新 · 人民币</p>
         <div class="asset-decoration" aria-hidden="true"></div>
+      </section>
+      <section class="panel-section event-section">
+        <div class="section-heading"><h3>条件触发演示</h3><span>不自动转账</span></div>
+        <p class="event-copy">模拟一笔工资实际到账，助手会重新计算可转存金额并在聊天里等待采纳。</p>
+        <button class="event-button" :disabled="busy || eventBusy" @click="eventConfirmation = true"><Radio :size="14" />模拟工资到账</button>
+        <button class="scenario-link" :disabled="busy || eventBusy" @click="emit('demoScenario')">载入缺口演示场景</button>
+        <div v-if="eventConfirmation" class="event-confirmation">
+          <span>按当前预测工资 ¥18,000、周期 {{ bank.next_salary_period }} 触发一次。</span>
+          <div><button :disabled="eventBusy" @click="emit('salaryEvent'); eventConfirmation = false">{{ eventBusy ? "处理中…" : "确认触发" }}</button><button @click="eventConfirmation = false">取消</button></div>
+        </div>
       </section>
       <section class="panel-section">
         <div class="section-heading">

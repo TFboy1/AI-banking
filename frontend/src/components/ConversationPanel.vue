@@ -123,6 +123,7 @@ function dateLabel(value: string) {
               class="history-pending"
               >待确认</span
             >
+            <span v-else-if="item.unread_count" class="history-pending">新建议 {{ item.unread_count }}</span>
             <span v-else-if="item.task_status" class="history-running"
               >处理中…</span
             >
