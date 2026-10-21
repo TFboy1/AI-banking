@@ -52,7 +52,7 @@ async def verify(settings):
         with database.transaction() as db:
             second = database.create_conversation(db)
         await ask("查询我的账户余额", second, "get_accounts")
-        await ask("给张三转 200 元，备注晚餐 AA", second, "transfer")
+        await ask("从日常账户给张三转 200 元，备注晚餐 AA", second, "transfer")
         assert agent.bank.snapshot() == initial, "检查不得执行资金或业务状态变更"
         print("真实模型检查完成，临时银行数据未发生资金变更。", flush=True)
     finally:

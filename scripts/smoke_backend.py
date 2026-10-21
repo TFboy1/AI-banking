@@ -20,6 +20,16 @@ async def verify(base_url):
         response = await client.get("/api/health")
         response.raise_for_status()
         assert response.json()["status"] == "ok"
+        assert (await client.get("/api/bootstrap")).status_code == 401
+        await client.post("/api/auth/open", json={})
+        sms = await client.post("/api/auth/sms", json={"phone": "13800123456", "purpose": "register"})
+        sms.raise_for_status()
+        registration = await client.post("/api/auth/login", json={
+            "phone": "13800123456", "purpose": "register", "username": "HTTP检查用户", "code": sms.json()["demo_code"],
+        })
+        registration.raise_for_status()
+        (await client.post("/api/auth/contacts-done", json={})).raise_for_status()
+        (await client.post("/api/auth/pin", json={"pin": "2468", "repeat_pin": "2468"})).raise_for_status()
         initial = (await client.get("/api/bootstrap")).json()
         queried = await client.post("/api/sandbox/inspect", json={"tool": "analyze_bills"})
         queried.raise_for_status()
@@ -105,6 +115,7 @@ def main():
         environment = {
             **os.environ,
             "PYTHONUTF8": "1",
+            "APP_AUTH_ENABLED": "true",
             "DATABASE_PATH": str(temporary_path / "test.sqlite3"),
             "LLM_BASE_URL": "",
             "LLM_API_KEY": "",

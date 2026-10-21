@@ -74,7 +74,7 @@ async def test_confirmation_stays_with_original_conversation_and_shares_bank(set
     async with running_client(settings, model) as (app, client):
         before = (await client.get("/api/bootstrap")).json()
         first = before["conversation_id"]
-        await client.post("/api/messages", json={"text": "给张三转200元", "conversation_id": first})
+        await client.post("/api/messages", json={"text": "从日常账户给张三转200元", "conversation_id": first})
         await asyncio.wait_for(app.state.agent.queue.join(), 3)
         pending = (await client.get("/api/bootstrap")).json()["messages"][-1]["data"]["approval_id"]
         second = (await client.post("/api/conversations", json={})).json()["conversation_id"]
@@ -115,7 +115,7 @@ async def test_deleting_last_conversation_cancels_pending_but_keeps_money(settin
     ) as (app, client):
         initial = (await client.get("/api/bootstrap")).json()
         first = initial["conversation_id"]
-        await client.post("/api/messages", json={"text": "给张三转200元"})
+        await client.post("/api/messages", json={"text": "从日常账户给张三转200元"})
         await asyncio.wait_for(app.state.agent.queue.join(), 3)
         pending = (await client.get("/api/bootstrap")).json()["messages"][-1]["data"]["approval_id"]
         removed = (await client.delete(f"/api/conversations/{first}")).json()

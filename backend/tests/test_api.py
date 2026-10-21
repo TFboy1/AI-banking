@@ -35,7 +35,7 @@ async def test_missing_model_is_reported_without_fake_success(settings):
     ):
         boot = (await client.get("/api/bootstrap")).json()
         assert not boot["config"]["model_configured"]
-        assert (await client.post("/api/messages", json={"text": "给张三转200元"})).status_code == 202
+        assert (await client.post("/api/messages", json={"text": "从日常账户给张三转200元"})).status_code == 202
         await asyncio.wait_for(app.state.agent.queue.join(), 3)
         after = (await client.get("/api/bootstrap")).json()
         assert after["messages"][-1]["kind"] == "error"
@@ -50,7 +50,7 @@ async def test_reset_clears_pending_operation_and_reseeds_bank(settings):
         httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://127.0.0.1:8000") as client,
     ):
         initial = (await client.get("/api/bootstrap")).json()
-        await client.post("/api/messages", json={"text": "给张三转200元"})
+        await client.post("/api/messages", json={"text": "从日常账户给张三转200元"})
         await asyncio.wait_for(app.state.agent.queue.join(), 3)
         before_reset = (await client.get("/api/bootstrap")).json()
         approval_id = before_reset["messages"][-1]["data"]["approval_id"]
@@ -86,7 +86,7 @@ async def test_feishu_binding_deduplication_and_cross_channel_confirmation(setti
             "open_id": "owner",
             "chat_id": "private_chat",
             "chat_type": "p2p",
-            "text": "给张三转200元",
+            "text": "从日常账户给张三转200元",
         }
         result = (await client.post("/api/internal/feishu", json=message, headers=headers)).json()
         assert "先在本机" in result["reply"]
@@ -96,12 +96,14 @@ async def test_feishu_binding_deduplication_and_cross_channel_confirmation(setti
             "绑定成功"
             in (await client.post("/api/internal/feishu", json=message, headers=headers)).json()["reply"]
         )
-        message.update(event_id="payment", text="给张三转200元")
+        message.update(event_id="payment", text="从日常账户给张三转200元")
         first = (await client.post("/api/internal/feishu", json=message, headers=headers)).json()
         await asyncio.wait_for(app.state.agent.queue.join(), 3)
         duplicate = (await client.post("/api/internal/feishu", json=message, headers=headers)).json()
         assert first["task_id"] == duplicate["task_id"] and duplicate["duplicate"]
         boot = (await client.get("/api/bootstrap")).json()
+        feishu_chat = next(c['id'] for c in boot['conversations'] if c['title'] == '飞书')
+        boot = (await client.get('/api/bootstrap', params={'conversation_id': feishu_chat})).json()
         approval_id = boot["messages"][-1]["data"]["approval_id"]
         forged = {
             **message,

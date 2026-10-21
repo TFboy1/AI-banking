@@ -1,0 +1,5415 @@
+{
+  "format": 1,
+  "exported_at": "2026-10-21",
+  "sanitized": true,
+  "identity": {
+    "username": "演示账户",
+    "phone": "11111111111",
+    "lock_enabled": 1,
+    "contacts_done": 1
+  },
+  "bank": {
+    "accounts": [
+      {
+        "id": "daily",
+        "name": "日常账户",
+        "kind": "checking",
+        "balance_minor": 2332150
+      },
+      {
+        "id": "bankcard_dd870f37a7ac4eda9baa9893f2e8fd78",
+        "name": "中国工商银行 · 尾号2872",
+        "kind": "bank_card_unlinked",
+        "balance_minor": 0
+      },
+      {
+        "id": "bankcard_fe0ebca055914235b5ab6854fb322811",
+        "name": "工商银行 · 尾号0101",
+        "kind": "bank_card",
+        "balance_minor": 0
+      },
+      {
+        "id": "category_65bf1a553bf2415896e7d55f43adfc5c",
+        "name": "旅行账户",
+        "kind": "category",
+        "balance_minor": 100000
+      },
+      {
+        "id": "bankcard_0fde60abeccb495199bbb47caac29bda",
+        "name": "厦门银行 · 尾号2937",
+        "kind": "bank_card_unlinked",
+        "balance_minor": 500000
+      },
+      {
+        "id": "category_b9fc86f57eaf432298c5e49606f9aabe",
+        "name": "存钱账户",
+        "kind": "category",
+        "balance_minor": 300000
+      },
+      {
+        "id": "bankcard_18c9e4e7ec7f4baa8cc24913968e6b19",
+        "name": "中国农业银行 · 尾号5678",
+        "kind": "bank_card",
+        "balance_minor": 400000
+      },
+      {
+        "id": "category_b2dac4288b4e4e73b974e6bd998c6531",
+        "name": "医疗",
+        "kind": "category",
+        "balance_minor": 200000
+      }
+    ],
+    "cards": [
+      {
+        "id": "card_b7170b879ce845899d27c1ad35de9c3d",
+        "account_id": "bankcard_fe0ebca055914235b5ab6854fb322811",
+        "name": "工商银行",
+        "last4": "0101",
+        "status": "active",
+        "daily_limit_minor": 1000000
+      },
+      {
+        "id": "card_1ad8e5d6f70846e8930594b57dad9cdd",
+        "account_id": "bankcard_18c9e4e7ec7f4baa8cc24913968e6b19",
+        "name": "中国农业银行",
+        "last4": "5678",
+        "status": "active",
+        "daily_limit_minor": 1000000
+      }
+    ],
+    "linked_card_accounts": [
+      {
+        "account_id": "bankcard_dd870f37a7ac4eda9baa9893f2e8fd78",
+        "status": "active",
+        "daily_limit_minor": 1000000,
+        "number_hash": "6e65d8db24365c90f979cef98c58afaa90016d3b3d406505dc1cc09571f2b5e3"
+      },
+      {
+        "account_id": "bankcard_fe0ebca055914235b5ab6854fb322811",
+        "status": "active",
+        "daily_limit_minor": 1000000,
+        "number_hash": "bc44109c6c4376f662eb432d94d1ed1cc3ec3b931944a6cae639900eead47d6e"
+      },
+      {
+        "account_id": "bankcard_0fde60abeccb495199bbb47caac29bda",
+        "status": "active",
+        "daily_limit_minor": 1000000,
+        "number_hash": "aae09b6040bd61b09e6d0e7e7c96d0c1bffb712b97aee0c687486b00f767c71c"
+      },
+      {
+        "account_id": "bankcard_18c9e4e7ec7f4baa8cc24913968e6b19",
+        "status": "active",
+        "daily_limit_minor": 1000000,
+        "number_hash": "06b404b893c53b0975919d2b0f1d586d15e23cd8c04b26fabfd866022175e86b"
+      }
+    ],
+    "contacts": [
+      {
+        "id": "zhang_san",
+        "name": "张三",
+        "bank": "演示银行",
+        "last4": "0826",
+        "phone": "13800000007"
+      },
+      {
+        "id": "li_ming_1",
+        "name": "李明",
+        "bank": "演示银行",
+        "last4": "1920",
+        "phone": "13800000002"
+      },
+      {
+        "id": "li_ming_2",
+        "name": "李明",
+        "bank": "模拟商业银行",
+        "last4": "6712",
+        "phone": "13800000003"
+      },
+      {
+        "id": "chen_yue",
+        "name": "陈悦",
+        "bank": "演示银行",
+        "last4": "2468",
+        "phone": "13800000001"
+      },
+      {
+        "id": "wang_wei_1",
+        "name": "王伟",
+        "bank": "演示银行",
+        "last4": "1357",
+        "phone": "13800000005"
+      },
+      {
+        "id": "wang_wei_2",
+        "name": "王伟",
+        "bank": "模拟商业银行",
+        "last4": "9753",
+        "phone": "13800000006"
+      },
+      {
+        "id": "zhao_min",
+        "name": "赵敏",
+        "bank": "模拟商业银行",
+        "last4": "8642",
+        "phone": "13800000008"
+      },
+      {
+        "id": "liu_yang",
+        "name": "刘洋",
+        "bank": "演示银行",
+        "last4": "3690",
+        "phone": "13800000004"
+      },
+      {
+        "id": "chen_yue_2",
+        "name": "陈悦",
+        "bank": "模拟商业银行",
+        "last4": "5810",
+        "phone": "13800000001"
+      }
+    ],
+    "contact_details": [
+      {
+        "contact_id": "chen_yue",
+        "note": "",
+        "card_number": "6222000000002468"
+      },
+      {
+        "contact_id": "chen_yue_2",
+        "note": "",
+        "card_number": "6222000000005810"
+      },
+      {
+        "contact_id": "li_ming_1",
+        "note": "",
+        "card_number": "6222000000001920"
+      },
+      {
+        "contact_id": "li_ming_2",
+        "note": "",
+        "card_number": "6222000000006712"
+      },
+      {
+        "contact_id": "liu_yang",
+        "note": "",
+        "card_number": "6222000000003690"
+      },
+      {
+        "contact_id": "wang_wei_1",
+        "note": "",
+        "card_number": "6222000000001357"
+      },
+      {
+        "contact_id": "wang_wei_2",
+        "note": "",
+        "card_number": "6222000000009753"
+      },
+      {
+        "contact_id": "zhang_san",
+        "note": "",
+        "card_number": "6222000000000826"
+      },
+      {
+        "contact_id": "zhao_min",
+        "note": "",
+        "card_number": "6222000000008642"
+      }
+    ],
+    "contact_links": [
+      {
+        "contact_id": "chen_yue",
+        "person_id": "chen_yue"
+      },
+      {
+        "contact_id": "chen_yue_2",
+        "person_id": "chen_yue"
+      },
+      {
+        "contact_id": "li_ming_1",
+        "person_id": "li_ming_1"
+      },
+      {
+        "contact_id": "li_ming_2",
+        "person_id": "li_ming_2"
+      },
+      {
+        "contact_id": "liu_yang",
+        "person_id": "liu_yang"
+      },
+      {
+        "contact_id": "wang_wei_1",
+        "person_id": "wang_wei_1"
+      },
+      {
+        "contact_id": "wang_wei_2",
+        "person_id": "wang_wei_2"
+      },
+      {
+        "contact_id": "zhang_san",
+        "person_id": "zhang_san"
+      },
+      {
+        "contact_id": "zhao_min",
+        "person_id": "zhao_min"
+      }
+    ],
+    "contact_phones": [
+      {
+        "person_id": "chen_yue",
+        "phone": "13800000001"
+      },
+      {
+        "person_id": "li_ming_1",
+        "phone": "13800000002"
+      },
+      {
+        "person_id": "li_ming_2",
+        "phone": "13800000003"
+      },
+      {
+        "person_id": "liu_yang",
+        "phone": "13800000004"
+      },
+      {
+        "person_id": "wang_wei_1",
+        "phone": "13800000005"
+      },
+      {
+        "person_id": "wang_wei_2",
+        "phone": "13800000006"
+      },
+      {
+        "person_id": "zhang_san",
+        "phone": "13800000007"
+      },
+      {
+        "person_id": "zhao_min",
+        "phone": "13800000008"
+      }
+    ],
+    "contact_profiles": [
+      {
+        "person_id": "liu_yang",
+        "relationship": "爱人",
+        "gender": "女",
+        "special_attention": 1,
+        "birthday": "2000-01-04"
+      }
+    ],
+    "products": [
+      {
+        "id": "cash",
+        "name": "安心现金",
+        "risk_level": 1,
+        "nav": "0.9995",
+        "min_purchase_minor": 10000,
+        "description": "R1 · 演示现金管理产品；每日模拟波动净值，申赎即时到账。"
+      },
+      {
+        "id": "bond",
+        "name": "稳享固收",
+        "risk_level": 2,
+        "nav": "1.0315",
+        "min_purchase_minor": 10000,
+        "description": "R2 · 演示固收产品；存在净值波动风险，申赎即时结算。"
+      },
+      {
+        "id": "growth",
+        "name": "远见成长",
+        "risk_level": 4,
+        "nav": "1.1859",
+        "min_purchase_minor": 100000,
+        "description": "R4 · 演示混合产品；较高波动风险，不保证本金或收益。"
+      },
+      {
+        "id": "flex_cash",
+        "name": "灵活零钱",
+        "risk_level": 1,
+        "nav": "1.0003",
+        "min_purchase_minor": 1000,
+        "description": "R1 · 演示现金产品；10 元起购，每日模拟波动净值。"
+      },
+      {
+        "id": "steady_bond",
+        "name": "稳健债券",
+        "risk_level": 2,
+        "nav": "1.0185",
+        "min_purchase_minor": 20000,
+        "description": "R2 · 演示债券产品；净值可波动，不承诺收益。"
+      },
+      {
+        "id": "balanced",
+        "name": "均衡配置",
+        "risk_level": 3,
+        "nav": "1.0869",
+        "min_purchase_minor": 50000,
+        "description": "R3 · 演示混合配置产品；中高波动，不保本。"
+      },
+      {
+        "id": "tech_growth",
+        "name": "科技精选",
+        "risk_level": 4,
+        "nav": "1.2222",
+        "min_purchase_minor": 200000,
+        "description": "R4 · 演示权益产品；高波动，不保本。"
+      }
+    ],
+    "product_nav_history": [
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-15",
+        "nav": "1.0000",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-14",
+        "nav": "1.0000",
+        "previous_nav": "1.0001"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-13",
+        "nav": "1.0001",
+        "previous_nav": "1.0004"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-12",
+        "nav": "1.0004",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-11",
+        "nav": "1.0003",
+        "previous_nav": "1.0006"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-10",
+        "nav": "1.0006",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-09",
+        "nav": "1.0003",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-08",
+        "nav": "1.0003",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-07",
+        "nav": "1.0000",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-06",
+        "nav": "1.0002",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-05",
+        "nav": "1.0002",
+        "previous_nav": "1.0005"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-04",
+        "nav": "1.0005",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-03",
+        "nav": "1.0003",
+        "previous_nav": "1.0001"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-02",
+        "nav": "1.0001",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-01",
+        "nav": "0.9999",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-30",
+        "nav": "1.0000",
+        "previous_nav": "0.9997"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-29",
+        "nav": "0.9997",
+        "previous_nav": "0.9996"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-28",
+        "nav": "0.9996",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-27",
+        "nav": "0.9994",
+        "previous_nav": "0.9991"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-26",
+        "nav": "0.9991",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-25",
+        "nav": "0.9989",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-24",
+        "nav": "0.9989",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-23",
+        "nav": "0.9990",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-22",
+        "nav": "0.9988",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-21",
+        "nav": "0.9990",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-20",
+        "nav": "0.9989",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-19",
+        "nav": "0.9988",
+        "previous_nav": "0.9985"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-18",
+        "nav": "0.9985",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-17",
+        "nav": "0.9986",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-16",
+        "nav": "0.9988",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-15",
+        "nav": "0.9989",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-14",
+        "nav": "0.9988",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-13",
+        "nav": "0.9986",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-12",
+        "nav": "0.9988",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-11",
+        "nav": "0.9990",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-10",
+        "nav": "0.9988",
+        "previous_nav": "0.9991"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-09",
+        "nav": "0.9991",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-08",
+        "nav": "0.9992",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-07",
+        "nav": "0.9990",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-06",
+        "nav": "0.9992",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-05",
+        "nav": "0.9990",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-04",
+        "nav": "0.9989",
+        "previous_nav": "0.9991"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-03",
+        "nav": "0.9991",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-02",
+        "nav": "0.9988",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-09-01",
+        "nav": "0.9990",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-31",
+        "nav": "0.9992",
+        "previous_nav": "0.9993"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-30",
+        "nav": "0.9993",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-29",
+        "nav": "0.9990",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-28",
+        "nav": "0.9992",
+        "previous_nav": "0.9991"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-27",
+        "nav": "0.9991",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-26",
+        "nav": "0.9992",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-25",
+        "nav": "0.9989",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-24",
+        "nav": "0.9992",
+        "previous_nav": "0.9993"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-23",
+        "nav": "0.9993",
+        "previous_nav": "0.9996"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-22",
+        "nav": "0.9996",
+        "previous_nav": "0.9996"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-21",
+        "nav": "0.9996",
+        "previous_nav": "0.9996"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-20",
+        "nav": "0.9996",
+        "previous_nav": "0.9993"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-19",
+        "nav": "0.9993",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-18",
+        "nav": "0.9990",
+        "previous_nav": "0.9987"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-17",
+        "nav": "0.9987",
+        "previous_nav": "0.9987"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-16",
+        "nav": "0.9987",
+        "previous_nav": "0.9984"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-15",
+        "nav": "0.9984",
+        "previous_nav": "0.9985"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-14",
+        "nav": "0.9985",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-13",
+        "nav": "0.9986",
+        "previous_nav": "0.9987"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-12",
+        "nav": "0.9987",
+        "previous_nav": "0.9985"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-11",
+        "nav": "0.9985",
+        "previous_nav": "0.9982"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-10",
+        "nav": "0.9982",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-09",
+        "nav": "0.9983",
+        "previous_nav": "0.9982"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-08",
+        "nav": "0.9982",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-07",
+        "nav": "0.9983",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-06",
+        "nav": "0.9986",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-05",
+        "nav": "0.9986",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-04",
+        "nav": "0.9986",
+        "previous_nav": "0.9984"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-03",
+        "nav": "0.9984",
+        "previous_nav": "0.9985"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-02",
+        "nav": "0.9985",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-08-01",
+        "nav": "0.9983",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-31",
+        "nav": "0.9983",
+        "previous_nav": "0.9985"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-30",
+        "nav": "0.9985",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-29",
+        "nav": "0.9983",
+        "previous_nav": "0.9982"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-28",
+        "nav": "0.9982",
+        "previous_nav": "0.9979"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-27",
+        "nav": "0.9979",
+        "previous_nav": "0.9978"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-26",
+        "nav": "0.9978",
+        "previous_nav": "0.9979"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-25",
+        "nav": "0.9979",
+        "previous_nav": "0.9980"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-24",
+        "nav": "0.9980",
+        "previous_nav": "0.9977"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-23",
+        "nav": "0.9977",
+        "previous_nav": "0.9980"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-22",
+        "nav": "0.9980",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-21",
+        "nav": "0.9983",
+        "previous_nav": "0.9981"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-20",
+        "nav": "0.9981",
+        "previous_nav": "0.9982"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-19",
+        "nav": "0.9982",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-07-18",
+        "nav": "0.9983",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-15",
+        "nav": "1.0250",
+        "previous_nav": "1.0230"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-14",
+        "nav": "1.0230",
+        "previous_nav": "1.0227"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-13",
+        "nav": "1.0227",
+        "previous_nav": "1.0219"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-12",
+        "nav": "1.0219",
+        "previous_nav": "1.0225"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-11",
+        "nav": "1.0225",
+        "previous_nav": "1.0240"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-10",
+        "nav": "1.0240",
+        "previous_nav": "1.0242"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-09",
+        "nav": "1.0242",
+        "previous_nav": "1.0224"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-08",
+        "nav": "1.0224",
+        "previous_nav": "1.0234"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-07",
+        "nav": "1.0234",
+        "previous_nav": "1.0260"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-06",
+        "nav": "1.0260",
+        "previous_nav": "1.0263"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-05",
+        "nav": "1.0263",
+        "previous_nav": "1.0284"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-04",
+        "nav": "1.0284",
+        "previous_nav": "1.0260"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-03",
+        "nav": "1.0260",
+        "previous_nav": "1.0236"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-02",
+        "nav": "1.0236",
+        "previous_nav": "1.0232"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-01",
+        "nav": "1.0232",
+        "previous_nav": "1.0248"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-30",
+        "nav": "1.0248",
+        "previous_nav": "1.0238"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-29",
+        "nav": "1.0238",
+        "previous_nav": "1.0244"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-28",
+        "nav": "1.0244",
+        "previous_nav": "1.0262"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-27",
+        "nav": "1.0262",
+        "previous_nav": "1.0264"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-26",
+        "nav": "1.0264",
+        "previous_nav": "1.0250"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-25",
+        "nav": "1.0250",
+        "previous_nav": "1.0230"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-24",
+        "nav": "1.0230",
+        "previous_nav": "1.0244"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-23",
+        "nav": "1.0244",
+        "previous_nav": "1.0254"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-22",
+        "nav": "1.0254",
+        "previous_nav": "1.0263"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-21",
+        "nav": "1.0263",
+        "previous_nav": "1.0268"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-20",
+        "nav": "1.0268",
+        "previous_nav": "1.0281"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-19",
+        "nav": "1.0281",
+        "previous_nav": "1.0290"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-18",
+        "nav": "1.0290",
+        "previous_nav": "1.0294"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-17",
+        "nav": "1.0294",
+        "previous_nav": "1.0295"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-16",
+        "nav": "1.0295",
+        "previous_nav": "1.0288"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-15",
+        "nav": "1.0288",
+        "previous_nav": "1.0282"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-14",
+        "nav": "1.0282",
+        "previous_nav": "1.0306"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-13",
+        "nav": "1.0306",
+        "previous_nav": "1.0293"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-12",
+        "nav": "1.0293",
+        "previous_nav": "1.0318"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-11",
+        "nav": "1.0318",
+        "previous_nav": "1.0306"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-10",
+        "nav": "1.0306",
+        "previous_nav": "1.0331"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-09",
+        "nav": "1.0331",
+        "previous_nav": "1.0306"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-08",
+        "nav": "1.0306",
+        "previous_nav": "1.0287"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-07",
+        "nav": "1.0287",
+        "previous_nav": "1.0310"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-06",
+        "nav": "1.0310",
+        "previous_nav": "1.0315"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-05",
+        "nav": "1.0315",
+        "previous_nav": "1.0333"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-04",
+        "nav": "1.0333",
+        "previous_nav": "1.0310"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-03",
+        "nav": "1.0310",
+        "previous_nav": "1.0310"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-02",
+        "nav": "1.0310",
+        "previous_nav": "1.0284"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-09-01",
+        "nav": "1.0284",
+        "previous_nav": "1.0279"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-31",
+        "nav": "1.0279",
+        "previous_nav": "1.0272"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-30",
+        "nav": "1.0272",
+        "previous_nav": "1.0280"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-29",
+        "nav": "1.0280",
+        "previous_nav": "1.0282"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-28",
+        "nav": "1.0282",
+        "previous_nav": "1.0292"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-27",
+        "nav": "1.0292",
+        "previous_nav": "1.0295"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-26",
+        "nav": "1.0295",
+        "previous_nav": "1.0310"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-25",
+        "nav": "1.0310",
+        "previous_nav": "1.0335"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-24",
+        "nav": "1.0335",
+        "previous_nav": "1.0328"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-23",
+        "nav": "1.0328",
+        "previous_nav": "1.0316"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-22",
+        "nav": "1.0316",
+        "previous_nav": "1.0319"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-21",
+        "nav": "1.0319",
+        "previous_nav": "1.0311"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-20",
+        "nav": "1.0311",
+        "previous_nav": "1.0303"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-19",
+        "nav": "1.0303",
+        "previous_nav": "1.0281"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-18",
+        "nav": "1.0281",
+        "previous_nav": "1.0265"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-17",
+        "nav": "1.0265",
+        "previous_nav": "1.0267"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-16",
+        "nav": "1.0267",
+        "previous_nav": "1.0257"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-15",
+        "nav": "1.0257",
+        "previous_nav": "1.0232"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-14",
+        "nav": "1.0232",
+        "previous_nav": "1.0237"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-13",
+        "nav": "1.0237",
+        "previous_nav": "1.0246"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-12",
+        "nav": "1.0246",
+        "previous_nav": "1.0260"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-11",
+        "nav": "1.0260",
+        "previous_nav": "1.0245"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-10",
+        "nav": "1.0245",
+        "previous_nav": "1.0247"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-09",
+        "nav": "1.0247",
+        "previous_nav": "1.0243"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-08",
+        "nav": "1.0243",
+        "previous_nav": "1.0268"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-07",
+        "nav": "1.0268",
+        "previous_nav": "1.0274"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-06",
+        "nav": "1.0274",
+        "previous_nav": "1.0270"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-05",
+        "nav": "1.0270",
+        "previous_nav": "1.0266"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-04",
+        "nav": "1.0266",
+        "previous_nav": "1.0276"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-03",
+        "nav": "1.0276",
+        "previous_nav": "1.0300"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-02",
+        "nav": "1.0300",
+        "previous_nav": "1.0319"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-08-01",
+        "nav": "1.0319",
+        "previous_nav": "1.0296"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-31",
+        "nav": "1.0296",
+        "previous_nav": "1.0317"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-30",
+        "nav": "1.0317",
+        "previous_nav": "1.0302"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-29",
+        "nav": "1.0302",
+        "previous_nav": "1.0283"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-28",
+        "nav": "1.0283",
+        "previous_nav": "1.0308"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-27",
+        "nav": "1.0308",
+        "previous_nav": "1.0316"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-26",
+        "nav": "1.0316",
+        "previous_nav": "1.0314"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-25",
+        "nav": "1.0314",
+        "previous_nav": "1.0313"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-24",
+        "nav": "1.0313",
+        "previous_nav": "1.0302"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-23",
+        "nav": "1.0302",
+        "previous_nav": "1.0323"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-22",
+        "nav": "1.0323",
+        "previous_nav": "1.0336"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-21",
+        "nav": "1.0336",
+        "previous_nav": "1.0329"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-20",
+        "nav": "1.0329",
+        "previous_nav": "1.0322"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-19",
+        "nav": "1.0322",
+        "previous_nav": "1.0334"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-07-18",
+        "nav": "1.0334",
+        "previous_nav": "1.0328"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-15",
+        "nav": "1.1560",
+        "previous_nav": "1.1561"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-14",
+        "nav": "1.1561",
+        "previous_nav": "1.1591"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-13",
+        "nav": "1.1591",
+        "previous_nav": "1.1433"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-12",
+        "nav": "1.1433",
+        "previous_nav": "1.1340"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-11",
+        "nav": "1.1340",
+        "previous_nav": "1.1249"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-10",
+        "nav": "1.1249",
+        "previous_nav": "1.1141"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-09",
+        "nav": "1.1141",
+        "previous_nav": "1.1319"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-08",
+        "nav": "1.1319",
+        "previous_nav": "1.1386"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-07",
+        "nav": "1.1386",
+        "previous_nav": "1.1523"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-06",
+        "nav": "1.1523",
+        "previous_nav": "1.1689"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-05",
+        "nav": "1.1689",
+        "previous_nav": "1.1758"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-04",
+        "nav": "1.1758",
+        "previous_nav": "1.1574"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-03",
+        "nav": "1.1574",
+        "previous_nav": "1.1601"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-02",
+        "nav": "1.1601",
+        "previous_nav": "1.1426"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-01",
+        "nav": "1.1426",
+        "previous_nav": "1.1428"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-30",
+        "nav": "1.1428",
+        "previous_nav": "1.1313"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-29",
+        "nav": "1.1313",
+        "previous_nav": "1.1126"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-28",
+        "nav": "1.1126",
+        "previous_nav": "1.1235"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-27",
+        "nav": "1.1235",
+        "previous_nav": "1.1159"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-26",
+        "nav": "1.1159",
+        "previous_nav": "1.1331"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-25",
+        "nav": "1.1331",
+        "previous_nav": "1.1200"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-24",
+        "nav": "1.1200",
+        "previous_nav": "1.1169"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-23",
+        "nav": "1.1169",
+        "previous_nav": "1.1224"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-22",
+        "nav": "1.1224",
+        "previous_nav": "1.1334"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-21",
+        "nav": "1.1334",
+        "previous_nav": "1.1351"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-20",
+        "nav": "1.1351",
+        "previous_nav": "1.1292"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-19",
+        "nav": "1.1292",
+        "previous_nav": "1.1380"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-18",
+        "nav": "1.1380",
+        "previous_nav": "1.1587"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-17",
+        "nav": "1.1587",
+        "previous_nav": "1.1557"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-16",
+        "nav": "1.1557",
+        "previous_nav": "1.1555"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-15",
+        "nav": "1.1555",
+        "previous_nav": "1.1535"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-14",
+        "nav": "1.1535",
+        "previous_nav": "1.1441"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-13",
+        "nav": "1.1441",
+        "previous_nav": "1.1510"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-12",
+        "nav": "1.1510",
+        "previous_nav": "1.1321"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-11",
+        "nav": "1.1321",
+        "previous_nav": "1.1269"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-10",
+        "nav": "1.1269",
+        "previous_nav": "1.1274"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-09",
+        "nav": "1.1274",
+        "previous_nav": "1.1295"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-08",
+        "nav": "1.1295",
+        "previous_nav": "1.1305"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-07",
+        "nav": "1.1305",
+        "previous_nav": "1.1270"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-06",
+        "nav": "1.1270",
+        "previous_nav": "1.1194"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-05",
+        "nav": "1.1194",
+        "previous_nav": "1.1360"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-04",
+        "nav": "1.1360",
+        "previous_nav": "1.1197"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-03",
+        "nav": "1.1197",
+        "previous_nav": "1.1363"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-02",
+        "nav": "1.1363",
+        "previous_nav": "1.1369"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-09-01",
+        "nav": "1.1369",
+        "previous_nav": "1.1495"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-31",
+        "nav": "1.1495",
+        "previous_nav": "1.1629"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-30",
+        "nav": "1.1629",
+        "previous_nav": "1.1626"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-29",
+        "nav": "1.1626",
+        "previous_nav": "1.1729"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-28",
+        "nav": "1.1729",
+        "previous_nav": "1.1787"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-27",
+        "nav": "1.1787",
+        "previous_nav": "1.1614"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-26",
+        "nav": "1.1614",
+        "previous_nav": "1.1604"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-25",
+        "nav": "1.1604",
+        "previous_nav": "1.1532"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-24",
+        "nav": "1.1532",
+        "previous_nav": "1.1650"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-23",
+        "nav": "1.1650",
+        "previous_nav": "1.1790"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-22",
+        "nav": "1.1790",
+        "previous_nav": "1.1715"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-21",
+        "nav": "1.1715",
+        "previous_nav": "1.1729"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-20",
+        "nav": "1.1729",
+        "previous_nav": "1.1530"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-19",
+        "nav": "1.1530",
+        "previous_nav": "1.1409"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-18",
+        "nav": "1.1409",
+        "previous_nav": "1.1562"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-17",
+        "nav": "1.1562",
+        "previous_nav": "1.1635"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-16",
+        "nav": "1.1635",
+        "previous_nav": "1.1529"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-15",
+        "nav": "1.1529",
+        "previous_nav": "1.1384"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-14",
+        "nav": "1.1384",
+        "previous_nav": "1.1496"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-13",
+        "nav": "1.1496",
+        "previous_nav": "1.1474"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-12",
+        "nav": "1.1474",
+        "previous_nav": "1.1299"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-11",
+        "nav": "1.1299",
+        "previous_nav": "1.1101"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-10",
+        "nav": "1.1101",
+        "previous_nav": "1.0946"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-09",
+        "nav": "1.0946",
+        "previous_nav": "1.1048"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-08",
+        "nav": "1.1048",
+        "previous_nav": "1.1116"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-07",
+        "nav": "1.1116",
+        "previous_nav": "1.1112"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-06",
+        "nav": "1.1112",
+        "previous_nav": "1.1285"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-05",
+        "nav": "1.1285",
+        "previous_nav": "1.1316"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-04",
+        "nav": "1.1316",
+        "previous_nav": "1.1425"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-03",
+        "nav": "1.1425",
+        "previous_nav": "1.1338"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-02",
+        "nav": "1.1338",
+        "previous_nav": "1.1418"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-08-01",
+        "nav": "1.1418",
+        "previous_nav": "1.1376"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-31",
+        "nav": "1.1376",
+        "previous_nav": "1.1286"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-30",
+        "nav": "1.1286",
+        "previous_nav": "1.1392"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-29",
+        "nav": "1.1392",
+        "previous_nav": "1.1218"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-28",
+        "nav": "1.1218",
+        "previous_nav": "1.1205"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-27",
+        "nav": "1.1205",
+        "previous_nav": "1.1062"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-26",
+        "nav": "1.1062",
+        "previous_nav": "1.0885"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-25",
+        "nav": "1.0885",
+        "previous_nav": "1.1018"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-24",
+        "nav": "1.1018",
+        "previous_nav": "1.1004"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-23",
+        "nav": "1.1004",
+        "previous_nav": "1.1060"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-22",
+        "nav": "1.1060",
+        "previous_nav": "1.0941"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-21",
+        "nav": "1.0941",
+        "previous_nav": "1.0954"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-20",
+        "nav": "1.0954",
+        "previous_nav": "1.1137"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-19",
+        "nav": "1.1137",
+        "previous_nav": "1.1089"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-07-18",
+        "nav": "1.1089",
+        "previous_nav": "1.1142"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-15",
+        "nav": "1.0000",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-14",
+        "nav": "1.0002",
+        "previous_nav": "1.0004"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-13",
+        "nav": "1.0004",
+        "previous_nav": "1.0001"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-12",
+        "nav": "1.0001",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-11",
+        "nav": "1.0000",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-10",
+        "nav": "1.0003",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-09",
+        "nav": "1.0000",
+        "previous_nav": "1.0001"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-08",
+        "nav": "1.0001",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-07",
+        "nav": "0.9999",
+        "previous_nav": "1.0001"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-06",
+        "nav": "1.0001",
+        "previous_nav": "0.9998"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-05",
+        "nav": "0.9998",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-04",
+        "nav": "1.0000",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-03",
+        "nav": "1.0003",
+        "previous_nav": "1.0004"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-02",
+        "nav": "1.0004",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-01",
+        "nav": "1.0002",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-30",
+        "nav": "1.0002",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-29",
+        "nav": "0.9999",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-28",
+        "nav": "0.9999",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-27",
+        "nav": "0.9999",
+        "previous_nav": "0.9996"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-26",
+        "nav": "0.9996",
+        "previous_nav": "0.9997"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-25",
+        "nav": "0.9997",
+        "previous_nav": "0.9997"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-24",
+        "nav": "0.9997",
+        "previous_nav": "0.9998"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-23",
+        "nav": "0.9998",
+        "previous_nav": "0.9995"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-22",
+        "nav": "0.9995",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-21",
+        "nav": "0.9992",
+        "previous_nav": "0.9993"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-20",
+        "nav": "0.9993",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-19",
+        "nav": "0.9992",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-18",
+        "nav": "0.9992",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-17",
+        "nav": "0.9994",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-16",
+        "nav": "0.9994",
+        "previous_nav": "0.9997"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-15",
+        "nav": "0.9997",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-14",
+        "nav": "0.9999",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-13",
+        "nav": "0.9999",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-12",
+        "nav": "1.0002",
+        "previous_nav": "1.0005"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-11",
+        "nav": "1.0005",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-10",
+        "nav": "1.0003",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-09",
+        "nav": "1.0002",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-08",
+        "nav": "0.9999",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-07",
+        "nav": "1.0002",
+        "previous_nav": "1.0002"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-06",
+        "nav": "1.0002",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-05",
+        "nav": "0.9999",
+        "previous_nav": "0.9999"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-04",
+        "nav": "0.9999",
+        "previous_nav": "0.9997"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-03",
+        "nav": "0.9997",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-02",
+        "nav": "0.9994",
+        "previous_nav": "0.9991"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-09-01",
+        "nav": "0.9991",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-31",
+        "nav": "0.9992",
+        "previous_nav": "0.9993"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-30",
+        "nav": "0.9993",
+        "previous_nav": "0.9995"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-29",
+        "nav": "0.9995",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-28",
+        "nav": "0.9992",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-27",
+        "nav": "0.9990",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-26",
+        "nav": "0.9989",
+        "previous_nav": "0.9990"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-25",
+        "nav": "0.9990",
+        "previous_nav": "0.9992"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-24",
+        "nav": "0.9992",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-23",
+        "nav": "0.9994",
+        "previous_nav": "0.9995"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-22",
+        "nav": "0.9995",
+        "previous_nav": "0.9997"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-21",
+        "nav": "0.9997",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-20",
+        "nav": "0.9994",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-19",
+        "nav": "0.9994",
+        "previous_nav": "0.9997"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-18",
+        "nav": "0.9997",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-17",
+        "nav": "0.9994",
+        "previous_nav": "0.9994"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-16",
+        "nav": "0.9994",
+        "previous_nav": "0.9993"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-15",
+        "nav": "0.9993",
+        "previous_nav": "0.9991"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-14",
+        "nav": "0.9991",
+        "previous_nav": "0.9988"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-13",
+        "nav": "0.9988",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-12",
+        "nav": "0.9989",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-11",
+        "nav": "0.9989",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-10",
+        "nav": "0.9989",
+        "previous_nav": "0.9989"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-09",
+        "nav": "0.9989",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-08",
+        "nav": "0.9986",
+        "previous_nav": "0.9984"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-07",
+        "nav": "0.9984",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-06",
+        "nav": "0.9983",
+        "previous_nav": "0.9985"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-05",
+        "nav": "0.9985",
+        "previous_nav": "0.9982"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-04",
+        "nav": "0.9982",
+        "previous_nav": "0.9984"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-03",
+        "nav": "0.9984",
+        "previous_nav": "0.9986"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-02",
+        "nav": "0.9986",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-08-01",
+        "nav": "0.9983",
+        "previous_nav": "0.9983"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-31",
+        "nav": "0.9983",
+        "previous_nav": "0.9982"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-30",
+        "nav": "0.9982",
+        "previous_nav": "0.9980"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-29",
+        "nav": "0.9980",
+        "previous_nav": "0.9978"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-28",
+        "nav": "0.9978",
+        "previous_nav": "0.9977"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-27",
+        "nav": "0.9977",
+        "previous_nav": "0.9974"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-26",
+        "nav": "0.9974",
+        "previous_nav": "0.9974"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-25",
+        "nav": "0.9974",
+        "previous_nav": "0.9977"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-24",
+        "nav": "0.9977",
+        "previous_nav": "0.9975"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-23",
+        "nav": "0.9975",
+        "previous_nav": "0.9975"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-22",
+        "nav": "0.9975",
+        "previous_nav": "0.9976"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-21",
+        "nav": "0.9976",
+        "previous_nav": "0.9974"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-20",
+        "nav": "0.9974",
+        "previous_nav": "0.9975"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-19",
+        "nav": "0.9975",
+        "previous_nav": "0.9975"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-07-18",
+        "nav": "0.9975",
+        "previous_nav": "0.9973"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-15",
+        "nav": "1.0180",
+        "previous_nav": "1.0158"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-14",
+        "nav": "1.0158",
+        "previous_nav": "1.0169"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-13",
+        "nav": "1.0169",
+        "previous_nav": "1.0161"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-12",
+        "nav": "1.0161",
+        "previous_nav": "1.0164"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-11",
+        "nav": "1.0164",
+        "previous_nav": "1.0184"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-10",
+        "nav": "1.0184",
+        "previous_nav": "1.0176"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-09",
+        "nav": "1.0176",
+        "previous_nav": "1.0186"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-08",
+        "nav": "1.0186",
+        "previous_nav": "1.0163"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-07",
+        "nav": "1.0163",
+        "previous_nav": "1.0141"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-06",
+        "nav": "1.0141",
+        "previous_nav": "1.0123"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-05",
+        "nav": "1.0123",
+        "previous_nav": "1.0125"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-04",
+        "nav": "1.0125",
+        "previous_nav": "1.0109"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-03",
+        "nav": "1.0109",
+        "previous_nav": "1.0090"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-02",
+        "nav": "1.0090",
+        "previous_nav": "1.0090"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-01",
+        "nav": "1.0090",
+        "previous_nav": "1.0091"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-30",
+        "nav": "1.0091",
+        "previous_nav": "1.0096"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-29",
+        "nav": "1.0096",
+        "previous_nav": "1.0120"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-28",
+        "nav": "1.0120",
+        "previous_nav": "1.0132"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-27",
+        "nav": "1.0132",
+        "previous_nav": "1.0122"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-26",
+        "nav": "1.0122",
+        "previous_nav": "1.0109"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-25",
+        "nav": "1.0109",
+        "previous_nav": "1.0109"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-24",
+        "nav": "1.0109",
+        "previous_nav": "1.0097"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-23",
+        "nav": "1.0097",
+        "previous_nav": "1.0113"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-22",
+        "nav": "1.0113",
+        "previous_nav": "1.0113"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-21",
+        "nav": "1.0113",
+        "previous_nav": "1.0104"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-20",
+        "nav": "1.0104",
+        "previous_nav": "1.0103"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-19",
+        "nav": "1.0103",
+        "previous_nav": "1.0079"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-18",
+        "nav": "1.0079",
+        "previous_nav": "1.0057"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-17",
+        "nav": "1.0057",
+        "previous_nav": "1.0074"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-16",
+        "nav": "1.0074",
+        "previous_nav": "1.0069"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-15",
+        "nav": "1.0069",
+        "previous_nav": "1.0062"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-14",
+        "nav": "1.0062",
+        "previous_nav": "1.0062"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-13",
+        "nav": "1.0062",
+        "previous_nav": "1.0042"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-12",
+        "nav": "1.0042",
+        "previous_nav": "1.0043"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-11",
+        "nav": "1.0043",
+        "previous_nav": "1.0065"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-10",
+        "nav": "1.0065",
+        "previous_nav": "1.0090"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-09",
+        "nav": "1.0090",
+        "previous_nav": "1.0113"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-08",
+        "nav": "1.0113",
+        "previous_nav": "1.0099"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-07",
+        "nav": "1.0099",
+        "previous_nav": "1.0111"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-06",
+        "nav": "1.0111",
+        "previous_nav": "1.0124"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-05",
+        "nav": "1.0124",
+        "previous_nav": "1.0114"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-04",
+        "nav": "1.0114",
+        "previous_nav": "1.0092"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-03",
+        "nav": "1.0092",
+        "previous_nav": "1.0095"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-02",
+        "nav": "1.0095",
+        "previous_nav": "1.0070"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-09-01",
+        "nav": "1.0070",
+        "previous_nav": "1.0064"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-31",
+        "nav": "1.0064",
+        "previous_nav": "1.0052"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-30",
+        "nav": "1.0052",
+        "previous_nav": "1.0044"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-29",
+        "nav": "1.0044",
+        "previous_nav": "1.0038"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-28",
+        "nav": "1.0038",
+        "previous_nav": "1.0042"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-27",
+        "nav": "1.0042",
+        "previous_nav": "1.0056"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-26",
+        "nav": "1.0056",
+        "previous_nav": "1.0049"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-25",
+        "nav": "1.0049",
+        "previous_nav": "1.0068"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-24",
+        "nav": "1.0068",
+        "previous_nav": "1.0085"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-23",
+        "nav": "1.0085",
+        "previous_nav": "1.0088"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-22",
+        "nav": "1.0088",
+        "previous_nav": "1.0087"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-21",
+        "nav": "1.0087",
+        "previous_nav": "1.0084"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-20",
+        "nav": "1.0084",
+        "previous_nav": "1.0104"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-19",
+        "nav": "1.0104",
+        "previous_nav": "1.0115"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-18",
+        "nav": "1.0115",
+        "previous_nav": "1.0091"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-17",
+        "nav": "1.0091",
+        "previous_nav": "1.0080"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-16",
+        "nav": "1.0080",
+        "previous_nav": "1.0057"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-15",
+        "nav": "1.0057",
+        "previous_nav": "1.0039"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-14",
+        "nav": "1.0039",
+        "previous_nav": "1.0061"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-13",
+        "nav": "1.0061",
+        "previous_nav": "1.0062"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-12",
+        "nav": "1.0062",
+        "previous_nav": "1.0053"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-11",
+        "nav": "1.0053",
+        "previous_nav": "1.0068"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-10",
+        "nav": "1.0068",
+        "previous_nav": "1.0059"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-09",
+        "nav": "1.0059",
+        "previous_nav": "1.0042"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-08",
+        "nav": "1.0042",
+        "previous_nav": "1.0022"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-07",
+        "nav": "1.0022",
+        "previous_nav": "1.0030"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-06",
+        "nav": "1.0030",
+        "previous_nav": "1.0042"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-05",
+        "nav": "1.0042",
+        "previous_nav": "1.0064"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-04",
+        "nav": "1.0064",
+        "previous_nav": "1.0041"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-03",
+        "nav": "1.0041",
+        "previous_nav": "1.0056"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-02",
+        "nav": "1.0056",
+        "previous_nav": "1.0069"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-08-01",
+        "nav": "1.0069",
+        "previous_nav": "1.0093"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-31",
+        "nav": "1.0093",
+        "previous_nav": "1.0101"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-30",
+        "nav": "1.0101",
+        "previous_nav": "1.0096"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-29",
+        "nav": "1.0096",
+        "previous_nav": "1.0112"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-28",
+        "nav": "1.0112",
+        "previous_nav": "1.0101"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-27",
+        "nav": "1.0101",
+        "previous_nav": "1.0111"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-26",
+        "nav": "1.0111",
+        "previous_nav": "1.0125"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-25",
+        "nav": "1.0125",
+        "previous_nav": "1.0142"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-24",
+        "nav": "1.0142",
+        "previous_nav": "1.0119"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-23",
+        "nav": "1.0119",
+        "previous_nav": "1.0123"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-22",
+        "nav": "1.0123",
+        "previous_nav": "1.0141"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-21",
+        "nav": "1.0141",
+        "previous_nav": "1.0146"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-20",
+        "nav": "1.0146",
+        "previous_nav": "1.0132"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-19",
+        "nav": "1.0132",
+        "previous_nav": "1.0123"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-07-18",
+        "nav": "1.0123",
+        "previous_nav": "1.0099"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-15",
+        "nav": "1.0860",
+        "previous_nav": "1.0880"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-14",
+        "nav": "1.0880",
+        "previous_nav": "1.0914"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-13",
+        "nav": "1.0914",
+        "previous_nav": "1.0869"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-12",
+        "nav": "1.0869",
+        "previous_nav": "1.0879"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-11",
+        "nav": "1.0879",
+        "previous_nav": "1.0904"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-10",
+        "nav": "1.0904",
+        "previous_nav": "1.0975"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-09",
+        "nav": "1.0975",
+        "previous_nav": "1.0914"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-08",
+        "nav": "1.0914",
+        "previous_nav": "1.0864"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-07",
+        "nav": "1.0864",
+        "previous_nav": "1.0816"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-06",
+        "nav": "1.0816",
+        "previous_nav": "1.0798"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-05",
+        "nav": "1.0798",
+        "previous_nav": "1.0744"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-04",
+        "nav": "1.0744",
+        "previous_nav": "1.0821"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-03",
+        "nav": "1.0821",
+        "previous_nav": "1.0864"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-02",
+        "nav": "1.0864",
+        "previous_nav": "1.0908"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-01",
+        "nav": "1.0908",
+        "previous_nav": "1.0883"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-30",
+        "nav": "1.0883",
+        "previous_nav": "1.0946"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-29",
+        "nav": "1.0946",
+        "previous_nav": "1.1031"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-28",
+        "nav": "1.1031",
+        "previous_nav": "1.0980"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-27",
+        "nav": "1.0980",
+        "previous_nav": "1.0946"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-26",
+        "nav": "1.0946",
+        "previous_nav": "1.0901"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-25",
+        "nav": "1.0901",
+        "previous_nav": "1.0833"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-24",
+        "nav": "1.0833",
+        "previous_nav": "1.0869"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-23",
+        "nav": "1.0869",
+        "previous_nav": "1.0908"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-22",
+        "nav": "1.0908",
+        "previous_nav": "1.0988"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-21",
+        "nav": "1.0988",
+        "previous_nav": "1.1000"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-20",
+        "nav": "1.1000",
+        "previous_nav": "1.0934"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-19",
+        "nav": "1.0934",
+        "previous_nav": "1.0954"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-18",
+        "nav": "1.0954",
+        "previous_nav": "1.1040"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-17",
+        "nav": "1.1040",
+        "previous_nav": "1.0964"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-16",
+        "nav": "1.0964",
+        "previous_nav": "1.0965"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-15",
+        "nav": "1.0965",
+        "previous_nav": "1.1046"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-14",
+        "nav": "1.1046",
+        "previous_nav": "1.0984"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-13",
+        "nav": "1.0984",
+        "previous_nav": "1.0940"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-12",
+        "nav": "1.0940",
+        "previous_nav": "1.0896"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-11",
+        "nav": "1.0896",
+        "previous_nav": "1.0873"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-10",
+        "nav": "1.0873",
+        "previous_nav": "1.0888"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-09",
+        "nav": "1.0888",
+        "previous_nav": "1.0971"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-08",
+        "nav": "1.0971",
+        "previous_nav": "1.0956"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-07",
+        "nav": "1.0956",
+        "previous_nav": "1.0947"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-06",
+        "nav": "1.0947",
+        "previous_nav": "1.0998"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-05",
+        "nav": "1.0998",
+        "previous_nav": "1.1064"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-04",
+        "nav": "1.1064",
+        "previous_nav": "1.1056"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-03",
+        "nav": "1.1056",
+        "previous_nav": "1.1023"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-02",
+        "nav": "1.1023",
+        "previous_nav": "1.1016"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-09-01",
+        "nav": "1.1016",
+        "previous_nav": "1.0930"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-31",
+        "nav": "1.0930",
+        "previous_nav": "1.0988"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-30",
+        "nav": "1.0988",
+        "previous_nav": "1.0990"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-29",
+        "nav": "1.0990",
+        "previous_nav": "1.0985"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-28",
+        "nav": "1.0985",
+        "previous_nav": "1.1007"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-27",
+        "nav": "1.1007",
+        "previous_nav": "1.0956"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-26",
+        "nav": "1.0956",
+        "previous_nav": "1.0891"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-25",
+        "nav": "1.0891",
+        "previous_nav": "1.0851"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-24",
+        "nav": "1.0851",
+        "previous_nav": "1.0797"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-23",
+        "nav": "1.0797",
+        "previous_nav": "1.0798"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-22",
+        "nav": "1.0798",
+        "previous_nav": "1.0856"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-21",
+        "nav": "1.0856",
+        "previous_nav": "1.0821"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-20",
+        "nav": "1.0821",
+        "previous_nav": "1.0763"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-19",
+        "nav": "1.0763",
+        "previous_nav": "1.0816"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-18",
+        "nav": "1.0816",
+        "previous_nav": "1.0828"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-17",
+        "nav": "1.0828",
+        "previous_nav": "1.0846"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-16",
+        "nav": "1.0846",
+        "previous_nav": "1.0870"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-15",
+        "nav": "1.0870",
+        "previous_nav": "1.0821"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-14",
+        "nav": "1.0821",
+        "previous_nav": "1.0859"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-13",
+        "nav": "1.0859",
+        "previous_nav": "1.0940"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-12",
+        "nav": "1.0940",
+        "previous_nav": "1.1004"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-11",
+        "nav": "1.1004",
+        "previous_nav": "1.1056"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-10",
+        "nav": "1.1056",
+        "previous_nav": "1.1144"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-09",
+        "nav": "1.1144",
+        "previous_nav": "1.1118"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-08",
+        "nav": "1.1118",
+        "previous_nav": "1.1172"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-07",
+        "nav": "1.1172",
+        "previous_nav": "1.1208"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-06",
+        "nav": "1.1208",
+        "previous_nav": "1.1293"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-05",
+        "nav": "1.1293",
+        "previous_nav": "1.1333"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-04",
+        "nav": "1.1333",
+        "previous_nav": "1.1246"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-03",
+        "nav": "1.1246",
+        "previous_nav": "1.1221"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-02",
+        "nav": "1.1221",
+        "previous_nav": "1.1283"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-08-01",
+        "nav": "1.1283",
+        "previous_nav": "1.1256"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-31",
+        "nav": "1.1256",
+        "previous_nav": "1.1296"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-30",
+        "nav": "1.1296",
+        "previous_nav": "1.1266"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-29",
+        "nav": "1.1266",
+        "previous_nav": "1.1198"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-28",
+        "nav": "1.1198",
+        "previous_nav": "1.1118"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-27",
+        "nav": "1.1118",
+        "previous_nav": "1.1158"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-26",
+        "nav": "1.1158",
+        "previous_nav": "1.1105"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-25",
+        "nav": "1.1105",
+        "previous_nav": "1.1046"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-24",
+        "nav": "1.1046",
+        "previous_nav": "1.1135"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-23",
+        "nav": "1.1135",
+        "previous_nav": "1.1076"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-22",
+        "nav": "1.1076",
+        "previous_nav": "1.1000"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-21",
+        "nav": "1.1000",
+        "previous_nav": "1.0990"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-20",
+        "nav": "1.0990",
+        "previous_nav": "1.1054"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-19",
+        "nav": "1.1054",
+        "previous_nav": "1.0995"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-07-18",
+        "nav": "1.0995",
+        "previous_nav": "1.0983"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-15",
+        "nav": "1.2345",
+        "previous_nav": "1.2187"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-14",
+        "nav": "1.2187",
+        "previous_nav": "1.2230"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-13",
+        "nav": "1.2230",
+        "previous_nav": "1.2075"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-12",
+        "nav": "1.2075",
+        "previous_nav": "1.1879"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-11",
+        "nav": "1.1879",
+        "previous_nav": "1.1855"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-10",
+        "nav": "1.1855",
+        "previous_nav": "1.1690"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-09",
+        "nav": "1.1690",
+        "previous_nav": "1.1716"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-08",
+        "nav": "1.1716",
+        "previous_nav": "1.1763"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-07",
+        "nav": "1.1763",
+        "previous_nav": "1.1840"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-06",
+        "nav": "1.1840",
+        "previous_nav": "1.1775"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-05",
+        "nav": "1.1775",
+        "previous_nav": "1.1809"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-04",
+        "nav": "1.1809",
+        "previous_nav": "1.1975"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-03",
+        "nav": "1.1975",
+        "previous_nav": "1.2139"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-02",
+        "nav": "1.2139",
+        "previous_nav": "1.2014"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-01",
+        "nav": "1.2014",
+        "previous_nav": "1.1983"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-30",
+        "nav": "1.1983",
+        "previous_nav": "1.2044"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-29",
+        "nav": "1.2044",
+        "previous_nav": "1.1958"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-28",
+        "nav": "1.1958",
+        "previous_nav": "1.2042"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-27",
+        "nav": "1.2042",
+        "previous_nav": "1.2230"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-26",
+        "nav": "1.2230",
+        "previous_nav": "1.2072"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-25",
+        "nav": "1.2072",
+        "previous_nav": "1.2262"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-24",
+        "nav": "1.2262",
+        "previous_nav": "1.2058"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-23",
+        "nav": "1.2058",
+        "previous_nav": "1.2254"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-22",
+        "nav": "1.2254",
+        "previous_nav": "1.2131"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-21",
+        "nav": "1.2131",
+        "previous_nav": "1.2168"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-20",
+        "nav": "1.2168",
+        "previous_nav": "1.2043"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-19",
+        "nav": "1.2043",
+        "previous_nav": "1.2226"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-18",
+        "nav": "1.2226",
+        "previous_nav": "1.2278"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-17",
+        "nav": "1.2278",
+        "previous_nav": "1.2319"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-16",
+        "nav": "1.2319",
+        "previous_nav": "1.2430"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-15",
+        "nav": "1.2430",
+        "previous_nav": "1.2225"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-14",
+        "nav": "1.2225",
+        "previous_nav": "1.2038"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-13",
+        "nav": "1.2038",
+        "previous_nav": "1.1837"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-12",
+        "nav": "1.1837",
+        "previous_nav": "1.1755"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-11",
+        "nav": "1.1755",
+        "previous_nav": "1.1635"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-10",
+        "nav": "1.1635",
+        "previous_nav": "1.1799"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-09",
+        "nav": "1.1799",
+        "previous_nav": "1.1592"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-08",
+        "nav": "1.1592",
+        "previous_nav": "1.1698"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-07",
+        "nav": "1.1698",
+        "previous_nav": "1.1498"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-06",
+        "nav": "1.1498",
+        "previous_nav": "1.1416"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-05",
+        "nav": "1.1416",
+        "previous_nav": "1.1313"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-04",
+        "nav": "1.1313",
+        "previous_nav": "1.1504"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-03",
+        "nav": "1.1504",
+        "previous_nav": "1.1345"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-02",
+        "nav": "1.1345",
+        "previous_nav": "1.1289"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-09-01",
+        "nav": "1.1289",
+        "previous_nav": "1.1494"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-31",
+        "nav": "1.1494",
+        "previous_nav": "1.1431"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-30",
+        "nav": "1.1431",
+        "previous_nav": "1.1248"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-29",
+        "nav": "1.1248",
+        "previous_nav": "1.1257"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-28",
+        "nav": "1.1257",
+        "previous_nav": "1.1375"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-27",
+        "nav": "1.1375",
+        "previous_nav": "1.1455"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-26",
+        "nav": "1.1455",
+        "previous_nav": "1.1336"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-25",
+        "nav": "1.1336",
+        "previous_nav": "1.1334"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-24",
+        "nav": "1.1334",
+        "previous_nav": "1.1398"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-23",
+        "nav": "1.1398",
+        "previous_nav": "1.1531"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-22",
+        "nav": "1.1531",
+        "previous_nav": "1.1679"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-21",
+        "nav": "1.1679",
+        "previous_nav": "1.1691"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-20",
+        "nav": "1.1691",
+        "previous_nav": "1.1845"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-19",
+        "nav": "1.1845",
+        "previous_nav": "1.1834"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-18",
+        "nav": "1.1834",
+        "previous_nav": "1.2020"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-17",
+        "nav": "1.2020",
+        "previous_nav": "1.1953"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-16",
+        "nav": "1.1953",
+        "previous_nav": "1.1928"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-15",
+        "nav": "1.1928",
+        "previous_nav": "1.1721"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-14",
+        "nav": "1.1721",
+        "previous_nav": "1.1884"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-13",
+        "nav": "1.1884",
+        "previous_nav": "1.1828"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-12",
+        "nav": "1.1828",
+        "previous_nav": "1.1813"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-11",
+        "nav": "1.1813",
+        "previous_nav": "1.2023"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-10",
+        "nav": "1.2023",
+        "previous_nav": "1.1993"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-09",
+        "nav": "1.1993",
+        "previous_nav": "1.2081"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-08",
+        "nav": "1.2081",
+        "previous_nav": "1.2015"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-07",
+        "nav": "1.2015",
+        "previous_nav": "1.2165"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-06",
+        "nav": "1.2165",
+        "previous_nav": "1.2299"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-05",
+        "nav": "1.2299",
+        "previous_nav": "1.2446"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-04",
+        "nav": "1.2446",
+        "previous_nav": "1.2527"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-03",
+        "nav": "1.2527",
+        "previous_nav": "1.2642"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-02",
+        "nav": "1.2642",
+        "previous_nav": "1.2838"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-08-01",
+        "nav": "1.2838",
+        "previous_nav": "1.3049"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-31",
+        "nav": "1.3049",
+        "previous_nav": "1.3101"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-30",
+        "nav": "1.3101",
+        "previous_nav": "1.3240"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-29",
+        "nav": "1.3240",
+        "previous_nav": "1.3228"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-28",
+        "nav": "1.3228",
+        "previous_nav": "1.3237"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-27",
+        "nav": "1.3237",
+        "previous_nav": "1.3170"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-26",
+        "nav": "1.3170",
+        "previous_nav": "1.2955"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-25",
+        "nav": "1.2955",
+        "previous_nav": "1.3108"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-24",
+        "nav": "1.3108",
+        "previous_nav": "1.3317"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-23",
+        "nav": "1.3317",
+        "previous_nav": "1.3372"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-22",
+        "nav": "1.3372",
+        "previous_nav": "1.3165"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-21",
+        "nav": "1.3165",
+        "previous_nav": "1.3302"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-20",
+        "nav": "1.3302",
+        "previous_nav": "1.3174"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-19",
+        "nav": "1.3174",
+        "previous_nav": "1.3349"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-07-18",
+        "nav": "1.3349",
+        "previous_nav": "1.3258"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-16",
+        "nav": "0.9998",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-16",
+        "nav": "1.0255",
+        "previous_nav": "1.0250"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-16",
+        "nav": "1.1656",
+        "previous_nav": "1.1560"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-16",
+        "nav": "1.0001",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-16",
+        "nav": "1.0191",
+        "previous_nav": "1.0180"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-16",
+        "nav": "1.0784",
+        "previous_nav": "1.0860"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-16",
+        "nav": "1.2385",
+        "previous_nav": "1.2345"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-17",
+        "nav": "0.9998",
+        "previous_nav": "0.9998"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-17",
+        "nav": "1.0271",
+        "previous_nav": "1.0255"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-17",
+        "nav": "1.1604",
+        "previous_nav": "1.1656"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-17",
+        "nav": "1.0003",
+        "previous_nav": "1.0001"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-17",
+        "nav": "1.0175",
+        "previous_nav": "1.0191"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-17",
+        "nav": "1.0857",
+        "previous_nav": "1.0784"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-17",
+        "nav": "1.2385",
+        "previous_nav": "1.2385"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-18",
+        "nav": "0.9998",
+        "previous_nav": "0.9998"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-18",
+        "nav": "1.0289",
+        "previous_nav": "1.0271"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-18",
+        "nav": "1.1726",
+        "previous_nav": "1.1604"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-18",
+        "nav": "1.0000",
+        "previous_nav": "1.0003"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-18",
+        "nav": "1.0184",
+        "previous_nav": "1.0175"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-18",
+        "nav": "1.0832",
+        "previous_nav": "1.0857"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-18",
+        "nav": "1.2425",
+        "previous_nav": "1.2385"
+      },
+      {
+        "product_id": "cash",
+        "price_date": "2026-10-19",
+        "nav": "0.9995",
+        "previous_nav": "0.9998"
+      },
+      {
+        "product_id": "bond",
+        "price_date": "2026-10-19",
+        "nav": "1.0315",
+        "previous_nav": "1.0289"
+      },
+      {
+        "product_id": "growth",
+        "price_date": "2026-10-19",
+        "nav": "1.1859",
+        "previous_nav": "1.1726"
+      },
+      {
+        "product_id": "flex_cash",
+        "price_date": "2026-10-19",
+        "nav": "1.0003",
+        "previous_nav": "1.0000"
+      },
+      {
+        "product_id": "steady_bond",
+        "price_date": "2026-10-19",
+        "nav": "1.0185",
+        "previous_nav": "1.0184"
+      },
+      {
+        "product_id": "balanced",
+        "price_date": "2026-10-19",
+        "nav": "1.0869",
+        "previous_nav": "1.0832"
+      },
+      {
+        "product_id": "tech_growth",
+        "price_date": "2026-10-19",
+        "nav": "1.2222",
+        "previous_nav": "1.2425"
+      }
+    ],
+    "holdings": [
+      {
+        "product_id": "cash",
+        "units": "0.0000"
+      },
+      {
+        "product_id": "bond",
+        "units": "2926.8291"
+      }
+    ],
+    "risk_profile": [
+      {
+        "id": 1,
+        "risk_level": 4,
+        "answers_json": "{\"horizon\": \"long\", \"loss_tolerance\": \"high\", \"experience\": \"experienced\"}"
+      }
+    ],
+    "subscriptions": [
+      {
+        "id": "video",
+        "name": "星河视频会员",
+        "merchant_key": "video",
+        "amount_minor": 2900,
+        "next_charge_date": "2026-11-03",
+        "status": "active"
+      },
+      {
+        "id": "music",
+        "name": "声动音乐会员",
+        "merchant_key": "music",
+        "amount_minor": 1500,
+        "next_charge_date": "2026-11-05",
+        "status": "active"
+      },
+      {
+        "id": "cloud",
+        "name": "云端存储",
+        "merchant_key": "cloud",
+        "amount_minor": 1200,
+        "next_charge_date": "2026-11-08",
+        "status": "active"
+      },
+      {
+        "id": "learning",
+        "name": "知行学习会员",
+        "merchant_key": "learning",
+        "amount_minor": 3900,
+        "next_charge_date": "2026-11-10",
+        "status": "active"
+      },
+      {
+        "id": "fitness",
+        "name": "活力健身会员",
+        "merchant_key": "fitness",
+        "amount_minor": 5900,
+        "next_charge_date": "2026-11-15",
+        "status": "cancelled"
+      },
+      {
+        "id": "office",
+        "name": "轻办公会员",
+        "merchant_key": "office",
+        "amount_minor": 2500,
+        "next_charge_date": "2026-11-20",
+        "status": "cancelled"
+      }
+    ],
+    "transactions": [
+      {
+        "id": "tx_9133497a05064336a9837a63592c240d",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 1800000,
+        "category": "工资",
+        "occurred_at": "2026-10-01T09:00:00+08:00",
+        "merchant_key": "salary",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_bd7e496f985b48809ffca0496f3cb0c6",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 320000,
+        "category": "居住",
+        "occurred_at": "2026-10-02T09:00:00+08:00",
+        "merchant_key": "rent",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_09d61c3ffb6b4601bf92c11fe0ecae18",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-10-03T09:00:00+08:00",
+        "merchant_key": "video",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_490f1ba8a59b454d8c8445d306694299",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1500,
+        "category": "订阅",
+        "occurred_at": "2026-10-05T09:00:00+08:00",
+        "merchant_key": "music",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_82283685cfe34b308c0fc22c6ab9010d",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2800,
+        "category": "餐饮",
+        "occurred_at": "2026-10-06T09:00:00+08:00",
+        "merchant_key": "coffee",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_104ae84ef1fb439fb0be7ecc3b4ee408",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 23650,
+        "category": "购物",
+        "occurred_at": "2026-10-07T09:00:00+08:00",
+        "merchant_key": "market",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_d47d2ba958784ac2adb2b874b13fba26",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "订阅",
+        "occurred_at": "2026-10-08T09:00:00+08:00",
+        "merchant_key": "cloud",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_831d1a22b7604edaa54103e9e68e6b19",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "交通",
+        "occurred_at": "2026-10-09T09:00:00+08:00",
+        "merchant_key": "metro",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_28b59086de00493dacaf2896199b99a2",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 16800,
+        "category": "餐饮",
+        "occurred_at": "2026-10-10T09:00:00+08:00",
+        "merchant_key": "restaurant",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_1ec6f537fdd5437b927d0af05ff8ccea",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 389900,
+        "category": "购物",
+        "occurred_at": "2026-10-10T09:00:00+08:00",
+        "merchant_key": "electronics",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_8d1ae7efca83473d85a7e0bbfbd781d8",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-10-10T09:00:00+08:00",
+        "merchant_key": "video",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_97646770638a451db44e6e82cf954eaf",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 1800000,
+        "category": "工资",
+        "occurred_at": "2026-09-01T09:00:00+08:00",
+        "merchant_key": "salary",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_75242187e5134e90a267394d5e246eec",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 320000,
+        "category": "居住",
+        "occurred_at": "2026-09-02T09:00:00+08:00",
+        "merchant_key": "rent",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_1987cf60e5e346389ba190e28217a0fb",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-09-03T09:00:00+08:00",
+        "merchant_key": "video",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_08a23cb5844641ed82ab1215e4315d50",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1500,
+        "category": "订阅",
+        "occurred_at": "2026-09-05T09:00:00+08:00",
+        "merchant_key": "music",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_837f7d2085c2415abf4fb8c8e9b4e071",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2800,
+        "category": "餐饮",
+        "occurred_at": "2026-09-06T09:00:00+08:00",
+        "merchant_key": "coffee",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_46b9fee752ba4e30bf2be45f8ce171d7",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 24850,
+        "category": "购物",
+        "occurred_at": "2026-09-07T09:00:00+08:00",
+        "merchant_key": "market",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_b0a7071b11ad4303bdc99af6ffc5c968",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "订阅",
+        "occurred_at": "2026-09-08T09:00:00+08:00",
+        "merchant_key": "cloud",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_91bf07fd5b274324932be754caf7a701",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "交通",
+        "occurred_at": "2026-09-09T09:00:00+08:00",
+        "merchant_key": "metro",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_488571602ea64206933d7b5bc285f4fb",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 16800,
+        "category": "餐饮",
+        "occurred_at": "2026-09-10T09:00:00+08:00",
+        "merchant_key": "restaurant",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_52a433dcc2bf4207b234022b27752bf9",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 19900,
+        "category": "购物",
+        "occurred_at": "2026-09-11T09:00:00+08:00",
+        "merchant_key": "electronics",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_ea2368b5655a45828d68519f5e4df2fb",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-09-12T09:00:00+08:00",
+        "merchant_key": "video",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_ca4af0d3ec804a7d991b839f4ddcd1ae",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 1800000,
+        "category": "工资",
+        "occurred_at": "2026-08-01T09:00:00+08:00",
+        "merchant_key": "salary",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_1261d8c5b3064bcbb1701f174d26f420",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 320000,
+        "category": "居住",
+        "occurred_at": "2026-08-02T09:00:00+08:00",
+        "merchant_key": "rent",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_2d9958ee0a3b42bc89c58998476c7047",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-08-03T09:00:00+08:00",
+        "merchant_key": "video",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_49747821be4341f9ad91a432e6ee5906",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1500,
+        "category": "订阅",
+        "occurred_at": "2026-08-05T09:00:00+08:00",
+        "merchant_key": "music",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_eaeabafdd09542aeaf4d261a9d712fc5",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2800,
+        "category": "餐饮",
+        "occurred_at": "2026-08-06T09:00:00+08:00",
+        "merchant_key": "coffee",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_6584c2414e13435e8fad46c4aef71cc6",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 26050,
+        "category": "购物",
+        "occurred_at": "2026-08-07T09:00:00+08:00",
+        "merchant_key": "market",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_bb402cd0682a46dcbbdd59b5ad2d3fbf",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "订阅",
+        "occurred_at": "2026-08-08T09:00:00+08:00",
+        "merchant_key": "cloud",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_a3f1d688931c4028aaf3ab96b79f4b1c",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 1200,
+        "category": "交通",
+        "occurred_at": "2026-08-09T09:00:00+08:00",
+        "merchant_key": "metro",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_af72e7c3c72d4a4ab295daa96aa18d45",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 16800,
+        "category": "餐饮",
+        "occurred_at": "2026-08-10T09:00:00+08:00",
+        "merchant_key": "restaurant",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_3336cb951e914322bf5d737827b768a0",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 19900,
+        "category": "购物",
+        "occurred_at": "2026-08-11T09:00:00+08:00",
+        "merchant_key": "electronics",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_c2b16a2d612a407f91b040beaf19712c",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2900,
+        "category": "订阅",
+        "occurred_at": "2026-08-12T09:00:00+08:00",
+        "merchant_key": "video",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_22952f7398be4143a8072a4d2f270419",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 3900,
+        "category": "订阅",
+        "occurred_at": "2026-10-10T09:00:00+08:00",
+        "merchant_key": "learning",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_67239fd8d13148b683da8b54ac22a9fb",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 3900,
+        "category": "订阅",
+        "occurred_at": "2026-09-10T09:00:00+08:00",
+        "merchant_key": "learning",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_e25ce0b8f5df47f6b6c6ed1a44ce8c8a",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 3900,
+        "category": "订阅",
+        "occurred_at": "2026-08-10T09:00:00+08:00",
+        "merchant_key": "learning",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_9dc1839d4d544d36b60fe015a4596fd7",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 5900,
+        "category": "订阅",
+        "occurred_at": "2026-10-10T09:00:00+08:00",
+        "merchant_key": "fitness",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_447bacb4d99646b8a35f79bfab2dc350",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 5900,
+        "category": "订阅",
+        "occurred_at": "2026-09-15T09:00:00+08:00",
+        "merchant_key": "fitness",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_2989d60f022a49b8937a598a6e511fbc",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 5900,
+        "category": "订阅",
+        "occurred_at": "2026-08-15T09:00:00+08:00",
+        "merchant_key": "fitness",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_bd28f70a86b4422c97a51bed42f37848",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2500,
+        "category": "订阅",
+        "occurred_at": "2026-10-10T09:00:00+08:00",
+        "merchant_key": "office",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_9f631a7ba5e04b5aaa6bc03f8d59abd8",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2500,
+        "category": "订阅",
+        "occurred_at": "2026-09-20T09:00:00+08:00",
+        "merchant_key": "office",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_e2a128bede9f4ccc93494d6af331b2b7",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 2500,
+        "category": "订阅",
+        "occurred_at": "2026-08-20T09:00:00+08:00",
+        "merchant_key": "office",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_2c866831a28e404ca71b2f346aa39839",
+        "action_id": "evt_78ccf9066228469c8c4e504e5e77a11a",
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 1800000,
+        "category": "工资",
+        "occurred_at": "2026-10-10T15:59:26.132+08:00",
+        "merchant_key": "salary",
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_84b66d43171147c7a015dc2eea9c9a60",
+        "action_id": "op_fd1a5f4fc0ec4940b9c1dd92e3009f63",
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 200000,
+        "category": "理财",
+        "occurred_at": "2026-10-14T11:48:32.778+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_5a1af8383d3e40c6a12de4ee62557255",
+        "action_id": "op_fb5f1820077b41b6b76a43f20808957e",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 200000,
+        "category": "理财",
+        "occurred_at": "2026-10-14T11:51:58.070+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_f64c985836d64f7296f0ee699410c6e2",
+        "action_id": "op_c3299f90098a4b8fa0fd581f56b2a093",
+        "account_id": "savings",
+        "direction": "in",
+        "amount_minor": 200000,
+        "category": "理财",
+        "occurred_at": "2026-10-14T11:52:37.762+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_bbaffdf2e5794c1aa4a511c6dec09f1e",
+        "action_id": "op_0e541ad4f1f54faaa0dd886ccc0a6167",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 100000,
+        "category": "理财",
+        "occurred_at": "2026-10-14T12:28:22.639+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_06dbe1c061214790b565fb3318647890",
+        "action_id": "op_94444345a50046d4838def3c7bc9cdc9:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 10000,
+        "category": "转账",
+        "occurred_at": "2026-10-14T14:33:28.586+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_7556e4575c694e11b2b1e590a59dd005",
+        "action_id": "op_513516e3280741b4a733f15bcd591d50",
+        "account_id": "savings",
+        "direction": "out",
+        "amount_minor": 100000,
+        "category": "理财",
+        "occurred_at": "2026-10-14T14:34:05.020+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_4b20a20bf8204dad85bf4327e70e6aad",
+        "action_id": "op_e709bfbc67d3403cbb72fe34bf399dd9",
+        "account_id": "savings",
+        "direction": "out",
+        "amount_minor": 100000,
+        "category": "理财",
+        "occurred_at": "2026-10-14T15:35:51.858+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_4a1b695026c1434b98043f016bfa6308",
+        "action_id": "op_e588ee9a878e4294a53e8488e17b9cf5:stocks",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 115000,
+        "category": "证券投资",
+        "occurred_at": "2026-10-15T12:34:13.035+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_0237ff80e9b24845a516753a5c49c796",
+        "action_id": null,
+        "account_id": "bankcard_dd870f37a7ac4eda9baa9893f2e8fd78",
+        "direction": "out",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T15:10:29.304+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_2458ddc2af8f4012adc692cbde5faf88",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T15:10:29.305+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_2d30a37bd01746b5911cb657bdbd0a41",
+        "action_id": null,
+        "account_id": "savings",
+        "direction": "out",
+        "amount_minor": 820000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T15:53:10.740+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_8445ec412d8649bca8ca432df552b50e",
+        "action_id": null,
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 820000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T15:53:10.740+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_b685d03ede70416ea4f2acc7cdb78915",
+        "action_id": "op_d7a3eb2b966d4573881f2871238103f4:out",
+        "account_id": "bankcard_fe0ebca055914235b5ab6854fb322811",
+        "direction": "out",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T16:12:25.396+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_607be658beb941d3a5d145c42d5fba12",
+        "action_id": "op_d7a3eb2b966d4573881f2871238103f4:in",
+        "account_id": "daily",
+        "direction": "in",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T16:12:25.396+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_1742ea964e5d49e991dc1601d336724b",
+        "action_id": "op_a18ad5f7c6e9465d9aae25e06e2d6070:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T16:15:09.048+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_f7ed839ad47a4fcfbbb33993fde90294",
+        "action_id": "op_a18ad5f7c6e9465d9aae25e06e2d6070:in",
+        "account_id": "savings",
+        "direction": "in",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T16:15:09.048+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_46b1e2323c354a659154214858221f06",
+        "action_id": "op_78574e8aa8eb41118157931cb9c37565:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T21:16:44.641+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_17e0cba8f3ff4d09b564c1bd788a74cb",
+        "action_id": "op_78574e8aa8eb41118157931cb9c37565:in",
+        "account_id": "category_b9fc86f57eaf432298c5e49606f9aabe",
+        "direction": "in",
+        "amount_minor": 500000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-15T21:16:44.641+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_17cca84d68834f31b15bf8fece1675d8",
+        "action_id": "op_7bc1a346b3664a9ea01e9f8d3ecc7e67:food",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 3900,
+        "category": "餐饮",
+        "occurred_at": "2026-10-16T11:58:38.063+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_bc0f2bb77ba24a7e85757b549290dd49",
+        "action_id": "op_707da4fe5c4540679fbfd1c5ce6d356e:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 100000,
+        "category": "转账",
+        "occurred_at": "2026-10-16T12:12:39.131+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_cdeffbf6bbf648849da1bd4cf507e861",
+        "action_id": "op_136d8742f2e24891b72ec0bd585cce0f:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 100000,
+        "category": "转账",
+        "occurred_at": "2026-10-16T12:15:09.469+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_8df94ba6be7041c5bd54e2b2a1131ed3",
+        "action_id": "op_26df2b48c0994a418db924dc2354621a:out",
+        "account_id": "category_b9fc86f57eaf432298c5e49606f9aabe",
+        "direction": "out",
+        "amount_minor": 200000,
+        "category": "转账",
+        "occurred_at": "2026-10-16T14:04:29.703+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_60bc725dc7bd4f3aa44294dac74df9e1",
+        "action_id": "op_f86aed55e0484791bc20a4127e1f0c51:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 200000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-16T14:39:31.910+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_dc7681505c954de7a8a6987f51e24b81",
+        "action_id": "op_f86aed55e0484791bc20a4127e1f0c51:in",
+        "account_id": "category_b2dac4288b4e4e73b974e6bd998c6531",
+        "direction": "in",
+        "amount_minor": 200000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-16T14:39:31.910+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_c89eb71547274eadbe6fa8ba360e76cf",
+        "action_id": "op_dd70aaec33ca48158fb5a1a0d073dac3:out",
+        "account_id": "bankcard_18c9e4e7ec7f4baa8cc24913968e6b19",
+        "direction": "out",
+        "amount_minor": 100000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-16T15:23:48.484+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_7f488045dee04100a711e435515d854a",
+        "action_id": "op_dd70aaec33ca48158fb5a1a0d073dac3:in",
+        "account_id": "category_65bf1a553bf2415896e7d55f43adfc5c",
+        "direction": "in",
+        "amount_minor": 100000,
+        "category": "内部转账",
+        "occurred_at": "2026-10-16T15:23:48.485+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_ce30b627058748699e522e625713c691",
+        "action_id": "op_83adf2c05e8a4eaab47eae6f6f309833:stocks",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 115000,
+        "category": "证券投资",
+        "occurred_at": "2026-10-16T15:38:13.685+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_dc0cae638b46428f931b4e5c84bea848",
+        "action_id": "op_3b678c7f51d147499b66666a048dff7a:stocks",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 115000,
+        "category": "证券投资",
+        "occurred_at": "2026-10-16T15:40:30.086+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_6525c1abe0934e19a715be758554bfe8",
+        "action_id": "op_9e360e96d9304a8fb8168ab1229bfc0d:stocks",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 115000,
+        "category": "证券投资",
+        "occurred_at": "2026-10-16T15:42:39.939+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_f7a8913b8ccb42f2aedf8d08f80f4860",
+        "action_id": "op_657956559dc846d0a64509bda9fabc93:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 50000,
+        "category": "转账",
+        "occurred_at": "2026-10-17T17:00:00.111+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_6c82f53dc79e493698a428d6e07c41fa",
+        "action_id": "op_3280d74611734a20879a41720359c0c2:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 100000,
+        "category": "转账",
+        "occurred_at": "2026-10-18T18:14:08.290+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_5c5556ee01bc4be0a05bd84acff26cb9",
+        "action_id": "op_2e638e3b2e644c17a5a578a5982f1551:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 200000,
+        "category": "转账",
+        "occurred_at": "2026-10-19T10:21:06.320+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_c18ad543ee3545648b89f4515e4f8fd4",
+        "action_id": "op_bfe70c79b90545eba046bd4874532a45:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 200000,
+        "category": "转账",
+        "occurred_at": "2026-10-19T11:26:03.677+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      },
+      {
+        "id": "tx_6e65109b950b4a1a8450409232d6e5bc",
+        "action_id": "op_9798b8f820194a4999594029d7e6ce89:out",
+        "account_id": "daily",
+        "direction": "out",
+        "amount_minor": 50000,
+        "category": "转账",
+        "occurred_at": "2026-10-19T11:26:57.734+08:00",
+        "merchant_key": null,
+        "counterparty": "演示交易对象",
+        "description": "脱敏演示流水"
+      }
+    ],
+    "securities_positions": [
+      {
+        "symbol": "000001",
+        "name": "平安银行",
+        "shares": 400,
+        "cost_minor": 460000
+      }
+    ],
+    "securities_orders": [
+      {
+        "id": "stockorder_3c272b8b03a346ba915dca72f96e748c",
+        "approval_id": "op_e588ee9a878e4294a53e8488e17b9cf5",
+        "quote_id": "stockquote_a16595fee7164049968ddf505bfa305c",
+        "account_id": "daily",
+        "amount_minor": 115000,
+        "items_json": "[{\"symbol\": \"000001\", \"name\": \"平安银行\", \"shares\": 100, \"price_minor\": 1150, \"amount_minor\": 115000, \"quote_date\": \"2026-10-14\"}]",
+        "created_at": "2026-10-15T12:34:13.035+08:00"
+      },
+      {
+        "id": "stockorder_db1cf4ae25184c4c8b509d49880238d4",
+        "approval_id": "op_83adf2c05e8a4eaab47eae6f6f309833",
+        "quote_id": "stockquote_b336599aed4545e29c935101cf1b7f07",
+        "account_id": "daily",
+        "amount_minor": 115000,
+        "items_json": "[{\"symbol\": \"000001\", \"name\": \"平安银行\", \"shares\": 100, \"price_minor\": 1150, \"amount_minor\": 115000, \"quote_date\": \"2026-10-16\"}]",
+        "created_at": "2026-10-16T15:38:13.685+08:00"
+      },
+      {
+        "id": "stockorder_c12a725e3ae24aafaf86436cdbce8756",
+        "approval_id": "op_3b678c7f51d147499b66666a048dff7a",
+        "quote_id": "stockquote_9b2d4ee510e24ca6bb389ba926ba7a2c",
+        "account_id": "daily",
+        "amount_minor": 115000,
+        "items_json": "[{\"symbol\": \"000001\", \"name\": \"平安银行\", \"shares\": 100, \"price_minor\": 1150, \"amount_minor\": 115000, \"quote_date\": \"2026-10-16\"}]",
+        "created_at": "2026-10-16T15:40:30.086+08:00"
+      },
+      {
+        "id": "stockorder_f6c5a6d2800a4ae493275ee409657b1b",
+        "approval_id": "op_9e360e96d9304a8fb8168ab1229bfc0d",
+        "quote_id": "stockquote_4e4a5b6b129246abbe19d41fe0b0d84e",
+        "account_id": "daily",
+        "amount_minor": 115000,
+        "items_json": "[{\"symbol\": \"000001\", \"name\": \"平安银行\", \"shares\": 100, \"price_minor\": 1150, \"amount_minor\": 115000, \"quote_date\": \"2026-10-16\"}]",
+        "created_at": "2026-10-16T15:42:39.938+08:00"
+      }
+    ],
+    "payment_policy": [
+      {
+        "id": 1,
+        "threshold_minor": 100000,
+        "version": 4
+      }
+    ],
+    "daily_report_preferences": [
+      {
+        "id": 1,
+        "enabled": 1,
+        "delivery_time": "09:00",
+        "version": 3
+      }
+    ]
+  },
+  "meta": {
+    "food_owner": "demo_food_owner",
+    "securities_owner": "demo_securities_owner",
+    "travel_owner": "demo_travel_owner"
+  },
+  "platforms": {
+    "securities": {
+      "users": [
+        {
+          "id": "stock_demo",
+          "phone": "11111111111",
+          "label": "演示账户"
+        }
+      ],
+      "watchlist": [],
+      "investors": [
+        {
+          "id": "demo_securities_owner",
+          "label": "演示账户"
+        }
+      ],
+      "stock_identities": [
+        {
+          "symbol": "000001",
+          "name": "平安银行"
+        }
+      ]
+    },
+    "food": {
+      "users": [
+        {
+          "id": "food_demo",
+          "phone": "11111111111",
+          "label": "演示账户"
+        }
+      ],
+      "food_places": [
+        {
+          "user_id": "food_demo",
+          "place_id": "lujiazui"
+        }
+      ]
+    },
+    "travel": {
+      "users": [
+        {
+          "id": "travel_demo",
+          "phone": "11111111111",
+          "label": "演示账户"
+        }
+      ]
+    }
+  }
+}

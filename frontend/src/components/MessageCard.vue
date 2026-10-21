@@ -15,21 +15,45 @@ import { money, timeLabel } from "../types";
 import type { Challenge, Message, Plan } from "../types";
 import CashflowChart from "./CashflowChart.vue";
 import DecisionEvidence from "./DecisionEvidence.vue";
+import HandoffRating from './HandoffRating.vue';
+import BillReport from './BillReport.vue';
+import CustomAnalysis from './CustomAnalysis.vue';
+import DailyDigest from './DailyDigest.vue';
+import PartialCompletion from './PartialCompletion.vue';
+import BillEvidence from './BillEvidence.vue';
+import BirthdayPlanCard from './BirthdayPlanCard.vue';
 
 const props = defineProps<{ message: Message; deciding: string | null; acting?: string | null }>();
 const emit = defineEmits<{
   decision: [id: string, decision: "confirm" | "cancel"];
+  birthdayAction: [id:string,action:string,version:number];
+  partialAction:[taskId:string,action:string,version:number,orderId?:string];
   planAction: [planId: string, action: string, version: number, variant?: string];
   adoptTrigger: [notificationId: string];
   suggest: [prompt: string];
+  rateHandoff: [messageId: string, halfStars: number];
 }>();
 const display = computed(() => props.message.data.result?.display);
 const isPending = computed(() => props.message.data.status === "pending");
+const approvalExplanation = computed(() => {
+  const original = props.message.data.explanation;
+  const receipt = props.message.data.receipt;
+  if (!original || props.message.data.status !== "executed" || !receipt) return original;
+  if(props.message.data.scheduled)return undefined;
+  return {
+    ...original,
+    as_of: receipt.executed_at,
+    checks: original.checks.map((check) => check.label === "确认闸门"
+      ? { ...check, detail: "用户已确认，后端已按执行时的业务状态重新校验并完成操作。" }
+      : check),
+    conclusion: "该操作已确认并执行成功，请以本卡片中的成功回执为准。",
+  };
+});
 const statusLabel = computed(
   () =>
     ({
       pending: "等待你的确认",
-      executed: "操作已完成",
+      executed: props.message.data.scheduled ? "定时授权已保存 · 尚未执行交易" : "操作已完成",
       cancelled: "已取消",
       failed: "操作未完成",
       expired: "确认已过期",
@@ -47,7 +71,10 @@ const fmtDate = (value?: string) => value ? value.slice(0, 10).replaceAll("-", "
 </script>
 
 <template>
-  <section v-if="message.kind === 'data' && display" class="result-card">
+  <HandoffRating v-if="message.data.handoff_rating" :half-stars="message.data.handoff_rating.half_stars" :saving="acting === `rating:${message.id}`" @rate="value=>emit('rateHandoff',message.id,value)" />
+  <DailyDigest v-else-if="message.data.result?.daily_digest" :report="message.data.result.daily_digest"/>
+  <PartialCompletion v-else-if="message.data.result?.partial_completion" :report="message.data.result.partial_completion" :busy="!!acting||!!deciding" @choose="(id,action,version,order)=>emit('partialAction',id,action,version,order)"/>
+  <section v-else-if="message.kind === 'data' && display" class="result-card">
     <div class="result-heading">
       <span class="small-eyebrow">银行数据</span
       ><span v-if="message.data.source === 'sandbox'" class="source-label"
@@ -62,7 +89,7 @@ const fmtDate = (value?: string) => value ? value.slice(0, 10).replaceAll("-", "
       </div>
     </div>
     <div
-      v-if="display.rows.length"
+      v-if="display.rows.length && !message.data.result?.birthday_plans?.length && !message.data.result?.analysis"
       class="table-scroll"
       tabindex="0"
       :aria-label="display.title"
@@ -82,10 +109,20 @@ const fmtDate = (value?: string) => value ? value.slice(0, 10).replaceAll("-", "
         </tbody>
       </table>
     </div>
-    <p v-else class="empty-hint">这个范围内暂时没有记录。</p>
+    <p v-else-if="!message.data.result?.birthday_plans?.length && !message.data.result?.analysis && message.data.tool!=='get_bill_analysis_data'" class="empty-hint">这个范围内暂时没有记录。</p>
+    <div v-if="message.data.tool === 'find_recipients' && message.data.result?.recipients?.length" class="recipient-options">
+      <p>选择收款人后会填入聊天草稿，金额未提供时请补充金额。</p>
+      <button v-for="recipient in message.data.result.recipients" :key="recipient.id"
+        @click="emit('suggest', `收款人选择 ${recipient.name}（联系人编号 ${recipient.id}），请继续上一笔转账需求。`)">
+        {{ recipient.name }} · {{ recipient.detail }}
+      </button>
+    </div>
+    <BirthdayPlanCard v-for="plan in message.data.result?.birthday_plans" :key="plan.id" :plan="plan" :busy="!!acting || !!deciding" @manage="(id,action,version)=>emit('birthdayAction',id,action,version)" @suggest="text=>emit('suggest',text)" />
+    <CustomAnalysis v-if="message.data.result?.analysis" :analysis="message.data.result.analysis"/>
+    <BillReport v-if="message.data.result?.bill_report" :report="message.data.result.bill_report" @suggest="text=>emit('suggest',text)" />
     <div
-      v-for="alert in message.data.result?.alerts"
-      :key="alert.text"
+      v-for="(alert, alertIndex) in message.data.result?.alerts"
+      :key="alertIndex"
       class="data-alert"
     >
       <CircleAlert :size="15" />
@@ -93,10 +130,12 @@ const fmtDate = (value?: string) => value ? value.slice(0, 10).replaceAll("-", "
         {{ alert.text }}
         <details>
           <summary>查看交易依据</summary>
-          <code v-for="reference in alert.references" :key="reference">{{
+          <BillEvidence v-if="alert.transactions?.length" :transactions="alert.transactions" />
+          <code v-else v-for="reference in alert.references" :key="reference">{{
             reference
           }}</code>
         </details>
+        <details v-if="alert.baseline_transactions?.length"><summary>查看此前同类支出对照</summary><BillEvidence :transactions="alert.baseline_transactions" /></details>
       </div>
     </div>
     <div v-if="message.data.result?.holdings?.length" class="inline-holdings">
@@ -144,9 +183,9 @@ const fmtDate = (value?: string) => value ? value.slice(0, 10).replaceAll("-", "
         <dd>{{ field.value }}</dd>
       </div>
     </dl>
-    <DecisionEvidence v-if="message.data.explanation" :explanation="message.data.explanation" />
+    <DecisionEvidence v-if="approvalExplanation" :explanation="approvalExplanation" />
     <div v-if="isPending" class="confirmation-bottom">
-      <p><ShieldCheck :size="14" />核对后才会执行，确认有效期 15 分钟</p>
+      <p><ShieldCheck :size="14" />{{message.data.scheduled ? '提前验证后保存授权，到点才执行交易；确认有效期15分钟' : '核对后才会执行，确认有效期 15 分钟'}}</p>
       <div class="confirmation-actions">
         <button
           class="primary-button"
@@ -154,7 +193,7 @@ const fmtDate = (value?: string) => value ? value.slice(0, 10).replaceAll("-", "
           @click="emit('decision', message.data.approval_id!, 'confirm')"
         >
           <Check :size="16" />{{
-            deciding === message.data.approval_id ? "处理中…" : "确认并执行"
+            deciding === message.data.approval_id ? "处理中…" : message.data.scheduled ? "确认提前授权" : "确认并执行"
           }}
         </button>
         <button
@@ -169,12 +208,13 @@ const fmtDate = (value?: string) => value ? value.slice(0, 10).replaceAll("-", "
     <p v-if="message.data.error" class="approval-error">
       {{ message.data.error }}
     </p>
+    <BirthdayPlanCard v-if="message.data.receipt?.birthday_plan" :plan="message.data.receipt.birthday_plan" :busy="!!acting || !!deciding" @manage="(id,action,version)=>emit('birthdayAction',id,action,version)" @suggest="text=>emit('suggest',text)" />
     <div v-if="message.data.receipt" class="receipt-footer">
       <span
         ><Check :size="13" />{{
           timeLabel(message.data.receipt.executed_at)
         }}
-        已执行</span
+        {{message.data.scheduled?'已授权，待执行':'已执行'}}</span
       ><span :title="message.data.receipt.action_id"
         >回执 {{ message.data.receipt.action_id.slice(-8).toUpperCase() }}</span
       >

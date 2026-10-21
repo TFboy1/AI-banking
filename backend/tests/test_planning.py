@@ -97,8 +97,8 @@ def test_demo_scenario_has_fixed_business_date_and_full_protection(database):
         result = service.seed_demo_scenario(db)
         available, protected = service.available_minor(db)
         assert service.business_date(db) == date(2026, 9, 30)
-    assert result["daily_balance_minor"] == 625600
-    assert protected == 625600 and available == 0
+    assert result["daily_balance_minor"] == 637900
+    assert protected == 637900 and available == 0
 
 
 def test_multimonth_savings_is_split_by_salary_cycles(database):

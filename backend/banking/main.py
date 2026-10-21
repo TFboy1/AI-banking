@@ -11,11 +11,23 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
+from .account_categories import register_categories
+from .account_transfers import register_account_transfers
 from .agent import Agent, BusyError
-from .bank import BankError
+from .bank import DEBIT_TOOLS, BankError, ContactProfile, CreateContact
+from .cards import register_cards
 from .config import ROOT, Settings
+from .connections import register_connections
+from .contacts import add_details, contact, create_person, person_key, update_profile
 from .db import TZ, Database, add_message, dumps, event, message_dict, now
+from .travel_bridge import register_bank_travel
+from .food_bridge import register_bank_food
+from .market import market_loop, register_market
+from .payment_security import policy, risk, send_sms
 from .planning import PlanningService
+from .securities_bridge import register_bank_securities
+from .securities_common import StockOrder
+from .security import MONEY_TOOLS, register_auth, verify_pin
 
 
 class Body(BaseModel):
@@ -28,12 +40,67 @@ class ChatBody(Body):
 
 
 class DecisionBody(Body):
+    face_token: str | None = Field(default=None,max_length=150)
+    execute_at: str | None = Field(default=None,max_length=64)
     decision: Literal["confirm", "cancel"]
     conversation_id: str | None = Field(default=None, max_length=100)
+    pin: str | None = Field(default=None, pattern=r"^[0-9]{4}$")
+    account_id: str | None = Field(default=None, min_length=1, max_length=100)
+    sms_code: str | None = Field(default=None, pattern=r"^[0-9]{6}$")
+
+
+class PaymentSMSBody(Body):
+    execute_at: str | None = Field(default=None,max_length=64)
+    conversation_id: str = Field(min_length=1, max_length=100)
+    account_id: str | None = Field(default=None, min_length=1, max_length=100)
+
+
+class ConversationBodyForInterrupt(Body):
+    conversation_id: str = Field(min_length=1, max_length=100)
+
+
+class PartialChoiceBody(ConversationBodyForInterrupt):
+    action:Literal['keep','replan','cancel_order']
+    version:int=Field(ge=1)
+    order_id:str|None=Field(default=None,max_length=100)
+
+
+class PaymentPolicyBody(Body):
+    threshold_yuan: str = Field(pattern=r"^(0|[1-9]\d{0,8})(\.\d{1,2})?$")
+    pin: str = Field(pattern=r"^[0-9]{4}$")
 
 
 class ConversationBody(Body):
     title: str = Field(default="新会话", min_length=1, max_length=60)
+
+
+class InvestmentActionBody(Body):
+    conversation_id: str = Field(min_length=1, max_length=100)
+    tool: Literal["save_risk_profile", "purchase_product", "redeem_product"]
+    arguments: dict
+
+
+class StockSellBody(StockOrder):
+    conversation_id: str = Field(min_length=1, max_length=100)
+    account_id: str = Field(min_length=1, max_length=100)
+
+
+class ContactCreateBody(CreateContact):
+    pass
+
+
+class ContactDetailsBody(Body):
+    phone: str | None = Field(default=None, pattern=r"^1[3-9]\d{9}$")
+    bank: str | None = Field(default=None, min_length=1, max_length=60)
+    card_number: str | None = Field(default=None, pattern=r"^\d{12,19}$")
+
+
+class ContactNameBody(Body):
+    name: str = Field(min_length=1, max_length=60)
+
+
+class ContactNoteBody(Body):
+    note: str = Field(max_length=120)
 
 
 class ResetBody(Body):
@@ -105,23 +172,48 @@ class FeishuBody(Body):
     text: str = Field(default="", max_length=4000)
     approval_id: str | None = None
     decision: Literal["confirm", "cancel"] | None = None
+    action: Literal['stop','resume','partial','human_end','rating','focus'] | None = None
+    task_id: str | None = Field(default=None,max_length=100)
+    conversation_id: str | None = Field(default=None,max_length=100)
+    message_id: str | None = Field(default=None,max_length=100)
+    choice: Literal['keep','replan','cancel_order'] | None = None
+    version: int | None = Field(default=None,ge=1)
+    order_id: str | None = Field(default=None,max_length=100)
+    half_stars: int | None = Field(default=None,strict=True,ge=1,le=10)
+
+
+class FeishuPreferencesBody(Body):
+    notifications: bool = Field(strict=True)
 
 
 def hash_token(token):
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
 
 
-def create_app(settings: Settings | None = None, model=None):
+def _create_single_app(settings: Settings | None = None, model=None):
     settings = settings or Settings()
-    database = Database(settings.database_path)
+    database = Database(settings.database_path, seed_demo=settings.seed_demo_data)
     agent = Agent(database, settings, model)
     planning = PlanningService(database)
 
     @asynccontextmanager
     async def lifespan(app):
         database.initialize()
+        from .face import configure as configure_face
+        configure_face(database,settings.face_enabled)
+        with database.transaction() as db:
+            if db.execute('SELECT 1 FROM feishu_binding WHERE id=1').fetchone():
+                from .feishu_actions import dedicated_conversation
+                dedicated_conversation(database, db)
         await agent.start()
+        from .scheduled_transfers import loop as scheduled_loop
+        scheduled_task=asyncio.create_task(scheduled_loop(database,agent.notify,settings)) if settings.scheduled_worker_enabled else None
+        from .daily_reports import loop as daily_report_loop
+        daily_task=asyncio.create_task(daily_report_loop(database,settings,agent.notify)) if settings.daily_report_worker_enabled else None
+        from .birthdays import loop as birthday_loop
+        birthday_task=asyncio.create_task(birthday_loop(database,settings,agent.notify)) if settings.birthday_worker_enabled else None
         reminder_task = asyncio.create_task(planning.run_reminder_loop(agent.changed))
+        price_task = asyncio.create_task(market_loop(database, agent.notify))
         sender = None
         if settings.feishu_ready:
             from .feishu import OutboxSender
@@ -130,6 +222,17 @@ def create_app(settings: Settings | None = None, model=None):
         try:
             yield
         finally:
+            if birthday_task:
+                birthday_task.cancel()
+                await asyncio.gather(birthday_task,return_exceptions=True)
+            if daily_task:
+                daily_task.cancel()
+                await asyncio.gather(daily_task,return_exceptions=True)
+            if scheduled_task:
+                scheduled_task.cancel()
+                await asyncio.gather(scheduled_task,return_exceptions=True)
+            price_task.cancel()
+            await asyncio.gather(price_task, return_exceptions=True)
             reminder_task.cancel()
             try:
                 await reminder_task
@@ -148,6 +251,7 @@ def create_app(settings: Settings | None = None, model=None):
     app.state.database = database
     app.state.settings = settings
     app.state.planning = planning
+    register_auth(app, database, settings)
 
     @app.middleware("http")
     async def origin_guard(request: Request, call_next):
@@ -160,6 +264,9 @@ def create_app(settings: Settings | None = None, model=None):
                 "http://localhost:8000",
                 "https://093c-2406-da18-1f2f-d00-e27a-9a35-fc21-c012.ngrok-free.app",
             }
+            if settings.feishu_public_url:
+                from .feishu_payment import public_origin
+                allowed.add(public_origin(settings))
             if origin and origin not in allowed:
                 return JSONResponse({"detail": "不接受来自其他站点的请求。"}, status_code=403)
         response = await call_next(request)
@@ -177,6 +284,9 @@ def create_app(settings: Settings | None = None, model=None):
             raise HTTPException(401, "会话已失效，请刷新页面。")
         return hash_token(token)
 
+    from .speech import register_speech
+    register_speech(app, database, settings, session)
+
     def resolve_conversation(db, session_key, requested=None):
         if requested is not None:
             row = db.execute(
@@ -192,11 +302,70 @@ def create_app(settings: Settings | None = None, model=None):
         ).fetchone()
         return row["id"] if row else database.conversation_id(db)
 
+    from .face import register as register_face
+    register_face(app,database,settings,session,resolve_conversation)
+
     def bridge(request: Request):
         expected = "Bearer " + settings.feishu_bridge_token
         supplied = request.headers.get("Authorization", "")
         if not settings.feishu_ready or not secrets.compare_digest(supplied, expected):
             raise HTTPException(403, "飞书桥接未启用或凭证不正确。")
+
+    register_categories(app, database, agent, settings, session, resolve_conversation)
+    register_account_transfers(app, database, agent, session, resolve_conversation)
+    register_cards(app, database, agent, settings, session, resolve_conversation)
+    register_market(app, database, session)
+    register_bank_securities(app, database, agent, settings, session)
+    register_bank_food(app, database, agent, settings, session)
+    register_bank_travel(app, database, agent, settings, session)
+    register_connections(app, database, settings, session)
+    from .handoff import register as register_handoff
+    register_handoff(app, database, agent, session, resolve_conversation)
+    from .scheduled_transfers import register as register_scheduled
+    register_scheduled(app,database,agent,session,resolve_conversation)
+    from .daily_reports import register as register_daily_reports
+    register_daily_reports(app,database,agent,session)
+    from .birthdays import register as register_birthdays
+    register_birthdays(app,database,agent,session,resolve_conversation)
+    from .safety_api import register as register_safety
+    register_safety(app, database, agent, session)
+    from .account_lock import register as register_account_lock
+    register_account_lock(app, database, session)
+
+    @app.get("/api/investments", dependencies=[Depends(session)])
+    def investment_account():
+        return {
+            **agent.bank.query("list_products", {}),
+            "questionnaire": agent.bank.query("get_risk_questionnaire", {}),
+        }
+
+    @app.post('/api/subscriptions/{subscription_id}/cancel')
+    async def cancel_subscription(subscription_id: str, body: PaymentSMSBody, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            current = resolve_conversation(db, session_key, body.conversation_id)
+            message = agent.create_direct_approval(db, current, 'cancel_subscription', {'subscription_id':subscription_id})
+        await agent.notify()
+        return message
+
+    @app.post('/api/securities/sell')
+    async def sell_stock(body: StockSellBody, session_key: str = Depends(session)):
+        with database.connection() as db:
+            current = resolve_conversation(db, session_key, body.conversation_id)
+        quote = await agent.securities.query('quote_stock_sale', {'orders': [{'symbol': body.symbol, 'shares': body.shares}]}, current)
+        if not quote.get('quote_id'):
+            raise BankError(quote.get('answer', '无法取得卖出报价。'))
+        with database.transaction() as db:
+            message = agent.create_direct_approval(db, current, 'sell_stock_basket', {'quote_id': quote['quote_id'], 'account_id': body.account_id})
+        await agent.notify()
+        return message
+
+    @app.post("/api/investments/approvals")
+    async def investment_approval(body: InvestmentActionBody, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            conversation_id = resolve_conversation(db, session_key, body.conversation_id)
+            message = agent.create_direct_approval(db, conversation_id, body.tool, body.arguments)
+        await agent.notify()
+        return message
 
     @app.exception_handler(BankError)
     async def bank_error_handler(request, exc):
@@ -211,7 +380,7 @@ def create_app(settings: Settings | None = None, model=None):
         }
 
     @app.get("/api/bootstrap")
-    def bootstrap(request: Request, response: Response, conversation_id: str | None = None):
+    async def bootstrap(request: Request, response: Response, conversation_id: str | None = None):
         token = request.cookies.get("bank_session", "")
         with database.transaction() as db:
             if not db.execute("SELECT 1 FROM sessions WHERE token_hash=?", (hash_token(token),)).fetchone():
@@ -224,6 +393,10 @@ def create_app(settings: Settings | None = None, model=None):
                 "UPDATE sessions SET active_conversation_id=? WHERE token_hash=?",
                 (conversation_id, hash_token(token)),
             )
+            from .interruption import repair_saved_reports
+            repair_saved_reports(db, conversation_id)
+            from .partial_completion import refresh as refresh_partial
+            refresh_partial(agent,db,conversation_id)
             messages = [
                 message_dict(row)
                 for row in db.execute(
@@ -240,6 +413,10 @@ def create_app(settings: Settings | None = None, model=None):
             ).fetchone()[0]
             binding = bool(db.execute("SELECT 1 FROM feishu_binding").fetchone())
             conversations = database.conversations(db)
+            from .task_dag import latest
+            latest_task_plan = latest(db, conversation_id)
+            from .human_service import current as human_current
+            human_session = human_current(db, conversation_id)
         response.set_cookie(
             "bank_session",
             token,
@@ -254,7 +431,9 @@ def create_app(settings: Settings | None = None, model=None):
             "messages": messages,
             "event_id": event_id,
             "active_task": dict(active) if active else None,
-            "bank": agent.bank.snapshot(),
+            "latest_task_plan": latest_task_plan,
+            "human_session": human_session,
+            "bank": (await agent.securities.snapshot()),
             "config": {
                 "model_configured": settings.model_ready,
                 "model_name": settings.llm_model,
@@ -262,6 +441,70 @@ def create_app(settings: Settings | None = None, model=None):
                 "feishu_bound": binding,
             },
         }
+
+    @app.get("/api/contacts", dependencies=[Depends(session)])
+    def list_contacts():
+        with database.connection() as db:
+            return [contact(db, row["id"]) for row in db.execute("SELECT person_id AS id FROM contact_links GROUP BY person_id ORDER BY MIN(rowid)")]
+
+    @app.post("/api/contacts/check-name", dependencies=[Depends(session)])
+    def check_contact_name(body: ContactNameBody):
+        with database.connection() as db:
+            return [contact(db, row[0]) for row in db.execute("SELECT DISTINCT l.person_id FROM contacts c JOIN contact_links l ON l.contact_id=c.id WHERE c.name=?", (body.name.strip(),))]
+
+    @app.post("/api/contacts", status_code=201, dependencies=[Depends(session)])
+    async def create_contact(body: ContactCreateBody):
+        with database.transaction() as db:
+            result = create_person(db, body.model_dump())
+            event(db, "*", "contacts.updated", {})
+        await agent.notify()
+        return result
+
+    @app.patch("/api/contacts/{contact_id}/profile", dependencies=[Depends(session)])
+    async def save_contact_profile(contact_id: str, body: ContactProfile):
+        with database.transaction() as db:
+            result = update_profile(db, contact_id, body.model_dump(exclude_unset=True))
+            event(db, "*", "contacts.updated", {})
+        await agent.notify()
+        return result
+
+    @app.post("/api/contacts/{contact_id}/details", dependencies=[Depends(session)])
+    async def supplement_contact(contact_id: str, body: ContactDetailsBody):
+        with database.transaction() as db:
+            result = add_details(db, contact_id, body.phone, body.bank.strip() if body.bank else None, body.card_number)
+            event(db, "*", "contacts.updated", {})
+        await agent.notify()
+        return result
+
+    @app.get("/api/contacts/{contact_id}", dependencies=[Depends(session)])
+    def contact_detail(contact_id: str):
+        with database.connection() as db:
+            return contact(db, contact_id, reveal=True)
+
+    @app.patch("/api/contacts/{contact_id}/note", dependencies=[Depends(session)])
+    async def save_contact_note(contact_id: str, body: ContactNoteBody):
+        with database.transaction() as db:
+            contact(db, contact_id)
+            db.execute("UPDATE contact_details SET note=? WHERE contact_id IN (SELECT contact_id FROM contact_links WHERE person_id=?)", (body.note.strip(), person_key(db, contact_id)))
+            result = contact(db, contact_id)
+            event(db, "*", "contacts.updated", {})
+        await agent.notify()
+        return result
+
+    @app.post("/api/contacts/{contact_id}/conversation", status_code=201)
+    async def contact_conversation(contact_id: str, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            person = contact(db, contact_id)
+            label = person["note"] or person["name"]
+            conversation_id = database.create_conversation(db, f"联系人 · {label}"[:60])
+            db.execute("INSERT INTO conversation_contacts VALUES (?,?)", (conversation_id, person["id"]))
+            db.execute("DELETE FROM messages WHERE conversation_id=?", (conversation_id,))
+            add_message(db, conversation_id, None, "assistant", "text",
+                        f"已选择联系人：{label}（原名：{person['name']}，手机尾号 {person['phone'][-4:]}，银行卡账户 {len(person['accounts'])} 个）。你想对这位联系人进行什么操作？", {"source": "contact_selected", "contact_id": person["id"]})
+            db.execute("UPDATE sessions SET active_conversation_id=? WHERE token_hash=?", (conversation_id, session_key))
+            event(db, "*", "conversations.updated", {"conversation_id": conversation_id})
+        await agent.notify()
+        return {"conversation_id": conversation_id}
 
     @app.get("/api/conversations", dependencies=[Depends(session)])
     def list_conversations():
@@ -436,18 +679,11 @@ def create_app(settings: Settings | None = None, model=None):
 
     @app.post("/api/sandbox/events")
     async def sandbox_event(body: SandboxEventBody, session_key: str = Depends(session)):
-        with database.transaction() as db:
-            result = planning.trigger_salary(db, body.model_dump())
-        await agent.notify()
-        return result
+        raise HTTPException(410, "模拟到账功能已移除。")
 
     @app.post("/api/sandbox/scenario")
     async def demo_scenario(body: DemoScenarioBody, session_key: str = Depends(session)):
-        with database.transaction() as db:
-            result = planning.seed_demo_scenario(db)
-            event(db, "*", "bank.updated", {})
-        await agent.notify()
-        return result
+        raise HTTPException(410, "模拟到账演示场景已移除。")
 
     @app.post("/api/notifications/{notification_id}/read")
     async def read_notification(notification_id: str, session_key: str = Depends(session)):
@@ -553,15 +789,108 @@ def create_app(settings: Settings | None = None, model=None):
         task_id = await agent.submit(body.text.strip(), conversation_id=conversation_id)
         return {"task_id": task_id}
 
+    @app.get("/api/payment-policy", dependencies=[Depends(session)])
+    def payment_policy():
+        with database.connection() as db:
+            return policy(db)
+
+    @app.patch("/api/payment-policy")
+    async def set_payment_policy(body: PaymentPolicyBody, session_key: str = Depends(session)):
+        from .bank import minor
+        amount = minor(body.threshold_yuan)
+        if amount <= 0:
+            raise BankError('单笔交易门槛必须大于0元。')
+        verify_pin(database, body.pin)
+        with database.transaction() as db:
+            before = policy(db)
+            if before['threshold_minor'] != amount:
+                db.execute('UPDATE payment_policy SET threshold_minor=?,version=version+1 WHERE id=1', (amount,))
+                event(db, '*', 'payment.policy_updated', {'basis':'single_transaction',
+                    'previous_threshold_minor':before['threshold_minor'],'threshold_minor':amount})
+            result = policy(db)
+        await agent.notify()
+        return result
+
+    @app.post("/api/approvals/{approval_id}/sms")
+    async def payment_sms(approval_id: str, body: PaymentSMSBody, session_key: str = Depends(session)):
+        with database.transaction() as db:
+            current = resolve_conversation(db, session_key, body.conversation_id)
+            approval = db.execute("SELECT a.*,t.conversation_id FROM approvals a JOIN tasks t ON t.id=a.task_id WHERE a.id=?", (approval_id,)).fetchone()
+            if not approval or approval["conversation_id"] != current or approval["status"] != "pending" or datetime.fromisoformat(approval["expires_at"]) <= datetime.now(TZ):
+                raise BankError("当前操作不存在、已结束或已过期。")
+            args = json.loads(approval["args_json"])
+            if approval["tool_name"] in DEBIT_TOOLS:
+                args["account_id"] = body.account_id or args.get("account_id")
+                if not args["account_id"]:
+                    raise BankError("请先选择付款账户。")
+            agent.bank._check_action(db, approval["tool_name"], args)
+            from .scheduled_actions import timing
+            args=timing(approval['tool_name'],args,body.execute_at)
+            agent.bank._check_action(db, approval["tool_name"], args)
+            result = send_sms(db, approval, args, session_key)
+        await agent.notify()
+        return result
+
+    @app.get("/api/approvals/{approval_id}/payment")
+    async def payment_context(approval_id: str, conversation_id: str | None = None, session_key: str = Depends(session)):
+        with database.connection() as db:
+            current = resolve_conversation(db, session_key, conversation_id)
+            approval = db.execute("SELECT a.*,t.conversation_id FROM approvals a JOIN tasks t ON t.id=a.task_id WHERE a.id=?", (approval_id,)).fetchone()
+            if not approval or approval["conversation_id"] != current:
+                raise BankError("找不到当前会话的待支付操作。")
+            if approval["status"] != "pending" or datetime.fromisoformat(approval["expires_at"]) <= datetime.now(TZ):
+                raise BankError("该操作已结束或过期，请重新发起。")
+            args = json.loads(approval["args_json"])
+            summary = json.loads(approval["summary_json"])
+            debit = approval["tool_name"] in DEBIT_TOOLS and summary.get('debit_minor',1)>0
+            from .scheduled_actions import TOOLS as schedulable
+            return {"tool": approval["tool_name"], "schedule_allowed":approval['tool_name'] in schedulable,"execute_at":args.get('execute_at',''),"title": summary["title"], "amount_minor": summary.get("amount_minor"), "fields": summary["fields"],
+                    "account_required": debit, "account_id": args.get("account_id", "") if debit else "",
+                    "accounts": agent.bank.payment_options(db, approval["tool_name"], args) if debit else [],
+                    **(risk(db, approval, args) if approval["tool_name"] in MONEY_TOOLS else {"sms_required": False, "level": "yellow"})}
+
     @app.post("/api/approvals/{approval_id}/decision")
     async def decide(approval_id: str, body: DecisionBody, session_key: str = Depends(session)):
         with database.connection() as db:
             conversation_id = resolve_conversation(db, session_key, body.conversation_id)
-        return await agent.confirm(approval_id, body.decision, conversation_id)
+        if settings.app_auth_enabled and body.decision == "confirm" and body.pin is None and not body.face_token:
+            with database.connection() as db:
+                approval = db.execute("SELECT tool_name,status FROM approvals WHERE id=?", (approval_id,)).fetchone()
+            if approval and approval["status"] == "pending" and approval["tool_name"] in MONEY_TOOLS:
+                raise HTTPException(428, "请输入四位交易密码。")
+        return await agent.confirm(approval_id, body.decision, conversation_id, pin=body.pin, account_id=body.account_id, sms_code=body.sms_code, session_key=session_key,execute_at=body.execute_at,face_token=body.face_token)
+
+    from .feishu_payment import register as register_feishu_payment
+    register_feishu_payment(app, database, settings, session, payment_context, payment_sms, decide, PaymentSMSBody, DecisionBody)
+
+    @app.post('/api/tasks/{task_id}/partial-resolution')
+    async def partial_resolution(task_id:str,body:PartialChoiceBody,session_key:str=Depends(session)):
+        from .partial_completion import choose
+        with database.transaction() as db:
+            current=resolve_conversation(db,session_key,body.conversation_id)
+            result,queued=choose(agent,db,task_id,current,body.action,body.version,body.order_id)
+        if queued:agent.queue.put_nowait(queued)
+        await agent.notify()
+        return result
+
+    @app.post("/api/tasks/{task_id}/interrupt")
+    async def interrupt_task(task_id: str, body: ConversationBodyForInterrupt, session_key: str = Depends(session)):
+        with database.connection() as db:
+            current = resolve_conversation(db, session_key, body.conversation_id)
+        return await agent.interrupt(task_id, current)
+
+    @app.get("/api/tasks/{task_id}/plan", dependencies=[Depends(session)])
+    def task_plan(task_id: str):
+        from .task_dag import public_task
+        with database.connection() as db:
+            row = db.execute("SELECT t.* FROM tasks t JOIN conversations c ON c.id=t.conversation_id WHERE t.id=? AND c.deleted_at IS NULL", (task_id,)).fetchone()
+            if not row:
+                raise HTTPException(404, "任务不存在。")
+            return public_task(row)
 
     @app.get("/api/bank", dependencies=[Depends(session)])
-    def bank_snapshot():
-        return agent.bank.snapshot()
+    async def bank_snapshot(refresh: bool = False):
+        return (await agent.securities.snapshot(refresh=refresh))
 
     @app.post("/api/sandbox/inspect")
     async def inspect_bank(body: InspectBody, session_key: str = Depends(session)):
@@ -587,17 +916,40 @@ def create_app(settings: Settings | None = None, model=None):
             if active:
                 raise BusyError("请等待当前请求处理结束，再重置演示数据。")
             for table in (
+                "analysis_runs",
+                "analysis_datasets",
+                "daily_report_runs",
+                "birthday_plans",
+                "scheduled_transfers",
                 "accounts",
+                "travel_quotes",
+                "travel_order_state",
+                "travel_changes",
+                "travel_change_quotes",
+                "travel_quote_claims",
+                "travel_orders",
+                "food_quotes",
+                "food_orders",
+                "securities_quotes",
+                "securities_positions",
+                "securities_orders",
                 "contacts",
                 "cards",
+                "linked_card_accounts",
                 "transactions",
                 "products",
+                "product_nav_history",
                 "holdings",
                 "risk_profile",
                 "subscriptions",
                 "approvals",
                 "messages",
                 "tasks",
+                "conversation_contacts",
+                "contact_details",
+                "contact_profiles",
+                "contact_links",
+                "contact_phones",
                 "conversations",
                 "feishu_outbox",
                 "binding_codes",
@@ -612,7 +964,11 @@ def create_app(settings: Settings | None = None, model=None):
             ):
                 db.execute(f"DELETE FROM {table}")
             db.execute("DELETE FROM meta WHERE key='business_date'")
-            new_conversation = database.seed(db)
+            empty_user = bool(db.execute("SELECT 1 FROM meta WHERE key='empty_user'").fetchone())
+            new_conversation = database.seed_empty(db) if empty_user else database.seed(db)
+            database.seed_contact_details(db)
+            from .report_history import reset_history
+            reset_history(db)
             db.execute("UPDATE sessions SET active_conversation_id=?", (new_conversation,))
             event(db, "*", "reset", {"conversation_id": new_conversation})
         await agent.notify()
@@ -635,6 +991,14 @@ def create_app(settings: Settings | None = None, model=None):
         async def stream():
             nonlocal cursor
             while not await request.is_disconnected():
+                from .account_lock import locked
+                with database.connection() as db:
+                    is_locked = locked(db)
+                if is_locked:
+                    yield 'event: system.locked\ndata: {"system_locked":true}\n\n'
+                    return
+                if settings.app_auth_enabled and not app.state.auth_status(session_key)["ready"]:
+                    return
                 # 条件变量阻塞等待；持久化序号支持连接恢复，不反复轮询任务。
                 async with agent.changed:
                     with database.connection() as db:
@@ -651,6 +1015,12 @@ def create_app(settings: Settings | None = None, model=None):
                     yield ": keepalive\n\n"
                     continue
                 for row in rows:
+                    with database.connection() as db:
+                        if locked(db):
+                            yield 'event: system.locked\ndata: {"system_locked":true}\n\n'
+                            return
+                    if settings.app_auth_enabled and not app.state.auth_status(session_key)["ready"]:
+                        return
                     cursor = row["id"]
                     yield f"id: {cursor}\nevent: {row['type']}\ndata: {row['data_json']}\n\n"
                     if row["type"] == "reset":
@@ -673,69 +1043,60 @@ def create_app(settings: Settings | None = None, model=None):
             )
         return {"code": code, "expires_in_seconds": 600, "instruction": f"在飞书机器人私聊发送：绑定 {code}"}
 
+    @app.get('/api/feishu/preferences',dependencies=[Depends(session)])
+    def feishu_preferences():
+        with database.connection() as db:
+            row=db.execute("SELECT value FROM meta WHERE key='feishu_notifications'").fetchone()
+            return {'notifications':not row or row[0]!='0','bound':bool(db.execute('SELECT 1 FROM feishu_binding').fetchone())}
+
+    @app.post('/api/feishu/preferences',dependencies=[Depends(session)])
+    def set_feishu_preferences(body:FeishuPreferencesBody):
+        with database.transaction() as db:
+            db.execute("INSERT OR REPLACE INTO meta(key,value) VALUES('feishu_notifications',?)",('1' if body.notifications else '0',))
+            if not body.notifications:
+                db.execute("UPDATE feishu_outbox SET status='failed',error='用户已关闭主动通知' WHERE status='pending' AND json_extract(payload_json,'$.data._feishu_notify')=1")
+        return {'notifications':body.notifications}
+
+    @app.post('/api/feishu/unbind',dependencies=[Depends(session)])
+    def feishu_unbind():
+        with database.transaction() as db:
+            db.execute('DELETE FROM feishu_binding');db.execute('DELETE FROM binding_codes')
+            db.execute("DELETE FROM meta WHERE key='feishu_conversation'")
+            db.execute("INSERT OR REPLACE INTO meta(key,value) VALUES('feishu_binding_nonce',?)",(secrets.token_hex(16),))
+            db.execute("UPDATE feishu_outbox SET status='failed',error='用户已解除飞书关联' WHERE status='pending'")
+            event(db,'*','binding.updated',{'bound':False})
+        return {'bound':False}
+
     @app.post("/api/internal/feishu", dependencies=[Depends(bridge)])
     async def feishu_event(body: FeishuBody):
-        task_id = None
-        with database.transaction() as db:
-            duplicate = db.execute(
-                "SELECT result_json FROM feishu_inbox WHERE event_id=?", (body.event_id,)
-            ).fetchone()
-            if duplicate:
-                return {**json.loads(duplicate[0]), "duplicate": True}
-            binding = db.execute("SELECT * FROM feishu_binding WHERE id=1").fetchone()
-            bound = bool(
-                binding
-                and binding["tenant_key"] == body.tenant_key
-                and binding["open_id"] == body.open_id
-                and binding["chat_id"] == body.chat_id
-            )
-            text = body.text.strip()
-            if body.kind == "message" and text.startswith(("绑定 ", "/绑定 ")):
-                code_hash = hash_token(text.split(maxsplit=1)[1].strip().upper())
-                code = db.execute(
-                    "SELECT expires_at FROM binding_codes WHERE code_hash=?", (code_hash,)
-                ).fetchone()
-                if code and datetime.fromisoformat(code[0]) > datetime.now(TZ):
-                    db.execute("DELETE FROM binding_codes")
-                    db.execute(
-                        "INSERT OR REPLACE INTO feishu_binding VALUES (1,?,?,?)",
-                        (body.tenant_key, body.open_id, body.chat_id),
-                    )
-                    result = {"reply": "绑定成功。你现在可以在这里操作 Web 中的同一个模拟银行账户。"}
-                    event(db, "*", "binding.updated", {"bound": True})
-                else:
-                    result = {"reply": "绑定码无效或已过期，请在 Web 端重新生成。"}
-            elif not bound:
-                result = {"reply": "请先在本机 Web 设置中生成绑定码，再在本私聊发送“绑定 绑定码”。"}
-            else:
-                try:
-                    if body.kind == "card":
-                        if not body.approval_id or not body.decision:
-                            raise BankError("确认卡片参数不完整。")
-                        result, task_id = agent.confirm_in_transaction(db, body.approval_id, body.decision)
-                        result["reply"] = {
-                            "executed": "操作已完成",
-                            "cancelled": "已取消",
-                            "expired": "卡片已过期",
-                            "failed": "操作未完成",
-                        }.get(result["status"], "已处理")
-                    elif text:
-                        task_id = agent.submit_in_transaction(db, text, "feishu")
-                        result = {"task_id": task_id, "reply": "收到，正在处理你的需求。"}
-                    else:
-                        result = {"reply": "目前支持文本消息，请直接描述你的需求。"}
-                except BankError as exc:
-                    result = {"reply": str(exc)}
-            db.execute("INSERT INTO feishu_inbox VALUES (?,?)", (body.event_id, dumps(result)))
-        if task_id:
-            agent.queue.put_nowait(task_id)
-        await agent.notify()
-        return result
+        from .feishu_actions import handle
+        return await handle(agent,database,body)
+
+    @app.get('/travel.html', include_in_schema=False)
+    def independent_travel_page():
+        raise HTTPException(404, '旅行演示站独立运行在8004端口。')
+
+    @app.get('/food.html', include_in_schema=False)
+    def independent_food_page():
+        raise HTTPException(404, '外卖演示站独立运行在8002端口。')
+
+    @app.get("/securities.html", include_in_schema=False)
+    def retired_securities_page():
+        raise HTTPException(404, "证券站已独立运行。")
 
     frontend_dist = ROOT / "frontend" / "dist"
     if frontend_dist.is_dir():
         app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="web")
     return app
+
+
+def create_app(settings: Settings | None = None, model=None):
+    settings = settings or Settings()
+    if settings.app_auth_enabled and settings.multi_user_accounts:
+        from .accounts import create_multiuser_app
+
+        return create_multiuser_app(settings, _create_single_app, model)
+    return _create_single_app(settings, model)
 
 
 app = create_app()

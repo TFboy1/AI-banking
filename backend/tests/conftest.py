@@ -6,9 +6,19 @@ from banking.agent import Agent
 from banking.config import Settings
 from banking.db import Database, dumps, uid
 
+@pytest.fixture(autouse=True)
+def stock_session_clock(monkeypatch):
+    """Legacy business tests run during an explicit open session, not wall time.
 
-def tool(name, **arguments):
-    return {"id": uid("call_"), "type": "function", "function": {"name": name, "arguments": dumps(arguments)}}
+    Session-gate tests override this clock to exercise closed boundaries.
+    """
+    from datetime import datetime
+    from banking.db import TZ
+    monkeypatch.setattr('banking.stock_trading.clock',lambda:datetime(2026,10,16,10,0,tzinfo=TZ))
+
+
+def tool(tool_name, **arguments):
+    return {"id": uid("call_"), "type": "function", "function": {"name": tool_name, "arguments": dumps(arguments)}}
 
 
 class ScriptedModel:
@@ -39,7 +49,7 @@ def database(tmp_path):
 @pytest.fixture
 def settings(tmp_path):
     return Settings(
-        _env_file=None, database_path=tmp_path / "api.sqlite3", llm_base_url="", llm_api_key="", llm_model=""
+        _env_file=None, app_auth_enabled=False, multi_user_accounts=False,daily_report_worker_enabled=False, birthday_worker_enabled=False, database_path=tmp_path / "api.sqlite3", llm_base_url="", llm_api_key="", llm_model=""
     )
 
 
@@ -53,7 +63,7 @@ async def agent(database, settings):
         await agent.stop()
 
 
-async def ask(agent, responses, text="测试用户请求"):
+async def ask(agent, responses, text="测试用户请求；付款账户选择日常账户"):
     agent.model.responses = list(responses)
     task_id = await agent.submit(text)
     await asyncio.wait_for(agent.queue.join(), 3)

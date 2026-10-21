@@ -558,17 +558,21 @@ class PlanningService:
         return {"duplicate": False, "event_id": event_id, "suggestions": suggestions}
 
     def seed_demo_scenario(self, db):
-        db.execute("UPDATE accounts SET balance_minor=625600 WHERE id='daily'")
+        subscription_total = db.execute("SELECT COALESCE(SUM(amount_minor),0) FROM subscriptions WHERE status='active'").fetchone()[0]
+        demo_balance = 620000 + subscription_total
+        db.execute("UPDATE accounts SET balance_minor=? WHERE id='daily'", (demo_balance,))
         db.execute("INSERT OR REPLACE INTO meta VALUES ('business_date','2026-09-30')")
         db.execute("DELETE FROM commitments")
         created = now()
         for kind, label, amount, due in (
             ("rent", "10 月房租", 320000, "2026-10-02"),
             ("living", "下月生活费", 300000, "2026-10-31"),
-            ("subscription", "下月订阅", 5600, "2026-10-08"),
+            ("subscription", "下月订阅", subscription_total, "2026-10-31"),
         ):
+            if amount == 0:
+                continue
             db.execute(
                 "INSERT INTO commitments VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
                 (uid("commit_"), "demo", self.database.conversation_id(db), "daily", kind, label, amount, amount, due, "active", created, created),
             )
-        return {"business_date": "2026-09-30", "daily_balance_minor": 625600, "protected_minor": 625600}
+        return {"business_date": "2026-09-30", "daily_balance_minor": demo_balance, "protected_minor": demo_balance}

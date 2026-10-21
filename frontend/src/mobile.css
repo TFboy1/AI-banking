@@ -1,0 +1,116 @@
+/* Imported only by consumer sites. The independent customer-service console is unchanged. */
+body .investment-dialog, body .stock-connect-dialog, body .modal, body .menu-modal, body .travel-modal {
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+}
+@media (max-width: 760px) {
+  html { -webkit-text-size-adjust: 100%; }
+  body input, body select, body textarea { font-size: 16px; min-width: 0; max-width: 100%; }
+  body input:not([type="checkbox"]):not([type="radio"]), body select { min-height: 44px; }
+  body button, body a { touch-action: manipulation; }
+  body button { min-height: 44px; min-width: 44px; }
+  body button:focus-visible, body a:focus-visible { outline: 2px solid #759bc4; outline-offset: 2px; }
+  body .app-shell { height: var(--chat-viewport-height, 100dvh); min-height: 0; }
+  body .app-header { height: auto; min-height: 112px; padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 6px max(12px, env(safe-area-inset-left)); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 12px; }
+  body .header-middle { display: flex; justify-content: flex-end; min-width: 0; font-size: 12px; overflow-wrap: anywhere; }
+  body .header-actions { grid-column: 1 / -1; width: 100%; justify-content: space-between; gap: 2px; }
+  body .header-actions .panel-toggle { padding: 6px 5px; font-size: 12px; gap: 4px; white-space: nowrap; }
+  body .header-actions .panel-toggle > svg:last-child { display: none; }
+  body .header-actions .new-chat-trigger { display: none; }
+  body .header-actions .icon-button { width: 44px; height: 44px; flex-shrink: 0; }
+  body .conversation { padding: 18px 12px; }
+  body .conversation.is-welcome { padding: 22px 18px; }
+  body .welcome-section h1 { font-size: 30px; }
+  body .welcome-description, body .example-list strong { font-size: 14px; }
+  body .example-list small, body .welcome-footnote { font-size: 12px; }
+  body .message-content, body .message-body, body .result-card { min-width: 0; overflow-wrap: anywhere; }
+  body .message-text, body .markdown, body .result-card { font-size: 14px; }
+  body .table-scroll { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  body .composer-area { padding: 8px max(12px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+  body .composer textarea { font-size: 16px; padding: 12px; min-height: 48px; max-height: 100px; }
+  body .send-button { width: 44px; height: 44px; }
+  body .composer-caption { display: none; }
+  body .composer-tools { min-width: 0; gap: 6px; }
+  body .composer-tools .tool-divider { display: none; }
+  body .tool-label, body .context-button { font-size: 11px; }
+  body .panel-content { padding: 16px; }
+  body .bank-panel { width: min(400px, 100vw); max-width: 100%; }
+  body .bank-panel .icon-button, body .panel-heading > button { min-width: 44px; }
+  body .investment-dialog-backdrop, body .stock-modal-backdrop, body .overlay, body .travel-overlay { padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); overflow-y: auto; }
+  body .investment-dialog, body .stock-connect-dialog, body .modal, body .menu-modal, body .travel-modal { width: 100%; max-width: 440px; max-height: calc(100dvh - 24px); overflow-y: auto; padding: 22px 18px; }
+  body .menu-modal { max-width: 690px; }
+  body .investment-dialog-backdrop .investment-dialog { max-height: calc(var(--chat-viewport-height, 100dvh) - 24px); }
+  body .investment-dialog h2, body .stock-connect-dialog h2, body .modal h2, body .travel-modal h2 { font-size: 21px; padding-right: 26px; }
+  body .modal-close { width: 44px; height: 44px; }
+  body .demo-sms, body .stock-sms-notice, body .sms-notice, body .travel-sms { width: calc(100% - 24px); max-width: 370px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
+  body .auth-screen { padding: max(18px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom)); }
+  body .auth-card { max-width: 100%; padding: 26px 20px; }
+  body .terminal .topbar { height: auto; padding: max(12px, env(safe-area-inset-top)) 16px 0; gap: 8px; flex-wrap: wrap; }
+  body .terminal .topbar .brand { min-width: 0; flex: 1; }
+  body .terminal .topbar .top-status { display: none; }
+  body .terminal .topbar nav { order: 3; width: 100%; margin: 0; height: 48px; display: flex; justify-content: space-between; }
+  body .terminal .topbar nav button { font-size: 14px; }
+  body .terminal .connect-account { font-size: 12px; padding: 6px 8px; max-width: 52%; overflow-wrap: anywhere; }
+  body .terminal .notice { padding: 10px 16px; font-size: 12px; flex-wrap: wrap; line-height: 1.7; }
+  body .terminal .workspace { display: grid; grid-template-columns: minmax(0, 1fr); padding: 12px; gap: 14px; }
+  body .terminal .stock-browser, body .terminal .main-market, body .terminal .research-side { min-width: 0; width: 100%; }
+  body .terminal .stock-list { max-height: 300px; overflow-y: auto; }
+  body .terminal .stock-row { min-height: 56px; }
+  body .terminal .instrument { padding: 16px; }
+  body .terminal .instrument-metrics { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; padding: 16px; }
+  body .terminal .chart-toolbar { flex-wrap: wrap; gap: 8px; }
+  body .terminal .chart-options { flex-wrap: wrap; }
+  body .terminal .price-chart { width: 100%; height: auto; }
+  body .terminal .chart-source { flex-wrap: wrap; gap: 8px; }
+  body .terminal .stock-account-page { padding: 24px 16px 40px; }
+  body .terminal .account-heading, body .terminal .position-heading { gap: 12px; flex-wrap: wrap; }
+  body .terminal .account-metrics, body .terminal .position-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body .terminal .position-card, body .terminal .order-row { min-width: 0; overflow-wrap: anywhere; }
+  body .food-app > header { padding: max(14px, env(safe-area-inset-top)) 16px 10px; display: flex; flex-wrap: wrap; gap: 10px; }
+  body .food-app > header .brand { flex: 1; }
+  body .food-app > header nav { order: 4; width: 100%; margin: 0; justify-content: space-around; }
+  body .food-app > header .location { order: 3; width: 100%; }
+  body .food-app > header .user { display: block; font-size: 12px; }
+  body .food-app main { padding-left: 16px; padding-right: 16px; }
+  body .food-app .demo-ribbon, body .travel-app .demo-bar { font-size: 11px; line-height: 1.7; padding: 8px 12px; }
+  body .food-app .hero { grid-template-columns: minmax(0,1fr); }
+  body .food-app .categories { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
+  body .food-app .categories button { flex-shrink: 0; }
+  body .food-app .shop-grid { grid-template-columns: minmax(0,1fr); }
+  body .food-app .shop-info h3 { font-size: 17px; }
+  body .food-app .menu-head { gap: 12px; }
+  body .food-app .dish { min-width: 0; }
+  body .food-app .stepper button { width: 44px; min-height: 44px; }
+  body .food-app .cart { flex-wrap: wrap; gap: 12px; }
+  body .food-app .cart button { width: 100%; }
+  body .food-app .order-card { overflow-wrap: anywhere; }
+  body .travel-app .travel-header { padding: max(14px, env(safe-area-inset-top)) 16px 10px; flex-wrap: wrap; gap: 12px; }
+  body .travel-app .travel-header nav { order: 3; width: 100%; justify-content: space-around; }
+  body .travel-app .header-account { flex-wrap: wrap; gap: 8px; }
+  body .travel-app main { padding-left: 16px; padding-right: 16px; }
+  body .travel-app .search-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  body .travel-app .search-fields label { width: auto; min-width: 0; max-width: none; }
+  body .travel-app .search-fields .trip-date { grid-column: 1/-1; }
+  body .travel-app .search-fields input, body .travel-app .search-fields select { width: 100%; min-height: 44px; }
+  body .travel-app .search-fields .swap-icon { display: none; }
+  body .travel-app .search-button { grid-column: 1/-1; }
+  body .travel-app .trip-counts { flex-wrap: wrap; gap: 12px; }
+  body .travel-app .trip-counts small { width: 100%; font-size: 12px; }
+  body .travel-app .service-cards, body .travel-app .hotel-grid { grid-template-columns: minmax(0,1fr); }
+  body .travel-app .trip-order > div, body .travel-app .order-actions, body .travel-app .travel-summary > div { flex-wrap: wrap; gap: 10px; }
+  body .travel-app .trip-order { overflow-wrap: anywhere; }
+  body .travel-app .trip-search, body .travel-app .travel-summary { padding: 18px 14px; }
+}
+@media (max-width: 360px) {
+  body .header-actions .panel-toggle { font-size: 11px; gap: 2px; padding: 6px 3px; }
+  body .header-actions .panel-toggle > svg { width: 15px; }
+  body .header-middle { font-size: 11px; }
+  body .composer-tools .tool-label { display: none; }
+  body .terminal .account-metrics, body .terminal .position-metrics { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 760px) and (max-height: 500px) {
+  body .app-header { min-height: 56px; display: flex; padding-top: 4px; }
+  body .header-middle { display: none; }
+  body .header-actions { width: auto; flex: 1; }
+  body .app-header .brand { display: none; }
+}

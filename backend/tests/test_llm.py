@@ -192,8 +192,6 @@ async def test_structured_format_retry_keeps_tool_result_and_never_repeats_tool(
     [
         "get_accounts\n{}",
         "```json\n{\"type\":\"tool_calls\",\"calls\":[{\"name\":\"get_accounts\",\"arguments\":{}}]}\n```",
-        "{\"query\":\"张三\"}",
-        "[{\"type\":\"reply\",\"reason\":\"chat\",\"text\":\"先查询\"},{\"query\":\"张三\"}]",
     ],
 )
 async def test_structured_adapter_accepts_common_compatible_output_variants(settings, content):
@@ -202,3 +200,13 @@ async def test_structured_adapter_accepts_common_compatible_output_variants(sett
     client = ModelClient(settings)
     result = client._parse_plan({"content": content}, [{"role": "user", "content": "查询余额"}])
     assert result["tool_calls"][0]["function"]["name"] in {"get_accounts", "find_recipients"}
+
+
+@pytest.mark.parametrize('content', ['{"query":"张三"}', '[{"type":"reply","reason":"chat","text":"先查询"},{"query":"张三"}]'])
+def test_unnamed_query_is_rejected_when_multiple_domains_match(settings, content):
+    # Contact, stock and food searches share query; an omitted name is ambiguous.
+    configure(settings)
+    settings.llm_tool_mode = 'structured'
+    client = ModelClient(settings)
+    with pytest.raises(ModelError):
+        client._parse_plan({'content': content}, [{'role':'user','content':'查询余额'}])

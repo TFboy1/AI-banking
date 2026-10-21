@@ -5,8 +5,30 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 data/
+audit-witness/
 logs/
 *.log
 frontend/node_modules/
 frontend/dist/
 *.egg-info/
+
+# Local configuration and credentials
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+# Private state, build output and downloaded model weights
+outputs/
+*.zip
+*.onnx
+*.pth
+*.pt
+*.tar.gz
+browser_profiles/

@@ -60,7 +60,7 @@ async def test_ready_diagnosis_does_not_bypass_confirmation_recheck(agent):
         message = agent.create_direct_approval(db, agent.db.conversation_id(db), "transfer", {"recipient": "张三", "amount_yuan": "200"})
     with agent.db.transaction() as db:
         db.execute("UPDATE cards SET status='frozen' WHERE id='card_daily'")
-    result = await agent.confirm(message["data"]["approval_id"], "confirm")
+    result = await agent.confirm(message["data"]["approval_id"], "confirm", account_id="daily")
     assert result["status"] == "failed" and "已冻结" in result["error"]
     assert balance(agent) == before
 
@@ -84,7 +84,7 @@ async def test_bill_evidence_is_persisted_and_model_context_masks_phone(agent):
             for item in db.execute("SELECT id FROM transactions WHERE substr(occurred_at,1,7)=?", (month,))
         }
     assert set(explanation["sources"][0]["references"]) == expected
-    assert "本月消费" in explanation["conclusion"]
+    assert "已有流水支出" in explanation["conclusion"]
 
 
 async def test_agent_persists_read_only_diagnosis_card(agent):

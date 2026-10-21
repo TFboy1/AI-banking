@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick, ref } from "vue";
-import { Check, MessageSquare, Pencil, Plus, Trash2, X } from "@lucide/vue";
+import { Check, MessageSquare, Pencil, Plus, Trash2, X, Phone } from "@lucide/vue";
 import type { Conversation } from "../types";
 
 defineProps<{
@@ -14,6 +14,7 @@ const emit = defineEmits<{
   rename: [id: string, title: string];
   delete: [id: string];
   close: [];
+  handoff: [];
 }>();
 const editing = ref("");
 const title = ref("");
@@ -169,6 +170,10 @@ function dateLabel(value: string) {
         </div>
       </div>
     </div>
-    <p class="history-footnote">每段对话独立记录<br />共用你的模拟银行账户</p>
+    <div class="history-footer"><p class="history-footnote">每段对话独立记录<br />共用你的模拟账户</p><button type="button" class="icon-button" aria-label="转人工" title="转人工" :disabled="disabled" @click="emit('handoff')"><Phone :size="18" /></button></div>
   </aside>
 </template>
+
+<style scoped>
+.history-footer{display:flex;align-items:center;justify-content:space-between;padding-right:16px}.history-footer .history-footnote{flex:1}.history-footer .icon-button{flex-shrink:0;color:#64816c}
+</style>

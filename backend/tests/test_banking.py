@@ -7,6 +7,7 @@ from banking.bank import BankError
 from banking.db import TZ, add_message
 from banking.llm import ModelError
 from conftest import ask, balance, confirm, pending, state, tool
+from subscription_consent import ask, subscription_facts, consent_reads
 
 
 async def test_transfer_requires_confirmation_and_writes_receipt(agent):
@@ -14,7 +15,7 @@ async def test_transfer_requires_confirmation_and_writes_receipt(agent):
     task_id = await ask(
         agent,
         [[tool("transfer", recipient="张三", amount_yuan="200.00")], "已完成，请查看回执。"],
-        "给张三转200元",
+        "从日常账户给张三转200元",
     )
     approval = pending(agent)
     assert state(agent, task_id)["status"] == "waiting_confirmation"
@@ -65,7 +66,10 @@ async def test_ambiguous_contact_does_not_create_approval(agent):
     assert result["needs_clarification"] and len(result["recipients"]) == 2
     before = balance(agent)
     task_id = await ask(agent, [[tool("transfer", recipient="李明", amount_yuan="200")]])
-    assert "多个同名" in state(agent, task_id)["error"]
+    assert state(agent, task_id)["status"] == "completed"
+    with agent.db.connection() as db:
+        card = db.execute("SELECT data_json FROM messages WHERE task_id=? AND kind='data'", (task_id,)).fetchone()
+        assert len(json.loads(card[0])["result"]["recipients"]) == 2
     assert balance(agent) == before
     with agent.db.connection() as db:
         assert db.execute("SELECT COUNT(*) FROM approvals").fetchone()[0] == 0
@@ -170,16 +174,16 @@ async def test_read_data_injection_cannot_grant_execution_permission(agent):
 
 
 async def test_cancellation_has_evidence_and_does_not_refund(agent):
-    result = agent.bank.query("list_subscriptions", {})
+    result = subscription_facts(agent.bank,"list_subscriptions", {})
     assert all(item["recurring_detected"] for item in result["subscriptions"])
-    assert result["active_monthly_minor"] == 5600
+    assert result["active_monthly_minor"] == 17900
     before = balance(agent)
     await ask(agent, [[tool("cancel_subscription", subscription_id="video")], "已取消自动代扣"])
     await confirm(agent)
-    result = agent.bank.query("list_subscriptions", {})
+    result = subscription_facts(agent.bank,"list_subscriptions", {})
     video = next(item for item in result["subscriptions"] if item["id"] == "video")
     assert video["status"] == "cancelled" and video["next_charge_date"] is None
-    assert result["active_monthly_minor"] == 2700
+    assert result["active_monthly_minor"] == 15000
     assert balance(agent) == before
 
 
@@ -206,8 +210,9 @@ async def test_multistep_failure_preserves_completed_step_and_stops_tail(agent):
     with agent.db.connection() as db:
         assert (
             "前面已完成 1 项"
-            in db.execute("SELECT text FROM messages ORDER BY rowid DESC LIMIT 1").fetchone()[0]
+            in db.execute("SELECT text FROM messages WHERE kind='error' ORDER BY rowid DESC LIMIT 1").fetchone()[0]
         )
+        assert db.execute("SELECT 1 FROM messages WHERE task_id=? AND json_extract(data_json,'$.tool')='partial_completion'",(task_id,)).fetchone()
 
 
 def test_bill_totals_and_anomaly_references_are_grounded(agent):
@@ -277,14 +282,16 @@ async def test_model_only_success_claim_is_not_a_receipt(agent):
     assert balance(agent) == 1286050
 
 
-async def test_pending_approval_survives_service_restart(agent):
-    await ask(agent, [[tool("transfer", recipient="张三", amount_yuan="200")], "已完成"])
+async def test_restart_saves_progress_and_invalidates_unconfirmed_approval(agent):
+    # Current recovery policy requires a new confirmation after restarting.
+    task_id=await ask(agent, [[tool("transfer", recipient="张三", amount_yuan="200")], "已完成"])
     approval_id = pending(agent)["id"]
     await agent.stop()
     await agent.start()
-    assert (await agent.confirm(approval_id, "confirm"))["status"] == "executed"
+    assert (await agent.confirm(approval_id, "confirm"))["status"] == "failed"
     await asyncio.wait_for(agent.queue.join(), 3)
-    assert balance(agent) == 1266050
+    assert balance(agent) == 1286050
+    assert json.loads(state(agent,task_id)['state_json'])['restart_checkpoint']['previous_status']=='waiting_confirmation'
 
 
 async def test_connection_errors_do_not_poison_next_bill_query_context(agent):
